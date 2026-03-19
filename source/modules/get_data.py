@@ -1,0 +1,1 @@
+"""In this file we're gonna get data from an API hosted by Vercel"""
