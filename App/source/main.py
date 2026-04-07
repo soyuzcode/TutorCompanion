@@ -1,10 +1,8 @@
 """Here we're gonna connect every module to UI"""
-from App.source.ui import TutorCompanion
+from ui import TutorCompanion
 
 class Main():
     def __init__(self) -> None:
-
-
 
         UI = TutorCompanion()
         UI.run()
