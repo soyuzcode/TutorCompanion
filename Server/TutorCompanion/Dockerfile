@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk-25:1.24-2.1776048119
 
 WORKDIR /app
 COPY . .
