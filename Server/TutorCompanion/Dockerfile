@@ -1,4 +1,4 @@
-FROM openjdk-25:1.24-2.1776048119
+FROM openjdk:25-jdk
 
 WORKDIR /app
 COPY . .
