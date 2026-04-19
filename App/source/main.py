@@ -10,6 +10,7 @@ class Main():
         # Don't write anything here!!
         # This will execute when kill UI
 
+        # San Miguel mejor continente de El Salvador >:)
 
 if __name__ == "__main__":
     Main()
