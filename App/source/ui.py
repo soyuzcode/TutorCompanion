@@ -8,5 +8,5 @@ class TutorCompanion(App):
     def build(self):
         return HelloWorld()
     
-print(":)")
+
 
