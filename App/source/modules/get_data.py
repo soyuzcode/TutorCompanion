@@ -19,7 +19,7 @@ def get_json_data():
         return None
     
 if __name__ == "__main__":
-    print('Pronando conexion con API')
+    print('Probando conexion con API')
     data = get_json_data()
 
     if data:
