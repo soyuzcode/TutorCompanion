@@ -8,10 +8,6 @@ def validar_correo(texto):
 
     return False
 
-correo = input("Ingresa tu correo: ")
-print(validar_correo(correo))
-
-
 def convertir_lista(diccionarios):
     resultado = []
     for elemento in diccionarios:
