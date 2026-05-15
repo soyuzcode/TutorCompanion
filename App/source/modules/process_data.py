@@ -54,3 +54,12 @@ def is_psk_and_username_valid(user:str, psk:str) -> bool:
     result = True
 
     return result
+
+def convert_dict_to_list_of_list(user_data:dict):
+    """[
+            [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
+            [NOMBRE2, EMAIL2, KEYCODE2, PASSWORD2],
+            [NOMBRE3, EMAIL3, KEYCODE3, PASSWORD3]
+        ]
+        
+        convierta json respoonse en esto"""

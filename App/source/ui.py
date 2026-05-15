@@ -5,6 +5,12 @@ class HelloWorld(MDScreen):
     pass
 
 class TutorCompanion(MDApp):
+    def __init__(
+            self, check_login,**kwargs):
+        
+        super().__init__(**kwargs)
+
+        self.check_login = check_login
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
