@@ -1,9 +1,6 @@
 """File to manage user settings"""
 import json
 
-BASE_URL = "https://tutorcompanionv1.onrender.com/"
-
-
 def get_base_Url():
     """Devuelve la URL Base"""
 
