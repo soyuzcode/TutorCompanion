@@ -1,0 +1,608 @@
+[
+    {
+        "id": 1,
+        "name": "Karl Marx",
+        "email": "marx@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=1",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": {
+            "twitter": "@marx",
+            "whatsapp": "123",
+            "phone": "111",
+            "instagram": "@marx_ig",
+            "userId": 1
+        },
+        "enrolledSessions": [
+            {
+                "studentStatus": "attended"
+            }
+        ],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": [
+            {
+                "rating": 5,
+                "comment": "Mind blowing",
+                "id": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Friedrich Nietzsche",
+        "email": "nietzsche@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=2",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": {
+            "twitter": "@nietzsche",
+            "whatsapp": "123",
+            "phone": "222",
+            "instagram": "@nietzsche_ig",
+            "userId": 2
+        },
+        "enrolledSessions": [
+            {
+                "studentStatus": "attended"
+            }
+        ],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": [
+            {
+                "rating": 3,
+                "comment": "Kinda chaotic",
+                "id": 4
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Sigmund Freud",
+        "email": "freud@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=3",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": {
+            "twitter": "@freud",
+            "whatsapp": "123",
+            "phone": "333",
+            "instagram": "@freud_ig",
+            "userId": 3
+        },
+        "enrolledSessions": [
+            {
+                "studentStatus": "attended"
+            }
+        ],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": [
+            {
+                "rating": 4,
+                "comment": "Very artistic",
+                "id": 2
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Niccolo Machiavelli",
+        "email": "machiavelli@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=4",
+        "isBecado": false,
+        "state": "banned",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [
+            {
+                "studentStatus": "absent"
+            }
+        ],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 5,
+        "name": "Jean Paul Sartre",
+        "email": "sartre@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=5",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [
+            {
+                "studentStatus": "pending"
+            }
+        ],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": [
+            {
+                "rating": 5,
+                "comment": "Electric class",
+                "id": 3
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Leonardo da Vinci",
+        "email": "davinci@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=6",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [
+            {
+                "rating": 4,
+                "comment": "Very artistic",
+                "id": 2
+            }
+        ],
+        "sessions": [
+            {
+                "id": 2,
+                "topic": "Renaissance Art",
+                "startTime": "2026-01-02T12:00:00",
+                "endTime": "2026-01-02T13:30:00",
+                "tutorStatus": "completed",
+                "description": "Art history",
+                "students": [
+                    {
+                        "studentStatus": "attended"
+                    },
+                    {
+                        "studentStatus": "absent"
+                    }
+                ]
+            }
+        ],
+        "subjects": [
+            {
+                "id": 5,
+                "name": "Introduccion a la Ingenieria"
+            }
+        ],
+        "tutorProfile": {
+            "rating": 4.8,
+            "approvedHours": 120,
+            "userId": 6
+        },
+        "writtenReviews": []
+    },
+    {
+        "id": 7,
+        "name": "Michelangelo",
+        "email": "michelangelo@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=7",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 5,
+                "name": "Introduccion a la Ingenieria"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 8,
+        "name": "Vincent van Gogh",
+        "email": "vangogh@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=8",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 5,
+                "name": "Introduccion a la Ingenieria"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 9,
+        "name": "Salvador Dali",
+        "email": "dali@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=9",
+        "isBecado": false,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 5,
+                "name": "Introduccion a la Ingenieria"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 10,
+        "name": "Albert Einstein",
+        "email": "einstein@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=10",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": {
+            "twitter": "@einstein",
+            "whatsapp": "123",
+            "phone": "444",
+            "instagram": "@einstein_ig",
+            "userId": 10
+        },
+        "enrolledSessions": [],
+        "receivedReviews": [
+            {
+                "rating": 5,
+                "comment": "Mind blowing",
+                "id": 1
+            }
+        ],
+        "sessions": [
+            {
+                "id": 1,
+                "topic": "Relativity Basics",
+                "startTime": "2026-01-01T10:00:00",
+                "endTime": "2026-01-01T11:00:00",
+                "tutorStatus": "completed",
+                "description": "Intro class",
+                "students": [
+                    {
+                        "studentStatus": "attended"
+                    },
+                    {
+                        "studentStatus": "attended"
+                    }
+                ]
+            }
+        ],
+        "subjects": [
+            {
+                "id": 2,
+                "name": "Fisica 1"
+            }
+        ],
+        "tutorProfile": {
+            "rating": 5.0,
+            "approvedHours": 200,
+            "userId": 10
+        },
+        "writtenReviews": []
+    },
+    {
+        "id": 11,
+        "name": "Isaac Newton",
+        "email": "newton@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=11",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 2,
+                "name": "Fisica 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 12,
+        "name": "Nikola Tesla",
+        "email": "tesla@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=12",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [
+            {
+                "rating": 5,
+                "comment": "Electric class",
+                "id": 3
+            }
+        ],
+        "sessions": [
+            {
+                "id": 3,
+                "topic": "Electricity",
+                "startTime": "2026-01-03T14:00:00",
+                "endTime": "2026-01-03T15:00:00",
+                "tutorStatus": "pending",
+                "description": "Tesla vibes",
+                "students": [
+                    {
+                        "studentStatus": "pending"
+                    }
+                ]
+            }
+        ],
+        "subjects": [
+            {
+                "id": 2,
+                "name": "Fisica 1"
+            }
+        ],
+        "tutorProfile": {
+            "rating": 4.9,
+            "approvedHours": 180,
+            "userId": 12
+        },
+        "writtenReviews": []
+    },
+    {
+        "id": 13,
+        "name": "Marie Curie",
+        "email": "curie@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=13",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 2,
+                "name": "Fisica 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 14,
+        "name": "Kanye West",
+        "email": "kanye@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=14",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": {
+            "twitter": "@kanye",
+            "whatsapp": "123",
+            "phone": "555",
+            "instagram": "@kanye_ig",
+            "userId": 14
+        },
+        "enrolledSessions": [],
+        "receivedReviews": [
+            {
+                "rating": 3,
+                "comment": "Kinda chaotic",
+                "id": 4
+            }
+        ],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 3,
+                "name": "Programacion 1"
+            }
+        ],
+        "tutorProfile": {
+            "rating": 3.5,
+            "approvedHours": 50,
+            "userId": 14
+        },
+        "writtenReviews": []
+    },
+    {
+        "id": 15,
+        "name": "Elon Musk",
+        "email": "elon@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=15",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 3,
+                "name": "Programacion 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 16,
+        "name": "Taylor Swift",
+        "email": "taylor@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=16",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 3,
+                "name": "Programacion 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 17,
+        "name": "Cristiano Ronaldo",
+        "email": "cr7@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=17",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 1,
+                "name": "Calculo 1"
+            }
+        ],
+        "tutorProfile": {
+            "rating": 4.7,
+            "approvedHours": 90,
+            "userId": 17
+        },
+        "writtenReviews": []
+    },
+    {
+        "id": 18,
+        "name": "DaVinci.exe",
+        "email": "davinci.exe@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=18",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 3,
+                "name": "Programacion 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 19,
+        "name": "Einstein_420",
+        "email": "einstein420@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=19",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 2,
+                "name": "Fisica 1"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    },
+    {
+        "id": 20,
+        "name": "FreudDebugging",
+        "email": "freuddebug@keyinstitute.edu.sv",
+        "passwordHash": "ab0ec5a139100e2f51ac08360c79a452",
+        "pfp": "https://i.pravatar.cc/150?img=20",
+        "isBecado": true,
+        "state": "active",
+        "createdAt": null,
+        "contact": null,
+        "enrolledSessions": [],
+        "receivedReviews": [],
+        "sessions": [],
+        "subjects": [
+            {
+                "id": 4,
+                "name": "Desarrollo Personal"
+            }
+        ],
+        "tutorProfile": null,
+        "writtenReviews": []
+    }
+]

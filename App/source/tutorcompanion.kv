@@ -1,27 +1,27 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
+<HelloWorld>
 
-KV = '''
 MDFloatLayout:
     md_bg_color: 0/255, 53/255, 102/255, 1
 
     MDLabel:
         text: "[b]TUTOR COMPANION[/b]"
         halign: "center"
+        markup: True
+        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
         font_style: "Display"
         role: "medium"
-        pos_hint: {"center_x": 0.5, "center_y": 0.85}
-        text_color: 1, 1, 1, 1
-        markup: True
-        font_size: "45sp"
 
     MDTextField:
         id: full_name
         mode: "filled"
         size_hint_x: 0.85
         pos_hint: {"center_x": 0.5, "center_y": 0.7}
+
         MDTextFieldHintText:
             text: "Nombre Completo"
+
         MDTextFieldLeadingIcon:
             icon: "account"
 
@@ -30,8 +30,10 @@ MDFloatLayout:
         mode: "filled"
         size_hint_x: 0.85
         pos_hint: {"center_x": 0.5, "center_y": 0.58}
+
         MDTextFieldHintText:
             text: "Correo Electrónico"
+
         MDTextFieldLeadingIcon:
             icon: "email"
 
@@ -39,32 +41,32 @@ MDFloatLayout:
         text: "¿Qué rol deseas tener?"
         halign: "center"
         pos_hint: {"center_y": 0.48}
+        theme_text_color: "Custom"
         text_color: 1, 1, 1, 1
         font_style: "Title"
 
     MDButton:
         style: "elevated"
         pos_hint: {"center_x": 0.3, "center_y": 0.4}
-        on_release: app.imprimir_datos("Estudiante", full_name.text)
+
+        on_release:
+            app.imprimir_datos(
+            "Estudiante",
+            full_name.text
+            )
+
         MDButtonText:
             text: "Estudiante"
 
     MDButton:
         style: "filled"
         pos_hint: {"center_x": 0.7, "center_y": 0.4}
-        on_release: app.imprimir_datos("Tutor", full_name.text)
+
+        on_release:
+            app.imprimir_datos(
+            "Tutor",
+            full_name.text
+            )
+
         MDButtonText:
             text: "Ser Tutor"
-'''
-
-class TutorApp(MDApp):
-    def build(self):
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Olive" # Puedes cambiar el color principal
-        return Builder.load_string(KV)
-
-    def imprimir_datos(self, rol, nombre):
-        print(f"Rol seleccionado: {rol} - Usuario: {nombre}")
-
-if __name__ == "__main__":
-    TutorApp().run()
