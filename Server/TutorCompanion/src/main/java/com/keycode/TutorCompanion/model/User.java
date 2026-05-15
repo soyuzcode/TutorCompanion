@@ -1,12 +1,20 @@
 package com.keycode.TutorCompanion.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,11 +44,40 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // 🎧 Constructor vacío (NECESARIO para JPA)
+    @ManyToMany
+    @JoinTable(
+    name = "user_subjects",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private List<Subject> subjects;
+
+    @OneToOne(mappedBy = "user")
+    private TutorProfile tutorProfile;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "user")
+    private Contact contact;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "tutor")
+    private List<TutorSession> sessions;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "student")
+    private List<SessionStudent> enrolledSessions;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "tutor")
+    private List<Review> receivedReviews;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "student")
+    private List<Review> writtenReviews;
+
     public User() {
     }
 
-    // 🎧 Constructor completo
     public User(Long id, String name, String email, String passwordHash, String pfp,
             Boolean isBecado, String state, LocalDateTime createdAt) {
         this.id = id;
@@ -116,4 +153,61 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public TutorProfile getTutorProfile() {
+        return tutorProfile;
+    }
+
+    public void setTutorProfile(TutorProfile tutorProfile) {
+        this.tutorProfile = tutorProfile;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public List<TutorSession> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<TutorSession> sessions) {
+        this.sessions = sessions;
+    }
+
+    public List<SessionStudent> getEnrolledSessions() {
+        return enrolledSessions;
+    }
+
+    public void setEnrolledSessions(List<SessionStudent> enrolledSessions) {
+        this.enrolledSessions = enrolledSessions;
+    }
+
+    public List<Review> getReceivedReviews() {
+        return receivedReviews;
+    }
+
+    public void setReceivedReviews(List<Review> receivedReviews) {
+        this.receivedReviews = receivedReviews;
+    }
+
+    public List<Review> getWrittenReviews() {
+        return writtenReviews;
+    }
+
+    public void setWrittenReviews(List<Review> writtenReviews) {
+        this.writtenReviews = writtenReviews;
+    }
+
 }
