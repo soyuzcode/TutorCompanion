@@ -1,6 +1,6 @@
 """Here we're gonna connect every module to UI"""
 from ui import TutorCompanion
-from .modules.process_data import is_psk_and_username_valid
+from modules.process_data import is_psk_and_username_valid
 
 class Main():
     def __init__(self) -> None:
