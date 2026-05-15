@@ -10,6 +10,7 @@ Kivy-Garden==0.1.5
 kivy_deps.angle==0.4.0
 kivy_deps.glew==0.3.1
 kivy_deps.sdl2==0.8.0
+kivymd==1.2.0
 pillow==10.4.0
 platformdirs==4.9.4
 Pygments==2.20.0
