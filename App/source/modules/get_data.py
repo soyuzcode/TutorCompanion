@@ -27,4 +27,5 @@ if __name__ == "__main__":
         print(data) 
     else:
         print("Failed to retrieve data from API")
+
     
