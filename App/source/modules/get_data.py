@@ -17,15 +17,3 @@ def get_json_data():
     except Exception as e:
         print(f"Error: {e}")
         return None
-    
-if __name__ == "__main__":
-    print('Probando conexion con API')
-    data = get_json_data()
-
-    if data:
-        print("Data received from API:")
-        print(data) 
-    else:
-        print("Failed to retrieve data from API")
-
-    
