@@ -5,32 +5,32 @@
 
         MDIcon:
             icon: "school"
-            font_size: "80sp"
-            pos_hint: {"center_x": 0.5, "center_y": 0.87}
+            font_size: "85sp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.85}
             theme_text_color: "Custom"
             text_color: 0.3, 0.8, 1, 1
 
         MDLabel:
             text: "Tutor Companion"
             halign: "center"
-            pos_hint: {"center_y": 0.76}
+            pos_hint: {"center_y": 0.75}
             font_style: "H4"
             theme_text_color: "Custom"
             text_color: 1, 1, 1, 1
 
         MDLabel:
-            text: "Aprende • Enseña • Crece"
+            text: "Powered by Key Code®"
             halign: "center"
-            pos_hint: {"center_y": 0.71}
+            pos_hint: {"center_y": 0.70}
             theme_text_color: "Custom"
-            text_color: 0.7, 0.7, 0.7, 1
+            text_color: 0.6, 0.6, 0.6, 1
 
         MDCard:
-            size_hint: 0.9, 0.45
+            size_hint: 0.88, 0.42
             pos_hint: {"center_x": 0.5, "center_y": 0.38}
             padding: "25dp"
-            radius: [25, 25, 25, 25]
-            elevation: 10
+            radius: [28, 28, 28, 28]
+            elevation: 12
             md_bg_color: 0.1, 0.12, 0.2, 1
 
             BoxLayout:
@@ -39,60 +39,43 @@
 
                 MDTextField:
                     id: full_name
-                    hint_text: "Nombre Completo"
-                    helper_text: "Ingresa tu nombre"
-                    helper_text_mode: "on_focus"
-                    icon_right: "account"
-                    mode: "rectangle"
-                    size_hint_y: None
-                    height: "50dp"
-
-                MDTextField:
-                    id: user_email
-                    hint_text: "Correo Electrónico"
-                    helper_text: "ejemplo@email.com"
+                    hint_text: "Correo / Código KEY"
+                    helper_text: "KEY_123456"
                     helper_text_mode: "on_focus"
                     icon_right: "email"
                     mode: "rectangle"
                     size_hint_y: None
                     height: "50dp"
 
-                MDLabel:
-                    text: "¿Qué rol deseas tener?"
-                    halign: "center"
-                    font_style: "Subtitle1"
-                    theme_text_color: "Custom"
-                    text_color: 1, 1, 1, 1
+                MDTextField:
+                    id: password
+                    hint_text: "Contraseña"
+                    helper_text: "Ingresa tu contraseña"
+                    helper_text_mode: "on_focus"
+                    password: True
+                    icon_right: "lock"
+                    mode: "rectangle"
                     size_hint_y: None
-                    height: self.texture_size[1]
+                    height: "50dp"
 
-                BoxLayout:
-                    spacing: "15dp"
-                    size_hint_y: None
-                    height: "45dp"
+                Widget:
 
-                    MDRaisedButton:
-                        text: "Estudiante"
+                MDFillRoundFlatButton:
+                    text: "LOGIN"
+                    font_size: "16sp"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.8
 
-                        on_release:
-                            app.imprimir_datos(
-                            "Estudiante",
-                            full_name.text
-                            )
-
-                    MDFillRoundFlatButton:
-                        text: "Ser Tutor"
-
-                        on_release:
-                            app.imprimir_datos(
-                            "Tutor",
-                            full_name.text
-                            )
+                    on_release:
+                        app.imprimir_datos(
+                        "Login",
+                        full_name.text
+                        )
 
         MDLabel:
-            text: "Powered by AI ✨"
+            text: "Key Institute®"
             halign: "center"
             pos_hint: {"center_y": 0.04}
             theme_text_color: "Custom"
-            text_color: 0.5, 0.5, 0.5, 1
+            text_color: 0.4, 0.4, 0.4, 1
             font_style: "Caption"
