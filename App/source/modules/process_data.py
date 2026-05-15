@@ -8,6 +8,10 @@ def validar_correo(texto):
 
     return False
 
+correo = input("Ingresa tu correo: ")
+print(validar_correo(correo))
+
+
 def convertir_lista(diccionarios):
     resultado = []
     for elemento in diccionarios:
@@ -19,47 +23,48 @@ def convertir_lista(diccionarios):
         lista.append(elemento["hour"])
         resultado.append(lista)
     return resultado
+data = []
+id = int(input("Ingrese id: "))
+name = input("Ingrese nombre: ")
+topic = input("Ingrese tema: ")
+date = input("Ingrese fecha: ")
+hour = input("Ingrese hora: ")
+nuevo = {
+    "id": id,
+    "name": name,
+    "topic": topic,
+    "date": date,
+    "hour": hour
+}
+data.append(nuevo)
+print(convertir_lista(data))
 
-# Asignado: Cristina
-def process_data_from_user_dict(data:dict):
-    """Dado un diccionario (llamado data) de la forma escrita en Data/return_example.json
-        Retorne una lista de listas asi:
-            [
-                [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
-                [NOMBRE2, EMAIL2, KEYCODE2, PASSWORD2],
-                [NOMBRE3, EMAIL3, KEYCODE3, PASSWORD3]
-            ]
-            
-        Con todos los nombres, emails, key codes y passwords en el diccionario."""
-
-    result: list[list[str]] = []
-
-    return result
-
-# Asignado: Miguel
 def is_psk_and_username_valid(user:str, psk:str) -> bool:
-    """Dado una lista de listas de la siguiente forma:
-        [
-            [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
-            [NOMBRE2, EMAIL2, KEYCODE2, PASSWORD2],
-            [NOMBRE3, EMAIL3, KEYCODE3, PASSWORD3]
-        ]
-        
-        Verifique si user es igual a nombre, email, o key code.
-        Si es igual a uno de estos, verifique si PASSWORD (el cuarto elemento)
-        es igual a psk.
-        
-        Devuelva Verdadero si cumple el requisito, y Falso si no."""
-    
-    result = True
 
-    return result
+    datos = [
+        ["Miguel", "miguel@keyinstitute.edu.sv", "KEY123", "1234"],
+        ["Carlos", "carlos@keyinstitute.edu.sv", "KEY456", "abcd"],
+        ["Ana", "ana@keyinstitute.edu.sv", "KEY789", "4321"]
+    ]
 
-def convert_dict_to_list_of_list(user_data:dict):
-    """[
-            [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
-            [NOMBRE2, EMAIL2, KEYCODE2, PASSWORD2],
-            [NOMBRE3, EMAIL3, KEYCODE3, PASSWORD3]
-        ]
-        
-        convierta json respoonse en esto"""
+    for persona in datos:
+
+        nombre = persona[0]
+        email = persona[1]
+        keycode = persona[2]
+        password = persona[3]
+
+        if user == nombre or user == email or user == keycode:
+
+            if psk == password:
+                return True
+
+    return False
+
+
+usuario = input("Ingresa nombre, correo o keycode: ")
+clave = input("Ingresa password: ")
+
+resultado = is_psk_and_username_valid(usuario, clave)
+
+print(resultado)
