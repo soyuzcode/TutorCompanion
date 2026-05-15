@@ -1,6 +1,14 @@
 package com.keycode.TutorCompanion.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tutor_profiles")
@@ -12,6 +20,7 @@ public class TutorProfile {
 
     @OneToOne
     @MapsId
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 

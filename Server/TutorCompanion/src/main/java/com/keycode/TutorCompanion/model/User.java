@@ -52,6 +52,7 @@ public class User {
     )
     private List<Subject> subjects;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "user")
     private TutorProfile tutorProfile;
 
