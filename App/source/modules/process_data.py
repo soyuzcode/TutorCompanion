@@ -23,18 +23,3 @@ def convertir_lista(diccionarios):
         lista.append(elemento["hour"])
         resultado.append(lista)
     return resultado
-data = []
-id = int(input("Ingrese id: "))
-name = input("Ingrese nombre: ")
-topic = input("Ingrese tema: ")
-date = input("Ingrese fecha: ")
-hour = input("Ingrese hora: ")
-nuevo = {
-    "id": id,
-    "name": name,
-    "topic": topic,
-    "date": date,
-    "hour": hour
-}
-data.append(nuevo)
-print(convertir_lista(data))
