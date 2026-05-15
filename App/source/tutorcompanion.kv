@@ -1,57 +1,98 @@
 <HelloWorld>:
 
     MDFloatLayout:
-        md_bg_color: 0/255, 53/255, 102/255, 1
+        md_bg_color: 0.05, 0.08, 0.15, 1
+
+        MDIcon:
+            icon: "school"
+            font_size: "80sp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.87}
+            theme_text_color: "Custom"
+            text_color: 0.3, 0.8, 1, 1
 
         MDLabel:
-            text: "[b]TUTOR COMPANION[/b]"
+            text: "Tutor Companion"
             halign: "center"
-            markup: True
-            pos_hint: {"center_x": 0.5, "center_y": 0.85}
-            theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1
+            pos_hint: {"center_y": 0.76}
             font_style: "H4"
-
-        MDTextField:
-            id: full_name
-            hint_text: "Nombre Completo"
-            icon_right: "account"
-            mode: "fill"
-            size_hint_x: 0.85
-            pos_hint: {"center_x": 0.5, "center_y": 0.7}
-
-        MDTextField:
-            id: user_email
-            hint_text: "Correo Electrónico"
-            icon_right: "email"
-            mode: "fill"
-            size_hint_x: 0.85
-            pos_hint: {"center_x": 0.5, "center_y": 0.58}
-
-        MDLabel:
-            text: "¿Qué rol deseas tener?"
-            halign: "center"
-            pos_hint: {"center_y": 0.48}
             theme_text_color: "Custom"
             text_color: 1, 1, 1, 1
-            font_style: "H6"
 
-        MDRaisedButton:
-            text: "Estudiante"
-            pos_hint: {"center_x": 0.3, "center_y": 0.4}
+        MDLabel:
+            text: "Aprende • Enseña • Crece"
+            halign: "center"
+            pos_hint: {"center_y": 0.71}
+            theme_text_color: "Custom"
+            text_color: 0.7, 0.7, 0.7, 1
 
-            on_release:
-                app.imprimir_datos(
-                "Estudiante",
-                full_name.text
-                )
+        MDCard:
+            size_hint: 0.9, 0.45
+            pos_hint: {"center_x": 0.5, "center_y": 0.38}
+            padding: "25dp"
+            radius: [25, 25, 25, 25]
+            elevation: 10
+            md_bg_color: 0.1, 0.12, 0.2, 1
 
-        MDFillRoundFlatButton:
-            text: "Ser Tutor"
-            pos_hint: {"center_x": 0.7, "center_y": 0.4}
+            BoxLayout:
+                orientation: "vertical"
+                spacing: "20dp"
 
-            on_release:
-                app.imprimir_datos(
-                "Tutor",
-                full_name.text
-                )
+                MDTextField:
+                    id: full_name
+                    hint_text: "Nombre Completo"
+                    helper_text: "Ingresa tu nombre"
+                    helper_text_mode: "on_focus"
+                    icon_right: "account"
+                    mode: "rectangle"
+                    size_hint_y: None
+                    height: "50dp"
+
+                MDTextField:
+                    id: user_email
+                    hint_text: "Correo Electrónico"
+                    helper_text: "ejemplo@email.com"
+                    helper_text_mode: "on_focus"
+                    icon_right: "email"
+                    mode: "rectangle"
+                    size_hint_y: None
+                    height: "50dp"
+
+                MDLabel:
+                    text: "¿Qué rol deseas tener?"
+                    halign: "center"
+                    font_style: "Subtitle1"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                BoxLayout:
+                    spacing: "15dp"
+                    size_hint_y: None
+                    height: "45dp"
+
+                    MDRaisedButton:
+                        text: "Estudiante"
+
+                        on_release:
+                            app.imprimir_datos(
+                            "Estudiante",
+                            full_name.text
+                            )
+
+                    MDFillRoundFlatButton:
+                        text: "Ser Tutor"
+
+                        on_release:
+                            app.imprimir_datos(
+                            "Tutor",
+                            full_name.text
+                            )
+
+        MDLabel:
+            text: "Powered by AI ✨"
+            halign: "center"
+            pos_hint: {"center_y": 0.04}
+            theme_text_color: "Custom"
+            text_color: 0.5, 0.5, 0.5, 1
+            font_style: "Caption"
