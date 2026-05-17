@@ -1,8 +1,14 @@
 from kivy.lang import Builder
+from kivy.core.window import Window
 
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.screenmanager import MDScreenManager
+
+
+# WINDOW CONFIG
+Window.size = (400, 700)
+Window.clearcolor = (0.05, 0.08, 0.15, 1)
 
 
 # ================= SCREENS =================
@@ -20,6 +26,7 @@ class DashboardScreen(MDScreen):
 class TutorCompanion(MDApp):
 
     def __init__(self, check_login, **kwargs):
+
         super().__init__(**kwargs)
 
         self.check_login = check_login
@@ -39,6 +46,8 @@ class TutorCompanion(MDApp):
         self.sm.add_widget(LoginScreen(name="login"))
         self.sm.add_widget(DashboardScreen(name="dashboard"))
 
+        self.sm.current = "login"
+
         return self.sm
 
     def on_login(self, user, psk):
@@ -47,6 +56,7 @@ class TutorCompanion(MDApp):
 
             print("Alright! You're good!")
 
+            self.sm.transition.direction = "left"
             self.sm.current = "dashboard"
 
         else:
