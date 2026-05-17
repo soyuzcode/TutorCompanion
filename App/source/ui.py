@@ -7,8 +7,8 @@ from kivymd.uix.screenmanager import MDScreenManager
 
 
 # WINDOW CONFIG
-Window.size = (400, 700)
-Window.clearcolor = (0.05, 0.08, 0.15, 1)
+#Window.size = (400, 700)
+#Window.clearcolor = (0.05, 0.08, 0.15, 1)
 
 
 # ================= SCREENS =================
