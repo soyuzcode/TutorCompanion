@@ -1,6 +1,7 @@
 from kivy.lang import Builder
 from kivy.core.window import Window
 
+from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.screenmanager import MDScreenManager
@@ -20,7 +21,6 @@ class LoginScreen(MDScreen):
 class DashboardScreen(MDScreen):
     pass
 
-
 # ================= APP =================
 
 class TutorCompanion(MDApp):
@@ -33,11 +33,17 @@ class TutorCompanion(MDApp):
 
     def build(self):
 
+        LabelBase.register(
+            name="Emoji",
+            fn_regular="C:/Windows/Fonts/seguiemj.ttf"
+        )
+
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Cyan"
 
         # LOAD KV FILES
         Builder.load_file("ui/login.kv")
+        Builder.load_file("ui/components.kv")
         Builder.load_file("ui/dashboard.kv")
 
         # SCREEN MANAGER
