@@ -3,7 +3,7 @@
 import requests 
 from modules.config import get_base_Url
 
-def get_user_data():
+def get_user_data() -> dict | None:
     """Fetches JSON from the API and returns it as a Python dictionary"""
 
     try:

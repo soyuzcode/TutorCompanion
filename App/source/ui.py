@@ -8,12 +8,11 @@ class TutorCompanion(MDApp):
     def __init__(
             self,
             check_login,
-            data, **kwargs):
+            **kwargs):
         
         super().__init__(**kwargs)
 
         self.check_login = check_login
-        self.get_user_data = data
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -21,10 +20,10 @@ class TutorCompanion(MDApp):
         return HelloWorld()
 
     def on_login(self, user, psk):
-        if self.check_login(user=user, psk=psk, data=self.get_user_data()):
+        if self.check_login(user=user, psk=psk):
             
             print("Alright! You're good!")
         
         else:
-            
+
             print("Wrong!")

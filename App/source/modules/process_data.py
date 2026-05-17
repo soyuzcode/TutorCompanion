@@ -21,7 +21,7 @@ def convertir_lista(diccionarios):
     return resultado
 
 # Asignado: Cristina
-def process_data_from_user_dict(data:dict):
+def process_data_from_user_dict(data:dict | None):
     """Dado un diccionario (llamado data) de la forma escrita en Data/return_example.json
         Retorne una lista de listas asi:
             [
@@ -32,7 +32,22 @@ def process_data_from_user_dict(data:dict):
             
         Con todos los nombres, emails, key codes y passwords en el diccionario."""
 
+    if data == None:
+        return []
+
     result: list[list[str]] = []
+
+    for user in data:
+        user_id = user.get("id")
+
+        keycode = f"KEY_{user_id:06d}"
+
+        result.append([
+            user.get("name"),
+            user.get("email"),
+            keycode,
+            user.get("passwordHash")
+        ])
 
     return result
 
