@@ -1,94 +1,144 @@
 #:import dp kivy.metrics.dp
 
-<DashboardScreen>:
+<DashboardScreen>
 
-    MDFloatLayout:
-        md_bg_color: 0.96, 0.97, 0.99, 1
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0.95, 0.96, 0.98, 1
+
+        # ===== CHIKITO HEADER =====
 
         MDBoxLayout:
-            orientation: "vertical"
-            size_hint: 1, 0.2
-            pos_hint: {"top": 1}
-            padding: dp(25)
-            spacing: dp(5)
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(120)
+            padding: dp(20)
+            spacing: dp(15)
 
-            MDLabel:
-                text: "Hola, Carlitos 👋"
-                font_size: "30sp"
-                bold: True
-                adaptive_height: True
-                theme_text_color: "Custom"
-                text_color: 0.1, 0.1, 0.1, 1
+            canvas.before:
+                Color:
+                    rgba: 0.04, 0.07, 0.16, 1
 
-            MDLabel:
-                text: "Bienvenido de nuevo a Tutor Companion"
-                adaptive_height: True
-                theme_text_color: "Secondary"
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [0, 0, 35, 35]
+
+            MDCard:
+                size_hint: None, None
+                size: dp(65), dp(65)
+                radius: [32]
+                elevation: 0
+                pos_hint: {"center_y": 0.5}
+                md_bg_color: 0.15, 0.2, 0.35, 1
+
+                MDIcon:
+                    icon: "account"
+                    halign: "center"
+                    valign: "middle"
+                    font_size: "35sp"
+                    theme_text_color: "Custom"
+                    text_color: 0.4, 0.8, 1, 1
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_y": 0.5}
+
+                MDLabel:
+                    text: "Hola usuario chiko"
+                    font_size: "28sp"
+                    bold: True
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+
+                MDLabel:
+                    text: "Bienvenido de nuevo"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.7, 0.7, 0.7, 1
+
+        # ===== CHIKITO CONTENT =====
 
         ScrollView:
-            size_hint: 1, 0.8
-            pos_hint: {"y": 0}
 
             MDBoxLayout:
                 orientation: "vertical"
                 adaptive_height: True
-                spacing: dp(20)
                 padding: dp(20)
+                spacing: dp(18)
+
+                # ===== CHIKITO STATS =====
 
                 MDGridLayout:
                     cols: 2
                     spacing: dp(15)
                     adaptive_height: True
+                    size_hint_y: None
+                    height: dp(120)
+
+                    # ===== TUTORIAS =====
 
                     MDCard:
-                        radius: [24, 24, 24, 24]
+                        radius: [28]
                         elevation: 1
-                        padding: dp(20)
+                        md_bg_color: 0.88, 0.93, 1, 1
+                        padding: dp(15)
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(10)
+                            spacing: dp(8)
 
                             MDIcon:
                                 icon: "calendar"
-                                font_size: "35sp"
+                                halign: "center"
                                 theme_text_color: "Custom"
-                                text_color: 0.1, 0.5, 1, 1
+                                text_color: 0.2, 0.45, 1, 1
+                                font_size: "36sp"
 
                             MDLabel:
                                 text: "12"
-                                font_size: "28sp"
+                                halign: "center"
                                 bold: True
-                                adaptive_height: True
+                                font_size: "26sp"
 
                             MDLabel:
                                 text: "Tutorías"
+                                halign: "center"
                                 theme_text_color: "Secondary"
 
+                    # ===== MATERIAS =====
+
                     MDCard:
-                        radius: [24, 24, 24, 24]
+                        radius: [28]
                         elevation: 1
-                        padding: dp(20)
+                        md_bg_color: 0.88, 1, 0.93, 1
+                        padding: dp(15)
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(10)
+                            spacing: dp(8)
 
                             MDIcon:
-                                icon: "book-open-variant"
-                                font_size: "35sp"
+                                icon: "book-open-page-variant"
+                                halign: "center"
                                 theme_text_color: "Custom"
-                                text_color: 0.2, 0.7, 0.4, 1
+                                text_color: 0.15, 0.75, 0.45, 1
+                                font_size: "36sp"
 
                             MDLabel:
                                 text: "5"
-                                font_size: "28sp"
+                                halign: "center"
                                 bold: True
-                                adaptive_height: True
+                                font_size: "26sp"
 
                             MDLabel:
                                 text: "Materias"
+                                halign: "center"
                                 theme_text_color: "Secondary"
+
+                # ===== CHIKITO TITLE =====
 
                 MDLabel:
                     text: "Acciones rápidas"
@@ -98,51 +148,124 @@
                     theme_text_color: "Custom"
                     text_color: 0.1, 0.1, 0.1, 1
 
+                # ===== CHIKITO ACTIONS =====
+
                 MDGridLayout:
                     cols: 2
                     spacing: dp(15)
                     adaptive_height: True
+                    size_hint_y: None
+                    height: dp(160)
+
+                    # ===== BUSCAR TUTOR =====
 
                     MDCard:
                         ripple_behavior: True
-                        radius: [24, 24, 24, 24]
+                        radius: [28]
                         elevation: 1
-                        padding: dp(20)
+                        md_bg_color: 1, 1, 1, 1
+                        padding: dp(18)
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(10)
+                            spacing: dp(12)
+
+                            Widget:
 
                             MDIcon:
                                 icon: "account-search"
-                                font_size: "40sp"
                                 halign: "center"
                                 theme_text_color: "Custom"
-                                text_color: 0.4, 0.5, 1, 1
+                                text_color: 0.35, 0.45, 1, 1
+                                font_size: "46sp"
 
                             MDLabel:
                                 text: "Buscar Tutor"
                                 halign: "center"
                                 bold: True
+                                font_size: "18sp"
+
+                            MDLabel:
+                                text: "Encuentra ayuda"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Secondary"
+
+                            Widget:
+
+                    # ===== HORARIOS =====
 
                     MDCard:
                         ripple_behavior: True
-                        radius: [24, 24, 24, 24]
+                        radius: [28]
                         elevation: 1
-                        padding: dp(20)
+                        md_bg_color: 1, 1, 1, 1
+                        padding: dp(18)
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(10)
+                            spacing: dp(12)
+
+                            Widget:
 
                             MDIcon:
                                 icon: "clock-outline"
-                                font_size: "40sp"
                                 halign: "center"
                                 theme_text_color: "Custom"
-                                text_color: 0.1, 0.7, 0.8, 1
+                                text_color: 0.1, 0.72, 0.82, 1
+                                font_size: "46sp"
 
                             MDLabel:
                                 text: "Mis Horarios"
                                 halign: "center"
                                 bold: True
+                                font_size: "18sp"
+
+                            MDLabel:
+                                text: "Gestiona sesiones"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Secondary"
+
+                            Widget:
+
+                # ===== CHIKITO NAVBAR =====
+
+                MDCard:
+                    radius: [30]
+                    elevation: 2
+                    size_hint_y: None
+                    height: dp(75)
+                    padding: dp(10)
+                    md_bg_color: 1, 1, 1, 1
+
+                    MDBoxLayout:
+                        spacing: dp(10)
+
+                        MDIconButton:
+                            icon: "home"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.2, 0.5, 1, 1
+                            pos_hint: {"center_y": 0.5}
+
+                        MDIconButton:
+                            icon: "book"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.5, 0.5, 0.5, 1
+                            pos_hint: {"center_y": 0.5}
+
+                        MDIconButton:
+                            icon: "calendar"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.5, 0.5, 0.5, 1
+                            pos_hint: {"center_y": 0.5}
+
+                        MDIconButton:
+                            icon: "account"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.5, 0.5, 0.5, 1
+                            pos_hint: {"center_y": 0.5}
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(20)
