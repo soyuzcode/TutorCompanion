@@ -37,7 +37,7 @@ def process_data_from_user_dict(data:dict):
     return result
 
 # Asignado: Miguel
-def is_psk_and_username_valid(user:str, psk:str) -> bool:
+def is_psk_and_username_valid(user:str, psk:str, data: list[list[str]]) -> bool:
     """Dado una lista de listas de la siguiente forma:
         [
             [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
@@ -50,10 +50,20 @@ def is_psk_and_username_valid(user:str, psk:str) -> bool:
         es igual a psk.
         
         Devuelva Verdadero si cumple el requisito, y Falso si no."""
-    
-    result = True
 
-    return result
+    for persona in data:
+
+        nombre = persona[0]
+        email = persona[1]
+        keycode = persona[2]
+        password = persona[3]
+
+        if user == nombre or user == email or user == keycode:
+
+            if psk == password:
+                return True
+
+    return False
 
 def convert_dict_to_list_of_list(user_data:dict):
     """[
