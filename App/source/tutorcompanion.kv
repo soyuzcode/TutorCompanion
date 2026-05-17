@@ -67,10 +67,7 @@
                     size_hint_x: 0.8
 
                     on_release:
-                        app.imprimir_datos(
-                        "Login",
-                        full_name.text
-                        )
+                        app.on_login(full_name.text, password.text)
 
         MDLabel:
             text: "Key Institute®"
