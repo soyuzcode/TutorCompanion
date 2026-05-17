@@ -1,271 +1,267 @@
 #:import dp kivy.metrics.dp
 
-<DashboardScreen>
+<DashboardScreen>:
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.95, 0.96, 0.98, 1
+        md_bg_color: 0.08, 0.09, 0.12, 1
 
-        # ===== CHIKITO HEADER =====
+        # ===== HEADER =====
+
+        MDCard:
+            size_hint_y: None
+            height: dp(90)
+            radius: [0, 0, 25, 25]
+            elevation: 0
+            padding: dp(20)
+            md_bg_color: 0.05, 0.08, 0.16, 1
+
+            MDBoxLayout:
+                spacing: dp(20)
+
+                # ===== USER =====
+
+                MDBoxLayout:
+                    adaptive_width: True
+                    spacing: dp(15)
+
+                    MDIcon:
+                        icon: "account-circle"
+                        font_size: "42sp"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.8, 1, 1
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+
+                        MDLabel:
+                            text: "Hola Carlitos 👋"
+                            bold: True
+                            font_name: "Emoji"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+
+                        MDLabel:
+                            text: "Rol: Estudiante"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                Widget:
+
+                # ===== CENTER =====
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_width: True
+
+                    MDLabel:
+                        text: "Compañeros Tutores"
+                        halign: "center"
+                        bold: True
+                        font_size: "24sp"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+
+                    MDLabel:
+                        text: "Tu red de aprendizaje"
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 0.7, 0.7, 0.7, 1
+
+                Widget:
+
+                # ===== ACTIONS =====
+
+                MDBoxLayout:
+                    adaptive_width: True
+                    spacing: dp(10)
+
+                    MDIconButton:
+                        icon: "bell-outline"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+
+                    MDIconButton:
+                        icon: "calendar"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+
+        # ===== BODY =====
 
         MDBoxLayout:
-            orientation: "horizontal"
-            size_hint_y: None
-            height: dp(120)
             padding: dp(20)
-            spacing: dp(15)
+            spacing: dp(20)
 
-            canvas.before:
-                Color:
-                    rgba: 0.04, 0.07, 0.16, 1
-
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
-                    radius: [0, 0, 35, 35]
-
-            MDCard:
-                size_hint: None, None
-                size: dp(65), dp(65)
-                radius: [32]
-                elevation: 0
-                pos_hint: {"center_y": 0.5}
-                md_bg_color: 0.15, 0.2, 0.35, 1
-
-                MDIcon:
-                    icon: "account"
-                    halign: "center"
-                    valign: "middle"
-                    font_size: "35sp"
-                    theme_text_color: "Custom"
-                    text_color: 0.4, 0.8, 1, 1
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            # =========================================================
+            # LEFT COLUMN
+            # =========================================================
 
             MDBoxLayout:
                 orientation: "vertical"
-                pos_hint: {"center_y": 0.5}
+                spacing: dp(15)
+                size_hint_x: 0.33
 
                 MDLabel:
-                    text: "Hola usuario chiko"
-                    font_size: "28sp"
+                    text: "¿Qué quieres hacer?"
                     bold: True
+                    font_size: "22sp"
                     adaptive_height: True
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
+                ActionCard:
+                    icon: "calendar-plus"
+                    title: "Sugerir Tutoría"
+                    subtitle: "Pide ayuda en temas difíciles"
+
+                ActionCard:
+                    icon: "magnify"
+                    title: "Buscar Tutorías"
+                    subtitle: "Explora tutorías disponibles"
+
+                ActionCard:
+                    icon: "clock-outline"
+                    title: "Mis Tutorías"
+                    subtitle: "Revisa tus sesiones"
+
                 MDLabel:
-                    text: "Bienvenido de nuevo"
+                    text: "Próximas Tutorías"
+                    bold: True
+                    font_size: "22sp"
                     adaptive_height: True
                     theme_text_color: "Custom"
-                    text_color: 0.7, 0.7, 0.7, 1
+                    text_color: 1, 1, 1, 1
 
-        # ===== CHIKITO CONTENT =====
+                TutoriaCard:
+                    materia: "Cálculo I"
+                    estado: "Confirmada"
 
-        ScrollView:
+                TutoriaCard:
+                    materia: "Física"
+                    estado: "Pendiente"
+
+            # =========================================================
+            # CENTER COLUMN
+            # =========================================================
 
             MDBoxLayout:
                 orientation: "vertical"
-                adaptive_height: True
-                padding: dp(20)
-                spacing: dp(18)
-
-                # ===== CHIKITO STATS =====
-
-                MDGridLayout:
-                    cols: 2
-                    spacing: dp(15)
-                    adaptive_height: True
-                    size_hint_y: None
-                    height: dp(120)
-
-                    # ===== TUTORIAS =====
-
-                    MDCard:
-                        radius: [28]
-                        elevation: 1
-                        md_bg_color: 0.88, 0.93, 1, 1
-                        padding: dp(15)
-
-                        MDBoxLayout:
-                            orientation: "vertical"
-                            spacing: dp(8)
-
-                            MDIcon:
-                                icon: "calendar"
-                                halign: "center"
-                                theme_text_color: "Custom"
-                                text_color: 0.2, 0.45, 1, 1
-                                font_size: "36sp"
-
-                            MDLabel:
-                                text: "12"
-                                halign: "center"
-                                bold: True
-                                font_size: "26sp"
-
-                            MDLabel:
-                                text: "Tutorías"
-                                halign: "center"
-                                theme_text_color: "Secondary"
-
-                    # ===== MATERIAS =====
-
-                    MDCard:
-                        radius: [28]
-                        elevation: 1
-                        md_bg_color: 0.88, 1, 0.93, 1
-                        padding: dp(15)
-
-                        MDBoxLayout:
-                            orientation: "vertical"
-                            spacing: dp(8)
-
-                            MDIcon:
-                                icon: "book-open-page-variant"
-                                halign: "center"
-                                theme_text_color: "Custom"
-                                text_color: 0.15, 0.75, 0.45, 1
-                                font_size: "36sp"
-
-                            MDLabel:
-                                text: "5"
-                                halign: "center"
-                                bold: True
-                                font_size: "26sp"
-
-                            MDLabel:
-                                text: "Materias"
-                                halign: "center"
-                                theme_text_color: "Secondary"
-
-                # ===== CHIKITO TITLE =====
+                spacing: dp(15)
+                size_hint_x: 0.33
 
                 MDLabel:
-                    text: "Acciones rápidas"
-                    font_size: "22sp"
+                    text: "Tutores Destacados"
                     bold: True
+                    font_size: "22sp"
                     adaptive_height: True
                     theme_text_color: "Custom"
-                    text_color: 0.1, 0.1, 0.1, 1
+                    text_color: 1, 1, 1, 1
 
-                # ===== CHIKITO ACTIONS =====
+                TutorCard:
+                    position: "1"
+                    name: "Andrea"
+
+                TutorCard:
+                    position: "2"
+                    name: "Sebastián"
+
+                TutorCard:
+                    position: "3"
+                    name: "María"
+
+                TutorCard:
+                    position: "4"
+                    name: "Carlos"
+
+                MDLabel:
+                    text: "Feedback y progreso"
+                    bold: True
+                    font_size: "22sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
 
                 MDGridLayout:
                     cols: 2
                     spacing: dp(15)
                     adaptive_height: True
-                    size_hint_y: None
-                    height: dp(160)
 
-                    # ===== BUSCAR TUTOR =====
+                    FeatureCard:
+                        icon: "star"
+                        title: "Rating Tutor"
 
-                    MDCard:
-                        ripple_behavior: True
-                        radius: [28]
-                        elevation: 1
-                        md_bg_color: 1, 1, 1, 1
-                        padding: dp(18)
+                    FeatureCard:
+                        icon: "chart-bar"
+                        title: "Estadísticas"
 
-                        MDBoxLayout:
-                            orientation: "vertical"
-                            spacing: dp(12)
+            # =========================================================
+            # RIGHT COLUMN
+            # =========================================================
 
-                            Widget:
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+                size_hint_x: 0.34
 
-                            MDIcon:
-                                icon: "account-search"
-                                halign: "center"
-                                theme_text_color: "Custom"
-                                text_color: 0.35, 0.45, 1, 1
-                                font_size: "46sp"
-
-                            MDLabel:
-                                text: "Buscar Tutor"
-                                halign: "center"
-                                bold: True
-                                font_size: "18sp"
-
-                            MDLabel:
-                                text: "Encuentra ayuda"
-                                halign: "center"
-                                font_size: "12sp"
-                                theme_text_color: "Secondary"
-
-                            Widget:
-
-                    # ===== HORARIOS =====
-
-                    MDCard:
-                        ripple_behavior: True
-                        radius: [28]
-                        elevation: 1
-                        md_bg_color: 1, 1, 1, 1
-                        padding: dp(18)
-
-                        MDBoxLayout:
-                            orientation: "vertical"
-                            spacing: dp(12)
-
-                            Widget:
-
-                            MDIcon:
-                                icon: "clock-outline"
-                                halign: "center"
-                                theme_text_color: "Custom"
-                                text_color: 0.1, 0.72, 0.82, 1
-                                font_size: "46sp"
-
-                            MDLabel:
-                                text: "Mis Horarios"
-                                halign: "center"
-                                bold: True
-                                font_size: "18sp"
-
-                            MDLabel:
-                                text: "Gestiona sesiones"
-                                halign: "center"
-                                font_size: "12sp"
-                                theme_text_color: "Secondary"
-
-                            Widget:
-
-                # ===== CHIKITO NAVBAR =====
+                MDTextField:
+                    hint_text: "Buscar tutorías..."
+                    mode: "rectangle"
 
                 MDCard:
-                    radius: [30]
-                    elevation: 2
+                    padding: dp(20)
+                    radius: [20]
+                    elevation: 0
+                    md_bg_color: 0.12, 0.13, 0.18, 1
                     size_hint_y: None
-                    height: dp(75)
-                    padding: dp(10)
-                    md_bg_color: 1, 1, 1, 1
+                    height: dp(170)
 
                     MDBoxLayout:
-                        spacing: dp(10)
+                        orientation: "vertical"
+                        spacing: dp(12)
 
-                        MDIconButton:
-                            icon: "home"
-                            theme_icon_color: "Custom"
-                            icon_color: 0.2, 0.5, 1, 1
-                            pos_hint: {"center_y": 0.5}
+                        MDLabel:
+                            text: "Tu impacto como tutor"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
 
-                        MDIconButton:
-                            icon: "book"
-                            theme_icon_color: "Custom"
-                            icon_color: 0.5, 0.5, 0.5, 1
-                            pos_hint: {"center_y": 0.5}
+                        MDLabel:
+                            text: "⏰ Key Hours: 24"
+                            font_name: "Emoji"
+                            theme_text_color: "Custom"
+                            text_color: 0.8, 0.8, 0.8, 1
 
-                        MDIconButton:
-                            icon: "calendar"
-                            theme_icon_color: "Custom"
-                            icon_color: 0.5, 0.5, 0.5, 1
-                            pos_hint: {"center_y": 0.5}
+                        MDLabel:
+                            text: "¡Sigue enseñando y canjea horas!"
+                            theme_text_color: "Custom"
+                            text_color: 0.6, 0.6, 0.6, 1
 
-                        MDIconButton:
-                            icon: "account"
-                            theme_icon_color: "Custom"
-                            icon_color: 0.5, 0.5, 0.5, 1
-                            pos_hint: {"center_y": 0.5}
+                        MDProgressBar:
+                            value: 70
 
-                Widget:
-                    size_hint_y: None
-                    height: dp(20)
+                MDLabel:
+                    text: "Solicitudes"
+                    bold: True
+                    font_size: "22sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+
+                SolicitudCard:
+                    name: "Luis"
+                    materia: "Álgebra"
+
+                SolicitudCard:
+                    name: "Camila"
+                    materia: "Programación"
+
+                MDLabel:
+                    text: "Calendario"
+                    bold: True
+                    font_size: "22sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+
+                CalendarCard:

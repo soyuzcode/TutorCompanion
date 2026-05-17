@@ -1,0 +1,64 @@
+<TopicCard@MDCard>
+    text: ""
+
+    size_hint_y: None
+    height: "80dp"
+
+    radius: [20]
+    elevation: 2
+    padding: "10dp"
+
+    MDLabel:
+        text: root.text
+        halign: "center"
+
+
+<ActionCard@MDCard>
+    icon: ""
+    title: ""
+
+    size_hint_y: None
+    height: "100dp"
+
+    radius: [20]
+    elevation: 2
+    padding: "15dp"
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        spacing: "15dp"
+
+        MDIcon:
+            icon: root.icon
+            font_size: "35sp"
+
+        MDLabel:
+            text: root.title
+
+
+<TutorCard@MDCard>
+    position: ""
+    name: ""
+
+    size_hint_y: None
+    height: "80dp"
+
+    radius: [20]
+    elevation: 2
+    padding: "15dp"
+
+    MDBoxLayout:
+        spacing: "15dp"
+
+        MDLabel:
+            text: root.position
+            bold: True
+            size_hint_x: None
+            width: "30dp"
+
+        MDLabel:
+            text: root.name
+
+        MDLabel:
+            text: "⭐⭐⭐⭐⭐"
+            halign: "right"
