@@ -28,7 +28,7 @@
             text_color: 0.6, 0.6, 0.6, 1
 
         MDCard:
-            size_hint: 0.88, 0.42
+            size_hint: 0.88, 0.45  # Un poco mas de altura
             pos_hint: {"center_x": 0.5, "center_y": 0.38}
             padding: "25dp"
             radius: [28, 28, 28, 28]
@@ -37,7 +37,7 @@
 
             BoxLayout:
                 orientation: "vertical"
-                spacing: "20dp"
+                spacing: "22dp"  # Un poquito más de espacio entre elementos
 
                 MDTextField:
                     id: full_name
@@ -47,7 +47,17 @@
                     icon_right: "email"
                     mode: "rectangle"
                     size_hint_y: None
-                    height: "50dp"
+                    height: "56dp"  # <- Aumentado a 56dp para que el texto flotante no se corte
+                    
+                    # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
+                    text_color_normal: 1, 1, 1, 1        # Texto que escribes (Blanco)
+                    text_color_focus: 1, 1, 1, 1         # Texto seleccionado (Blanco)
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1  # Texto de fondo normal (Gris)
+                    hint_text_color_focus: 0.3, 0.8, 1, 1     # Texto flotante arriba (Celeste Key)
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1 # Icono normal
+                    icon_right_color_focus: 0.3, 0.8, 1, 1    # Icono seleccionado
+                    line_color_normal: 0.3, 0.3, 0.4, 1       # Línea del cuadro normal
+                    line_color_focus: 0.3, 0.8, 1, 1          # Línea del cuadro seleccionada
 
                 MDTextField:
                     id: password
@@ -58,15 +68,29 @@
                     icon_right: "lock"
                     mode: "rectangle"
                     size_hint_y: None
-                    height: "50dp"
+                    height: "56dp"  # <- Aumentado a 56dp
+                    
+                    # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
+                    text_color_normal: 1, 1, 1, 1
+                    text_color_focus: 1, 1, 1, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0.3, 0.8, 1, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0.3, 0.8, 1, 1
+                    line_color_normal: 0.3, 0.3, 0.4, 1
+                    line_color_focus: 0.3, 0.8, 1, 1
 
                 Widget:
+                    size_hint_y: None
+                    height: "10dp"  # Espacio controlado antes del botón
 
                 MDFillRoundFlatButton:
                     text: "LOGIN"
                     font_size: "16sp"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.8
+                    md_bg_color: 0.3, 0.8, 1, 1  # Forzamos a que use el celeste brillante del logo
+                    text_color: 0.05, 0.08, 0.15, 1 # Letras oscuras para que contraste
 
                     on_release:
                         app.on_login(full_name.text, password.text)
