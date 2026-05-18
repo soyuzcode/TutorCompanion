@@ -28,7 +28,7 @@
             text_color: 0.6, 0.6, 0.6, 1
 
         MDCard:
-            size_hint: 0.88, 0.45  # Un poco mas de altura
+            size_hint: 0.88, 0.45  # Mantenemos tu altura perfecta
             pos_hint: {"center_x": 0.5, "center_y": 0.38}
             padding: "25dp"
             radius: [28, 28, 28, 28]
@@ -37,7 +37,7 @@
 
             BoxLayout:
                 orientation: "vertical"
-                spacing: "22dp"  # Un poquito más de espacio entre elementos
+                spacing: "22dp"  # Mantenemos tu espaciado ideal
 
                 MDTextField:
                     id: full_name
@@ -45,9 +45,12 @@
                     helper_text: "KEY_123456"
                     helper_text_mode: "on_focus"
                     icon_right: "email"
-                    mode: "rectangle"
                     size_hint_y: None
-                    height: "56dp"  # <- Aumentado a 56dp para que el texto flotante no se corte
+                    height: "64dp"  # Subido a 64dp para centrar el texto interno y dar espacio arriba
+                    mode: "outline"  # Cambiado a outline para que rompa la línea superior limpiamente
+                    
+                    # --- AJUSTES DE RELLENO PARA CENTRAR EL TEXTO ---
+                    padding: [16, 18, 16, 14] 
                     
                     # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
                     text_color_normal: 1, 1, 1, 1        # Texto que escribes (Blanco)
@@ -66,9 +69,12 @@
                     helper_text_mode: "on_focus"
                     password: True
                     icon_right: "lock"
-                    mode: "rectangle"
                     size_hint_y: None
-                    height: "56dp"  # <- Aumentado a 56dp
+                    height: "64dp"  # Subido a 64dp también
+                    mode: "outline"  # Cambiado a outline
+                    
+                    # --- AJUSTES DE RELLENO PARA CENTRAR EL TEXTO ---
+                    padding: [16, 18, 16, 14]
                     
                     # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
                     text_color_normal: 1, 1, 1, 1
