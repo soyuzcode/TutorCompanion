@@ -28,7 +28,7 @@
             text_color: 0.6, 0.6, 0.6, 1
 
         MDCard:
-            size_hint: 0.88, 0.45  # Mantenemos tu altura perfecta
+            size_hint: 0.88, 0.45  # Tu altura perfecta
             pos_hint: {"center_x": 0.5, "center_y": 0.38}
             padding: "25dp"
             radius: [28, 28, 28, 28]
@@ -37,7 +37,7 @@
 
             BoxLayout:
                 orientation: "vertical"
-                spacing: "22dp"  # Mantenemos tu espaciado ideal
+                spacing: "22dp"  # Tu espaciado ideal
 
                 MDTextField:
                     id: full_name
@@ -45,22 +45,22 @@
                     helper_text: "KEY_123456"
                     helper_text_mode: "on_focus"
                     icon_right: "email"
+                    mode: "rectangle"  # Regresamos al modo compatible con tu versión
                     size_hint_y: None
-                    height: "64dp"  # Subido a 64dp para centrar el texto interno y dar espacio arriba
-                    mode: "outline"  # Cambiado a outline para que rompa la línea superior limpiamente
+                    height: "52dp"     # Reducido un poquito para que el texto por defecto no baile
                     
-                    # --- AJUSTES DE RELLENO PARA CENTRAR EL TEXTO ---
-                    padding: [16, 18, 16, 14] 
+                    # --- AJUSTE DE RELLENO PARA BAJAR EL TEXTO ---
+                    padding: [12, 14, 12, 10]
                     
                     # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
-                    text_color_normal: 1, 1, 1, 1        # Texto que escribes (Blanco)
-                    text_color_focus: 1, 1, 1, 1         # Texto seleccionado (Blanco)
-                    hint_text_color_normal: 0.6, 0.6, 0.6, 1  # Texto de fondo normal (Gris)
-                    hint_text_color_focus: 0.3, 0.8, 1, 1     # Texto flotante arriba (Celeste Key)
-                    icon_right_color_normal: 0.6, 0.6, 0.6, 1 # Icono normal
-                    icon_right_color_focus: 0.3, 0.8, 1, 1    # Icono seleccionado
-                    line_color_normal: 0.3, 0.3, 0.4, 1       # Línea del cuadro normal
-                    line_color_focus: 0.3, 0.8, 1, 1          # Línea del cuadro seleccionada
+                    text_color_normal: 1, 1, 1, 1        
+                    text_color_focus: 1, 1, 1, 1         
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1  
+                    hint_text_color_focus: 0.3, 0.8, 1, 1     
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1 
+                    icon_right_color_focus: 0.3, 0.8, 1, 1    
+                    line_color_normal: 0.3, 0.3, 0.4, 1       
+                    line_color_focus: 0.3, 0.8, 1, 1          
 
                 MDTextField:
                     id: password
@@ -69,12 +69,12 @@
                     helper_text_mode: "on_focus"
                     password: True
                     icon_right: "lock"
+                    mode: "rectangle"  # Regresamos al modo compatible
                     size_hint_y: None
-                    height: "64dp"  # Subido a 64dp también
-                    mode: "outline"  # Cambiado a outline
+                    height: "52dp"
                     
-                    # --- AJUSTES DE RELLENO PARA CENTRAR EL TEXTO ---
-                    padding: [16, 18, 16, 14]
+                    # --- AJUSTE DE RELLENO PARA BAJAR EL TEXTO ---
+                    padding: [12, 14, 12, 10]
                     
                     # --- CONFIGURACIÓN DE COLORES PARA MODO OSCURO ---
                     text_color_normal: 1, 1, 1, 1
@@ -95,8 +95,8 @@
                     font_size: "16sp"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.8
-                    md_bg_color: 0.3, 0.8, 1, 1  # Forzamos a que use el celeste brillante del logo
-                    text_color: 0.05, 0.08, 0.15, 1 # Letras oscuras para que contraste
+                    md_bg_color: 0.3, 0.8, 1, 1  
+                    text_color: 0.05, 0.08, 0.15, 1 
 
                     on_release:
                         app.on_login(full_name.text, password.text)
