@@ -7,6 +7,8 @@ from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 
+from kivy.factory import Factory
+
 
 # WINDOW CONFIG
 #Window.size = (400, 700)
@@ -20,7 +22,38 @@ class LoginScreen(MDScreen):
 
 
 class DashboardScreen(MDScreen):
-    pass
+    
+    def actualizar_tarjetas_tutorias(self, lista_tutorias):
+        """
+        Recibe la lista de listas generada por Yulissa:
+        [[id, materia, tema, fecha, hora], ...] y pinta tarjetas reales.
+        """
+        # 1. Obtenemos el contenedor de la columna izquierda por su ID
+        columna_izquierda = self.ids.contenedor_izquierdo
+        
+        # 2. Buscamos la clase de tarjeta personalizada que hicieron tus compañeros
+        # Usamos Factory para poder crear copias de TutoriaCard desde Python
+        TutoriaCardClass = Factory.TutoriaCard
+        
+        # 3. Recorremos tus 5 tutorías reales del servidor
+        for tutoria in lista_tutorias:
+            id_tuto = tutoria[0]
+            materia_tuto = tutoria[1]
+            tema_tuto = tutoria[2]
+            fecha_tuto = tutoria[3]
+            hora_tuto = tutoria[4]
+            
+            # 4. Instanciamos una nueva tarjeta pasándole tus variables reales
+            # Nota: Si tus compañeros definieron propiedades específicas en su componente 
+            # como 'fecha' o 'hora', se las pasamos aquí. 
+            nueva_tarjeta = TutoriaCardClass(
+                materia=f"{materia_tuto}",
+                # Si su componente usa una propiedad de texto interna, combinamos la info útil:
+                # O si tiene campos dedicados en el kv, los adaptas aquí.
+            )
+            
+            # Agregamos la tarjeta real al final de la columna izquierda
+            columna_izquierda.add_widget(nueva_tarjeta)
 
 # ================= CARDS =================
 

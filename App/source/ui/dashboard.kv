@@ -157,6 +157,7 @@
             # =====================================================
 
             MDBoxLayout:
+                id: contenedor_izquierdo  # <-- LE AGREGAMOS ESTE ID 
                 orientation: "vertical"
                 spacing: dp(15)
                 size_hint_x: 0.33
@@ -166,7 +167,6 @@
                     bold: True
                     font_size: "22sp"
                     adaptive_height: True
-
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
@@ -190,23 +190,15 @@
                     bold: True
                     font_size: "22sp"
                     adaptive_height: True
-
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
-                TutoriaCard:
-                    materia: "Cálculo I"
-                    estado: "Confirmada"
-
-                TutoriaCard:
-                    materia: "Física"
-                    estado: "Pendiente"
+                # BORRAMOS las tarjetas viejas de Cálculo y Física de aquí.
+                # Tu código se encargará de crearlas dinámicamente.
 
             # =====================================================
             # LEFT COLUMN END
             # =====================================================
-
-
 
             # =====================================================
             # CENTER COLUMN START
