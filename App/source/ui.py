@@ -28,31 +28,24 @@ class DashboardScreen(MDScreen):
         Recibe la lista de listas generada por Yulissa:
         [[id, materia, tema, fecha, hora], ...] y pinta tarjetas reales.
         """
-        # 1. Obtenemos el contenedor de la columna izquierda por su ID
         columna_izquierda = self.ids.contenedor_izquierdo
-        
-        # 2. Buscamos la clase de tarjeta personalizada que hicieron tus compañeros
-        # Usamos Factory para poder crear copias de TutoriaCard desde Python
         TutoriaCardClass = Factory.TutoriaCard
         
-        # 3. Recorremos tus 5 tutorías reales del servidor
         for tutoria in lista_tutorias:
-            id_tuto = tutoria[0]
             materia_tuto = tutoria[1]
-            tema_tuto = tutoria[2]
-            fecha_tuto = tutoria[3]
-            hora_tuto = tutoria[4]
+            estado_tuto = "Confirmada" # Un valor por defecto para el diseño
             
-            # 4. Instanciamos una nueva tarjeta pasándole tus variables reales
-            # Nota: Si tus compañeros definieron propiedades específicas en su componente 
-            # como 'fecha' o 'hora', se las pasamos aquí. 
-            nueva_tarjeta = TutoriaCardClass(
-                materia=f"{materia_tuto}",
-                # Si su componente usa una propiedad de texto interna, combinamos la info útil:
-                # O si tiene campos dedicados en el kv, los adaptas aquí.
-            )
+            # 1. Creamos la tarjeta VACÍA (así no lanza el error de propiedad)
+            nueva_tarjeta = TutoriaCardClass()
             
-            # Agregamos la tarjeta real al final de la columna izquierda
+            # 2. Si tus compañeros definieron la tarjeta con propiedades internas de texto,
+            # intentamos asignárselas directamente al componente.
+            if hasattr(nueva_tarjeta, "materia"):
+                nueva_tarjeta.materia = materia_tuto
+            if hasattr(nueva_tarjeta, "estado"):
+                nueva_tarjeta.estado = estado_tuto
+                
+            # Agregamos la tarjeta real al contenedor
             columna_izquierda.add_widget(nueva_tarjeta)
 
 # ================= CARDS =================
