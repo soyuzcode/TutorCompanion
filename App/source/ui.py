@@ -4,7 +4,10 @@ from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
+
+from kivy.factory import Factory
 
 
 # WINDOW CONFIG
@@ -19,17 +22,54 @@ class LoginScreen(MDScreen):
 
 
 class DashboardScreen(MDScreen):
+    
+    def actualizar_tarjetas_tutorias(self, lista_tutorias):
+        """
+        Recibe la lista de listas generada por Yulissa:
+        [[id, materia, tema, fecha, hora], ...] y pinta tarjetas reales.
+        """
+        # 1. Obtenemos el contenedor de la columna izquierda por su ID
+        columna_izquierda = self.ids.contenedor_izquierdo
+        
+        # 2. Buscamos la clase de tarjeta personalizada que hicieron tus compañeros
+        # Usamos Factory para poder crear copias de TutoriaCard desde Python
+        TutoriaCardClass = Factory.TutoriaCard
+        
+        # 3. Recorremos tus 5 tutorías reales del servidor
+        for tutoria in lista_tutorias:
+            id_tuto = tutoria[0]
+            materia_tuto = tutoria[1]
+            tema_tuto = tutoria[2]
+            fecha_tuto = tutoria[3]
+            hora_tuto = tutoria[4]
+            
+            # 4. Instanciamos una nueva tarjeta pasándole tus variables reales
+            # Nota: Si tus compañeros definieron propiedades específicas en su componente 
+            # como 'fecha' o 'hora', se las pasamos aquí. 
+            nueva_tarjeta = TutoriaCardClass(
+                materia=f"{materia_tuto}",
+                # Si su componente usa una propiedad de texto interna, combinamos la info útil:
+                # O si tiene campos dedicados en el kv, los adaptas aquí.
+            )
+            
+            # Agregamos la tarjeta real al final de la columna izquierda
+            columna_izquierda.add_widget(nueva_tarjeta)
+
+# ================= CARDS =================
+
+class ImpactCard(MDCard):
     pass
 
 # ================= APP =================
 
 class TutorCompanion(MDApp):
 
-    def __init__(self, check_login, **kwargs):
+    def __init__(self, check_login, get_key_hours,**kwargs):
 
         super().__init__(**kwargs)
 
         self.check_login = check_login
+        self.get_key_hours = get_key_hours
 
     def build(self):
 
@@ -55,6 +95,17 @@ class TutorCompanion(MDApp):
         self.sm.current = "login"
 
         return self.sm
+
+    def load_data_on_dashboard(self):
+        approved_hours, total_hours = self.get_key_hours()
+
+        progress = int((approved_hours / total_hours) * 100)
+
+        dashboard = self.sm.get_screen("dashboard")
+
+        dashboard.ids.impact_card.current_hours = approved_hours
+        dashboard.ids.impact_card.total_hours = total_hours
+        dashboard.ids.impact_card.progress_value = progress
 
     def on_login(self, user, psk):
 
