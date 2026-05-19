@@ -9,13 +9,13 @@ from modules.tuto_suggestions import get_key_hours_by_identifier
 
 class Main():
     def __init__(self) -> None:
-        UI = TutorCompanion(check_login=self.check_login, get_ranking=self.get_rank)
+        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours)
         UI.run()
 
         # Don't write anything here!!
         # This will execute when kill UI
 
-    def get_rank(self, identifier) -> int | None:
+    def get_key_hours(self, identifier) -> int | None:
         return get_key_hours_by_identifier(identifier=identifier, users=get_user_data())
 
     def check_login(self, user, psk) -> bool:
