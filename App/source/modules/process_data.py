@@ -1,24 +1,52 @@
 """Here we're gonna process every data when we need on ui"""
+
 def validar_correo(texto):
-
     if texto.endswith("@keyinstitute.edu.sv"):
-
         if " " not in texto:
             return True
-
     return False
 
-def convertir_lista(diccionarios):
+
+# Asignado: Michelle
+def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
+    """
+    Dado el diccionario o lista de datos de Data/return_example.json,
+    recorre los usuarios, extrae TODAS las tutorías existentes en sus 'subjects'
+    e información disponible, evitando duplicarlas.
+    
+    Retorna una lista de listas lista para la UI:
+        [
+            [ID, MATERIA, TEMA, FECHA, HORA],
+            ...
+        ]
+    """
+    if data is None:
+        return []
+
     resultado = []
-    for elemento in diccionarios:
-        lista = []
-        lista.append(elemento["id"])
-        lista.append(elemento["name"])
-        lista.append(elemento["topic"])
-        lista.append(elemento["date"])
-        lista.append(elemento["hour"])
-        resultado.append(lista)
+    ids_visitados = set()
+
+    for user in data:
+        subjects = user.get("subjects", [])
+        for sub in subjects:
+            sub_id = str(sub.get("id"))
+            
+            # Si la tutoría no la hemos procesado ya, la agregamos
+            if sub_id not in ids_visitados:
+                ids_visitados.add(sub_id)
+                
+                # Extraemos los datos básicos. Si falta alguno, ponemos un valor por defecto
+                lista_tutoria = [
+                    sub_id,                                # ID
+                    sub.get("name", "Materia sin nombre"), # Nombre de la materia
+                    sub.get("topic", "General"),           # Tema / Tópico
+                    sub.get("date", "XX/XX/2026"),         # Fecha
+                    sub.get("hour", "4:00 PM")             # Hora
+                ]
+                resultado.append(lista_tutoria)
+                
     return resultado
+
 
 # Asignado: Cristina
 def process_data_from_user_dict(data:dict | None):
@@ -51,6 +79,7 @@ def process_data_from_user_dict(data:dict | None):
 
     return result
 
+
 # Asignado: Miguel
 def is_psk_and_username_valid(user:str, psk:str, data: list[list[str]]) -> bool:
     """Dado una lista de listas de la siguiente forma:
@@ -80,6 +109,7 @@ def is_psk_and_username_valid(user:str, psk:str, data: list[list[str]]) -> bool:
 
     return False
 
+
 def convert_dict_to_list_of_list(user_data:dict):
     """[
             [NOMBRE1, EMAIL1, KEYCODE1, PASSWORD1],
@@ -88,3 +118,4 @@ def convert_dict_to_list_of_list(user_data:dict):
         ]
         
         convierta json respoonse en esto"""
+    pass
