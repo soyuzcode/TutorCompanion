@@ -13,14 +13,17 @@ class Main():
         # Inicializamos la lista donde tu función guardará las tutorías
         self.tutorias_disponibles = []
         
-        UI = TutorCompanion(check_login=self.check_login)
-        UI.run()
+        # Guardamos la UI en self para poder usarla en toda la clase
+        self.UI = TutorCompanion(check_login=self.check_login)
+        self.UI.run()
 
         # Don't write anything here!!
         # This will execute when kill UI
 
     def check_login(self, user, psk) -> bool:
-        # 1. INTENTO CON EL SERVIDOR DE CARLOS
+        # =======================================================================
+        # 1. INTENTO CON EL SERVIDOR DE CARLOS (PLAN A)
+        # =======================================================================
         try:
             print("Intentando conectar con el servidor de Carlos...")
             datos_servidor = get_user_data()
@@ -30,6 +33,11 @@ class Main():
                     # Guardamos las tutorías reales del servidor usando tu función
                     self.tutorias_disponibles = obtener_todas_las_tutorias(datos_servidor)
                     print(f"Tutorías cargadas desde el servidor: {len(self.tutorias_disponibles)} encontradas.")
+                    
+                    # === AQUÍ ENVIAMOS LOS DATOS REALES A LA UI ===
+                    dashboard = self.UI.sm.get_screen("dashboard")
+                    dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
+                    
                     return True
         except Exception as e:
             print(f"El servidor externo no está disponible: {e}")
@@ -39,10 +47,8 @@ class Main():
         # =======================================================================
         print("Activando modo local de prueba para cargar la app...")
         
-        # Ajustamos la ruta según tu estructura real de carpetas:
-        # base_dir es 'APP/source'
+        # Ajustamos la ruta según tu estructura real de carpetas
         base_dir = os.path.dirname(os.path.abspath(__file__)) 
-        # Subimos un nivel a 'APP' y entramos a 'Data/return_example.json'
         json_path = os.path.join(os.path.dirname(base_dir), "Data", "return_example.json")
         
         try:
@@ -53,9 +59,14 @@ class Main():
             if is_psk_and_username_valid(user=user, psk=psk, data=datos_procesados_locales):
                 # Usamos tu función con los datos del JSON local de prueba
                 self.tutorias_disponibles = obtener_todas_las_tutorias(datos_locales)
-                print("\n=================== TUS TUTORÍAS CARGADAS ===================")
+                print("\n=================== TUS TUTORÍAS CARGADAS (LOCAL) ===================")
                 print(self.tutorias_disponibles)
                 print("=============================================================\n")
+                
+                # === AQUÍ ENVIAMOS LOS DATOS LOCALES A LA UI EN CASO DE FALLBACK ===
+                dashboard = self.UI.sm.get_screen("dashboard")
+                dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
+                
                 return True
         except Exception as err_local:
             print(f"Error crítico al leer el archivo de respaldo en {json_path}: {err_local}")
