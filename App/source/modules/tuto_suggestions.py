@@ -29,6 +29,7 @@ def get_key_hours_by_identifier(identifier, users):
         return None
 
     if not user.get("isBecado") or not user.get("tutorProfile"):
+        print("JAJA DEBUGGING AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADNIASJCNKVDJSNCD VM  BJRFHBEDJSKCNVF BJRHBGEKDSNCMNVF BRJHNEKDCDN VFRJHGE")
         return None
 
     approved_hours = int(user["tutorProfile"].get("approvedHours"))
@@ -37,7 +38,7 @@ def get_key_hours_by_identifier(identifier, users):
     return (approved_hours, required_hours)  # Tupla
 
 
-def get_name_by_identifier(identifier, users):
+def get_name(identifier, users):
     user = None
 
     if isinstance(identifier, int):

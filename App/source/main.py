@@ -18,8 +18,8 @@ class Main():
         # Don't write anything here!!
         # This will execute when kill UI
 
-    def get_key_hours(self, identifier) -> int | None:
-        return get_key_hours_by_identifier(identifier=identifier, users=get_user_data())
+    def get_key_hours(self, identifier) -> tuple | None:
+        return get_key_hours_by_identifier(identifier=identifier, users=get_user_data)
 
     def check_login(self, user, psk) -> bool:
         # =======================================================================

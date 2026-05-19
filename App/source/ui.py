@@ -90,15 +90,31 @@ class TutorCompanion(MDApp):
         return self.sm
 
     def load_data_on_dashboard(self):
-        approved_hours, total_hours = self.get_key_hours()
+
+        data = self.get_key_hours()
+
+        dashboard = self.sm.get_screen("dashboard")
+        card = dashboard.ids.impact_card
+
+        if data is None:
+
+            card.opacity = 0
+            card.disabled = True
+            card.height = 0
+
+            return
+
+        approved_hours, total_hours = data
 
         progress = int((approved_hours / total_hours) * 100)
 
-        dashboard = self.sm.get_screen("dashboard")
+        card.opacity = 1
+        card.disabled = False
+        #card.height = dp(190)
 
-        dashboard.ids.impact_card.current_hours = approved_hours
-        dashboard.ids.impact_card.total_hours = total_hours
-        dashboard.ids.impact_card.progress_value = progress
+        card.current_hours = approved_hours
+        card.total_hours = total_hours
+        card.progress_value = progress
 
     def on_login(self, user, psk):
 
