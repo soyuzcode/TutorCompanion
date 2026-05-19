@@ -32,3 +32,25 @@ def get_key_hours_by_identifier(identifier, users):
         return None
 
     return int(user["tutorProfile"].get("approvedHours"))  # ✅ Cast a entero
+
+def get_name_by_identifier(identifier, users):
+    user = None
+
+    if isinstance(identifier, int):
+        user = next((u for u in users if u["id"] == identifier), None)
+
+    elif isinstance(identifier, str):
+        identifier_clean = identifier.strip().lower()
+
+        if "@" in identifier_clean:
+            user = next((u for u in users if u["email"].lower() == identifier_clean), None)
+        else:
+            user = next((u for u in users if u["name"].lower() == identifier_clean), None)
+
+    if user is None:
+        return None
+
+    if not user.get("isBecado") or not user.get("tutorProfile"):
+        return None
+
+    return user["name"]
