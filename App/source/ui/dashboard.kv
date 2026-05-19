@@ -285,48 +285,12 @@
                 # IMPACT CARD START
                 # =================================================
 
-                MDCard:
-                    padding: dp(20)
-                    radius: [20]
-                    elevation: 0
+                ImpactCard:
+                    id: impact_card
 
-                    md_bg_color: 0.12, 0.13, 0.18, 1
-
-                    size_hint_y: None
-                    height: dp(190)
-
-                    MDBoxLayout:
-                        orientation: "vertical"
-                        spacing: dp(12)
-
-                        MDLabel:
-                            text: "Tu impacto como tutor"
-                            bold: True
-
-                            theme_text_color: "Custom"
-                            text_color: 1, 1, 1, 1
-
-                        MDLabel:
-                            text: "Key Hours: 24"
-
-                            theme_text_color: "Custom"
-                            text_color: 0.8, 0.8, 0.8, 1
-
-                        MDLabel:
-                            text: "¡Sigue enseñando y canjea horas!"
-
-                            theme_text_color: "Custom"
-                            text_color: 0.6, 0.6, 0.6, 1
-
-                        MDProgressBar:
-                            value: 70
-
-                        MDLabel:
-                            text: "70% completado"
-                            halign: "right"
-
-                            theme_text_color: "Custom"
-                            text_color: 0.5, 0.8, 1, 1
+                    current_hours: 24
+                    total_hours: 40
+                    progress_value: 60
 
                 # =================================================
                 # IMPACT CARD END

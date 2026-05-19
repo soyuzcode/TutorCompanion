@@ -4,6 +4,7 @@ from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 
 from kivy.factory import Factory
@@ -47,15 +48,21 @@ class DashboardScreen(MDScreen):
             # Agregamos la tarjeta real al contenedor
             columna_izquierda.add_widget(nueva_tarjeta)
 
+# ================= CARDS =================
+
+class ImpactCard(MDCard):
+    pass
+
 # ================= APP =================
 
 class TutorCompanion(MDApp):
 
-    def __init__(self, check_login, **kwargs):
+    def __init__(self, check_login, get_key_hours,**kwargs):
 
         super().__init__(**kwargs)
 
         self.check_login = check_login
+        self.get_key_hours = get_key_hours
 
     def build(self):
 
@@ -81,6 +88,17 @@ class TutorCompanion(MDApp):
         self.sm.current = "login"
 
         return self.sm
+
+    def load_data_on_dashboard(self):
+        approved_hours, total_hours = self.get_key_hours()
+
+        progress = int((approved_hours / total_hours) * 100)
+
+        dashboard = self.sm.get_screen("dashboard")
+
+        dashboard.ids.impact_card.current_hours = approved_hours
+        dashboard.ids.impact_card.total_hours = total_hours
+        dashboard.ids.impact_card.progress_value = progress
 
     def on_login(self, user, psk):
 

@@ -7,18 +7,18 @@ from modules.process_data import process_data_from_user_dict
 # Importamos tu nueva función asignada
 from modules.process_data import obtener_todas_las_tutorias 
 from modules.get_data import get_user_data
+from modules.tuto_suggestions import get_key_hours_by_identifier
 
 class Main():
     def __init__(self) -> None:
-        # Inicializamos la lista donde tu función guardará las tutorías
-        self.tutorias_disponibles = []
-        
-        # Guardamos la UI en self para poder usarla en toda la clase
-        self.UI = TutorCompanion(check_login=self.check_login)
-        self.UI.run()
+        UI = TutorCompanion(check_login=self.check_login)
+        UI.run()
 
         # Don't write anything here!!
         # This will execute when kill UI
+
+    def get_key_hours(self, identifier) -> int | None:
+        return get_key_hours_by_identifier(identifier=identifier, users=get_user_data())
 
     def check_login(self, user, psk) -> bool:
         # =======================================================================
