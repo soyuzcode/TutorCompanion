@@ -11,7 +11,8 @@ from modules.tuto_suggestions import get_key_hours_by_identifier
 
 class Main():
     def __init__(self) -> None:
-        UI = TutorCompanion(check_login=self.check_login)
+        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours)
+        self.UI = UI
         UI.run()
 
         # Don't write anything here!!
