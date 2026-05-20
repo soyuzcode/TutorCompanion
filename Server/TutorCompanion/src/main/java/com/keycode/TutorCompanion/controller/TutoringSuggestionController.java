@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.keycode.TutorCompanion.dto.SuggestionRequest;
+import com.keycode.TutorCompanion.dto.SuggestionResponse;
 import com.keycode.TutorCompanion.model.Subject;
 import com.keycode.TutorCompanion.model.TutoringSuggestion;
 import com.keycode.TutorCompanion.model.User;
@@ -59,8 +60,10 @@ public class TutoringSuggestionController {
     }
 
     @GetMapping
-    public List<TutoringSuggestion> getAllSuggestions() {
-        return suggestionRepository.findAll();
-}
+    public List<SuggestionResponse> getAllSuggestions() {
+        return suggestionRepository.findAll().stream()
+                .map(SuggestionResponse::from)
+                .toList();
+    }
 
 }

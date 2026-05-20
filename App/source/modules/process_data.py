@@ -119,6 +119,69 @@ def convert_dict_to_list_of_list(user_data:dict):
         convierta json respoonse en esto"""
     pass
 
+def find_user_profile(users, identifier: str) -> dict | None:
+    """Devuelve nombre, pfp y rol del usuario logueado."""
+    user_id = find_user_id(users, identifier)
+    if user_id is None:
+        return None
+
+    user = next((u for u in users if u.get("id") == user_id), None)
+    if not user:
+        return None
+
+    role = "Tutor" if user.get("tutorProfile") else "Estudiante"
+
+    return {
+        "name": user.get("name", "Usuario"),
+        "pfp": user.get("pfp", ""),
+        "role": role,
+    }
+
+
+def enrich_suggestions(suggestions: list, users) -> list:
+    """Añade autor y foto a cada solicitud."""
+    if not suggestions:
+        return []
+
+    users_by_id = {u.get("id"): u for u in users}
+    enriched = []
+
+    for sol in suggestions:
+        student = sol.get("student") or {}
+        student_id = (
+            sol.get("studentId")
+            or student.get("id")
+        )
+
+        if student_id in users_by_id:
+            author = users_by_id[student_id]
+            author_name = author.get("name", "Estudiante")
+            author_pfp = author.get("pfp", "")
+        elif sol.get("studentName"):
+            author_name = sol.get("studentName")
+            author_pfp = sol.get("studentPfp", "")
+        elif student.get("name"):
+            author_name = student.get("name")
+            author_pfp = student.get("pfp", "")
+        else:
+            author_name = "Estudiante"
+            author_pfp = ""
+
+        enriched.append({
+            **sol,
+            "authorName": author_name,
+            "authorPfp": author_pfp,
+        })
+
+    return enriched
+
+
+def format_tutor_rating(rating) -> str:
+    if rating is None:
+        return "⭐ 0"
+    return f"⭐ {rating}"
+
+
 def find_user_id(users, identifier: str) -> int | None:
     """Resuelve nombre, email, KEY_XXXXXX o id numérico al id de usuario."""
     if not users or not identifier:

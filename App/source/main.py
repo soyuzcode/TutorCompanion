@@ -7,7 +7,12 @@ from modules.process_data import process_data_from_user_dict
 # Solo importamos tutorías (el viejo formato) y get_user_data/get_sugerencias_reales
 from modules.process_data import obtener_todas_las_tutorias 
 from modules.get_data import get_user_data, get_sugerencias_reales, post_review
-from modules.process_data import find_user_id, submit_review_local
+from modules.process_data import (
+    find_user_id,
+    submit_review_local,
+    find_user_profile,
+    enrich_suggestions,
+)
 from modules.tuto_suggestions import get_key_hours_by_identifier
 from modules.ranking import get_featured_tutors
 from modules.process_data import extraer_tutores
@@ -26,6 +31,7 @@ class Main():
             get_tutors=self.extraer_tutor_plural,
             get_stats=self.get_stats,
             submit_review=self.submit_review,
+            get_user_profile=self.get_user_profile,
         )
         self.UI = UI
         UI.run()
@@ -38,6 +44,14 @@ class Main():
 
     def get_rank_tutor(self):
         return get_featured_tutors(self.user_data)
+
+    def get_user_profile(self):
+        if not self.user_data:
+            return None
+        return find_user_profile(
+            self.user_data,
+            self.UI.current_user,
+        )
 
     def submit_review(
         self,
@@ -68,16 +82,20 @@ class Main():
                 datos = get_user_data()
                 if datos:
                     self.user_data = datos
+                    self.UI.load_data_on_dashboard()
                 return True
             return False
 
-        return submit_review_local(
+        ok = submit_review_local(
             self.user_data,
             tutor_id,
             student_id,
             rating,
             comment,
         )
+        if ok:
+            self.UI.load_data_on_dashboard()
+        return ok
 
     def get_key_hours(self, identifier) -> tuple | None:
         try:
@@ -103,16 +121,32 @@ class Main():
                     # CARGAMOS TUTORÍAS DEL JSON VIEJO
                     self.tutorias_disponibles = obtener_todas_las_tutorias(datos_servidor)
                     
-                    # CARGAMOS SOLICITUDES DEL NUEVO ENDPOINT
-                    self.solicitudes_pendientes = get_sugerencias_reales() 
-                    
-                    print(f"DEBUG: Solicitudes reales encontradas: {self.solicitudes_pendientes}")
+                    raw_solicitudes = get_sugerencias_reales()
+                    self.solicitudes_pendientes = enrich_suggestions(
+                        raw_solicitudes,
+                        datos_servidor,
+                    )
 
                     os.environ["CONNECTED"] = "TRUE"
-                    
+
                     dashboard = self.UI.sm.get_screen("dashboard")
-                    dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
-                    dashboard.actualizar_solicitudes(self.solicitudes_pendientes)
+                    dashboard.actualizar_tarjetas_tutorias(
+                        self.tutorias_disponibles,
+                    )
+                    dashboard.actualizar_solicitudes(
+                        self.solicitudes_pendientes,
+                    )
+
+                    profile = find_user_profile(
+                        datos_servidor,
+                        user,
+                    )
+                    if profile:
+                        dashboard.actualizar_usuario(
+                            profile["name"],
+                            profile["role"],
+                            profile["pfp"],
+                        )
                     
                     return True
         except Exception as e:

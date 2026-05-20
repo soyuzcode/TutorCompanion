@@ -36,15 +36,13 @@
                     size_hint_x: 0.3
                     spacing: dp(15)
 
-                    MDIcon:
-                        icon: "account-circle"
-                        font_size: "52sp"
-
+                    FitImage:
+                        id: user_pfp
+                        source: ""
                         size_hint_x: None
                         width: dp(55)
-
-                        theme_text_color: "Custom"
-                        text_color: 0.3, 0.8, 1, 1
+                        height: dp(55)
+                        radius: [28]
 
                     MDBoxLayout:
                         orientation: "vertical"
@@ -55,6 +53,7 @@
                             id: label_nombre
                             text: "Hola, Usuario"
                             bold: True
+                            font_size: "16sp"
                             adaptive_height: True
 
                             theme_text_color: "Custom"
@@ -119,22 +118,8 @@
                 # ACTIONS START
                 # =================================================
 
-                MDBoxLayout:
+                Widget:
                     size_hint_x: 0.2
-
-                    Widget:
-
-                    MDIconButton:
-                        icon: "bell-outline"
-
-                        theme_text_color: "Custom"
-                        text_color: 1, 1, 1, 1
-
-                    MDIconButton:
-                        icon: "calendar"
-
-                        theme_text_color: "Custom"
-                        text_color: 1, 1, 1, 1
 
                 # =================================================
                 # ACTIONS END
@@ -183,13 +168,6 @@
                     #subtitle: "Explora tutorías disponibles"
                     #ripple_behavior: True
                     #on_release: root.ir_a_buscar_tutorias()
-
-                ActionCard:
-                    icon: "clock-outline"
-                    title: "Mis Tutorías"
-                    subtitle: "Revisa tus sesiones"
-                    ripple_behavior: True
-                    on_release: root.ir_a_mis_tutorias()
 
                 MDLabel:
                     text: "Próximas Tutorías"
@@ -293,7 +271,7 @@
                         adaptive_height: True
 
                         MDLabel:
-                            text: "Solicitudes"
+                            text: "Solicitudes de Tutoría"
                             bold: True
                             font_size: "22sp"
                             adaptive_height: True

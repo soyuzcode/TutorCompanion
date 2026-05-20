@@ -16,6 +16,8 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.menu import MDDropdownMenu
 
+from modules.process_data import format_tutor_rating
+
 # =========================================================
 # WINDOW CONFIG
 # =========================================================
@@ -28,10 +30,12 @@ from kivymd.uix.menu import MDDropdownMenu
 # CARDS
 # =========================================================
 class SolicitudCard(MDCard):
-    name = StringProperty("")
+    author = StringProperty("")
+    author_pfp = StringProperty("")
+    topic = StringProperty("")
     materia = StringProperty("")
-    solicitud_id = StringProperty("")       # <--- Añade esto
-    data_original = ObjectProperty(None)    # <--- Añade esto
+    solicitud_id = StringProperty("")
+    data_original = ObjectProperty(None)
 
 class TutoriaCard(MDCard):
 
@@ -110,7 +114,6 @@ class RatingsScreen(MDScreen):
 
         if success:
             print("¡Calificación enviada!")
-            app.load_data_on_dashboard()  # type: ignore
             self.selected_rating = 0
             self.ids.rating_label.text = "⭐ 0 / 5"
             self.ids.txt_comentario.text = ""
@@ -163,12 +166,6 @@ class DashboardScreen(MDScreen):
             "Acceso a: Buscador de Tutorías Disponibles"
         )
 
-    def ir_a_mis_tutorias(self):
-
-        print(
-            "Acceso a: Historial de Tutorías"
-        )
-
     def ver_ratings(self):
         app = MDApp.get_running_app()
         app.load_tutors_for_rating()  # type: ignore
@@ -188,10 +185,12 @@ class DashboardScreen(MDScreen):
         
         # Creamos la instancia de la tarjeta con los datos del diccionario
         card = SolicitudCard(
-            name=tema, 
+            author=solicitud.get("authorName", "Estudiante"),
+            author_pfp=solicitud.get("authorPfp", ""),
+            topic=tema,
             materia=materia,
-            solicitud_id=solicitud.get("id", "0"),
-            data_original=solicitud
+            solicitud_id=str(solicitud.get("id", "0")),
+            data_original=solicitud,
         )
         # La agregamos al contenedor en el Dashboard
         contenedor.add_widget(card)
@@ -200,15 +199,14 @@ class DashboardScreen(MDScreen):
     # USER INFO
     # =====================================================
 
-    def actualizar_usuario(self, nombre, rol):
+    def actualizar_usuario(self, nombre, rol, pfp=""):
 
-        self.ids.label_nombre.text = (
-            f"Hola, {nombre}! 👋"
-        )
+        self.ids.label_nombre.text = f"Hola, {nombre}"
 
-        self.ids.label_rol.text = (
-            f"Rol: {rol}"
-        )
+        self.ids.label_rol.text = f"Rol: {rol}"
+
+        if pfp:
+            self.ids.user_pfp.source = pfp
 
     # =====================================================
     # TUTORIAS
@@ -254,17 +252,21 @@ class DashboardScreen(MDScreen):
             contenedor.remove_widget(contenedor.children[0])
             
         for sol in lista_solicitudes:
-            materia = sol.get("subject", {}).get("name", "Sin materia")
+            materia = (
+                sol.get("subject", {}).get("name")
+                or sol.get("subjectName", "Sin materia")
+            )
             tema = sol.get("topic", "Sin tema")
-            sol_id = str(sol.get("id", "0")) # Asegúrate de obtener el ID real
-            
-            # PASAMOS LOS NUEVOS DATOS AQUÍ
+            sol_id = str(sol.get("id", "0"))
+
             card = SolicitudCard(
-                name=tema, 
-                materia=f"{materia}", 
-                solicitud_id=sol_id,    # <--- Esto es clave
-                data_original=sol       # <--- Esto es clave
-            ) 
+                author=sol.get("authorName", "Estudiante"),
+                author_pfp=sol.get("authorPfp", ""),
+                topic=tema,
+                materia=materia,
+                solicitud_id=sol_id,
+                data_original=sol,
+            )
             contenedor.add_widget(card)
 
     # =====================================================
@@ -317,6 +319,7 @@ class TutorCompanion(MDApp):
         get_tutors,
         get_stats,
         submit_review,
+        get_user_profile=None,
         **kwargs
     ):
 
@@ -333,6 +336,8 @@ class TutorCompanion(MDApp):
         self.get_stats = get_stats
 
         self.submit_review = submit_review
+
+        self.get_user_profile = get_user_profile
 
         self.current_user = ""
 
@@ -515,13 +520,11 @@ class TutorCompanion(MDApp):
 
                 name = nombres[tutor["userId"]],
 
-                rating = str(tutor["rating"]),
+                rating=format_tutor_rating(tutor["rating"]),
 
-                image = imagenes[tutor["userId"]],
+                image=imagenes[tutor["userId"]],
 
-                tutor_id = str(
-                    tutor["userId"]
-                )
+                tutor_id=str(tutor["userId"]),
             )
 
             container.add_widget(card)
@@ -536,7 +539,7 @@ class TutorCompanion(MDApp):
         for tutor in tutores:
             card = TutorSelectCard(
                 name=nombres[tutor["userId"]],
-                rating=str(tutor["rating"]),
+                rating=format_tutor_rating(tutor["rating"]),
                 image=imagenes[tutor["userId"]],
                 tutor_id=str(tutor["userId"]),
             )
@@ -582,9 +585,9 @@ class TutorCompanion(MDApp):
 
                     name = tutor["name"],
 
-                    rating = str(
-                        tutor["rating"]
-                    )
+                    rating=format_tutor_rating(
+                        tutor["rating"],
+                    ),
                 )
 
                 container.add_widget(card)
@@ -671,10 +674,19 @@ class TutorCompanion(MDApp):
         
         # --- AQUÍ CONECTAMOS CON EL DASHBOARD ---
         # Creamos un objeto temporal para que el Dashboard lo pinte
+        profile = (
+            self.get_user_profile()
+            if self.get_user_profile
+            else None
+        )
         nueva_solicitud = {
             "topic": tema,
             "subject": {"name": materia},
-            "id": "nuevo_id_temp"
+            "id": "nuevo_id_temp",
+            "authorName": (
+                profile["name"] if profile else self.current_user
+            ),
+            "authorPfp": profile["pfp"] if profile else "",
         }
         
         # Le decimos al dashboard que agregue la tarjeta

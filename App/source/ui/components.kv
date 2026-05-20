@@ -187,13 +187,15 @@
 # =========================================================
 
 <SolicitudCard>
-    name: ""
+    author: ""
+    author_pfp: ""
+    topic: ""
     materia: ""
     solicitud_id: ""
     data_original: None
 
     size_hint_y: None
-    height: dp(105)
+    height: dp(115)
 
     radius: [20]
     elevation: 0
@@ -204,25 +206,29 @@
     MDBoxLayout:
         spacing: dp(10)
 
-        MDBoxLayout:
+        FitImage:
+            source: root.author_pfp if root.author_pfp else ""
             size_hint_x: None
-            width: dp(50)
-            padding: dp(5)
-
-            MDIcon:
-                icon: "account-circle"
-                font_size: "35sp"
-                theme_text_color: "Custom"
-                text_color: 0.3, 0.8, 1, 1
+            width: dp(45)
+            height: dp(45)
+            radius: [23]
 
         MDBoxLayout:
             orientation: "vertical"
+            spacing: dp(4)
 
             MDLabel:
-                text: "De: " + root.name
+                text: root.author
                 bold: True
+                font_size: "15sp"
                 theme_text_color: "Custom"
                 text_color: 1, 1, 1, 1
+
+            MDLabel:
+                text: root.topic
+                font_size: "13sp"
+                theme_text_color: "Custom"
+                text_color: 0.85, 0.85, 0.9, 1
 
             MDLabel:
                 text: "Solicita: " + root.materia
