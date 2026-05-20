@@ -179,3 +179,5 @@ class TutorCompanion(MDApp):
             self.sm.current = "dashboard"
         else:
             print("Wrong!")
+
+# Ajuste pendiente: mejorar formato de fechas de tutorias 
