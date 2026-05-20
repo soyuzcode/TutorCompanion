@@ -42,7 +42,7 @@ class LoginScreen(MDScreen):
 class DashboardScreen(MDScreen):
 
     def ir_a_sugerir_tutoria(self):
-        print(" Acceso a: Formulario de Sugerir Tutoría (Módulo en desarrollo)")
+        self.manager.current = "sugerir_tutoria"
 
     def ir_a_buscar_tutorias(self):
         print(" Acceso a: Buscador de Tutorías Disponibles (Módulo en desarrollo)")
@@ -86,6 +86,8 @@ class DashboardScreen(MDScreen):
             # Agregamos la tarjeta real al contenedor con scroll
             columna_izquierda.add_widget(nueva_tarjeta)
 
+class SugerirTutoriaScreen(MDScreen):
+    pass
 
 # ================= APP =================
 
@@ -119,12 +121,14 @@ class TutorCompanion(MDApp):
         Builder.load_file("ui/login.kv")
         Builder.load_file("ui/components.kv")
         Builder.load_file("ui/dashboard.kv")
+        Builder.load_file("ui/sugerir_tutoria.kv")
 
         # SCREEN MANAGER
         self.sm = MDScreenManager()
 
         self.sm.add_widget(LoginScreen(name="login"))
         self.sm.add_widget(DashboardScreen(name="dashboard"))
+        self.sm.add_widget(SugerirTutoriaScreen(name="sugerir_tutoria"))
 
         self.sm.current = "login"
 
