@@ -26,13 +26,19 @@ class LoginScreen(MDScreen):
 class DashboardScreen(MDScreen):
 
     def ir_a_sugerir_tutoria(self):
-        print("Botón sugerir presionado")
+        print(" Acceso a: Formulario de Sugerir Tutoría (Módulo en desarrollo)")
 
     def ir_a_buscar_tutorias(self):
-        pass  
+        print(" Acceso a: Buscador de Tutorías Disponibles (Módulo en desarrollo)")
 
     def ir_a_mis_tutorias(self):
-        pass
+        print(" Acceso a: Historial de Tutorías del Usuario (Módulo en desarrollo)")
+        
+    def ver_ratings(self):
+        print(" Acceso a: Panel de Calificaciones del Tutor (Módulo en desarrollo)")
+        
+    def ver_estadisticas(self):
+        print(" Acceso a: Gráficas de Progreso y Horas (Módulo en desarrollo)")
     
     def actualizar_tarjetas_tutorias(self, lista_tutorias):
         """
