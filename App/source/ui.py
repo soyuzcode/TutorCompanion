@@ -137,6 +137,23 @@ class DashboardScreen(MDScreen):
         pass
         #self.manager.current = "stats"
 
+    def agregar_solicitud_desde_ui(self, solicitud):
+        # Esta función es la que recibe el diccionario y "pinta" la tarjeta
+        contenedor = self.ids.contenedor_solicitudes
+        
+        materia = solicitud.get("subject", {}).get("name", "Sin materia")
+        tema = solicitud.get("topic", "Sin tema")
+        
+        # Creamos la instancia de la tarjeta con los datos del diccionario
+        card = SolicitudCard(
+            name=tema, 
+            materia=materia,
+            solicitud_id=solicitud.get("id", "0"),
+            data_original=solicitud
+        )
+        # La agregamos al contenedor en el Dashboard
+        contenedor.add_widget(card)
+
     # =====================================================
     # USER INFO
     # =====================================================
@@ -571,16 +588,39 @@ class TutorCompanion(MDApp):
             print("Error: Debes seleccionar un tutor")
             return
             
-        print(f"Enviando sugerencia al servidor...")
-        print(f"Materia: {materia}, Tema: {tema}, Descripcion: {descripcion}, Tutor ID: {tutor_id}")
+        print(f"Simulando envío al servidor...")
         
-        # =================================================
-        # NOTA PARA BACKEND: 
-        # Aquí falta la integración con la API de Carlos.
-        # =================================================
+        # --- AQUÍ CONECTAMOS CON EL DASHBOARD ---
+        # Creamos un objeto temporal para que el Dashboard lo pinte
+        nueva_solicitud = {
+            "topic": tema,
+            "subject": {"name": materia},
+            "id": "nuevo_id_temp"
+        }
         
+        # Le decimos al dashboard que agregue la tarjeta
+        dashboard = self.sm.get_screen("dashboard")
+        dashboard.agregar_solicitud_desde_ui(nueva_solicitud)
+        
+        # Limpiamos y salimos
+        self.limpiar_formulario()
         self.sm.current = "dashboard"
         print("¡Sugerencia enviada con éxito!")
+
+    def limpiar_formulario(self):
+        # Accedemos a la pantalla
+        screen = self.sm.get_screen("sugerir_tutoria")
+        
+        # Reseteamos los campos a sus valores iniciales
+        screen.ids.materia_dropdown.text = "Selecciona una materia"
+        screen.ids.txt_tema.text = ""
+        screen.ids.txt_descripcion.text = ""
+        
+        # Desmarcamos todas las tarjetas de tutor
+        container = screen.ids.tutor_container
+        for card in container.children:
+            if hasattr(card, 'selected'):
+                card.selected = False
 
     def get_tutor_seleccionado(self):
         # Buscamos la pantalla y el contenedor de tarjetas
