@@ -29,7 +29,6 @@ def get_key_hours_by_identifier(identifier, users):
         return None
 
     if not user.get("isBecado") or not user.get("tutorProfile"):
-        print("JAJA DEBUGGING AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADNIASJCNKVDJSNCD VM  BJRFHBEDJSKCNVF BJRHBGEKDSNCMNVF BRJHNEKDCDN VFRJHGE")
         return None
 
     approved_hours = int(user["tutorProfile"].get("approvedHours"))
