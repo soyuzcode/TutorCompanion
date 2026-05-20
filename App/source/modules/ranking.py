@@ -2,6 +2,9 @@ def get_featured_tutors(data):
 
     tutores = []
 
+    if data is None:
+        return
+
     for persona in data:
 
         # Verificar si es tutor
@@ -19,5 +22,7 @@ def get_featured_tutors(data):
 
     # Ordenar del mayor al menor puntaje
     tutores.sort(key=lambda x: x["rating"], reverse=True)
+
+    tutores = tutores[:5]
 
     return tutores

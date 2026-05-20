@@ -6,6 +6,7 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
+from kivy.properties import StringProperty
 from kivy.factory import Factory
 
 from kivy.factory import Factory
@@ -54,6 +55,10 @@ class DashboardScreen(MDScreen):
 class ImpactCard(MDCard):
     pass
 
+class TutorCard(MDCard):
+    position = StringProperty("")
+    name = StringProperty("")
+    rating = StringProperty("0")
 # ================= APP =================
 
 class TutorCompanion(MDApp):
@@ -105,16 +110,17 @@ class TutorCompanion(MDApp):
         container = dashboard.ids.tutor_container
 
         container.clear_widgets()
+        
+        if data is not None:
+            for i, tutor in enumerate(data):
+                card = TutorCard(
+                    position = str(i +1),
+                    name = tutor["name"],
+                    rating = str(tutor["rating"])
+                )
 
-        for i, tutor in enumerate(data):
-            card = Factory.TutorCard(
-                position = str(i +1),
-                name = tutor["name"],
-                rating = tutor["rating"]
-            )
+                container.add_widget(card)
 
-            container.add_widget(card)
-            
         # IMPACT CARD
         data = self.get_key_hours(self.current_user)
 
