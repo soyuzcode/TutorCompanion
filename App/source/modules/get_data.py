@@ -12,7 +12,7 @@ def get_user_data() -> dict | None:
     # 1. Intentamos conectar al servidor de Vercel con un "timeout" de 2 segundos 
     # para que si está caído, no congele la app por minutos.
     try:
-        response = requests.get(f"{get_base_Url()}/user", timeout=2)
+        response = requests.get(f"{get_base_Url()}/user", timeout=5)
         if response.status_code == 200:
             return response.json()
         else:
