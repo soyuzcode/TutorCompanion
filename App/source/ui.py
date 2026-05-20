@@ -193,6 +193,7 @@ class TutorCompanion(MDApp):
         check_login,
         get_key_hours,
         get_ranking,
+        get_tutors,
         **kwargs
     ):
 
@@ -203,6 +204,8 @@ class TutorCompanion(MDApp):
         self.get_key_hours = get_key_hours
 
         self.get_rank_tutor = get_ranking
+
+        self.get_tutors = get_tutors
 
         self.current_user = ""
 
@@ -343,32 +346,7 @@ class TutorCompanion(MDApp):
         # PLACEHOLDER DATA
         # ================================================
 
-        tutores = [
-
-            {
-                "userId": 6,
-                "rating": 4.8
-            },
-
-            {
-                "userId": 8,
-                "rating": 4.5
-            },
-
-            {
-                "userId": 10,
-                "rating": 5.0
-            }
-        ]
-
-        nombres = {
-
-            6: "Andrea López",
-
-            8: "Carlos Méndez",
-
-            10: "María Fernanda"
-        }
+        tutores, nombres, imagenes = self.get_tutors()
 
         # ================================================
         # GET SCREEN
@@ -396,10 +374,7 @@ class TutorCompanion(MDApp):
 
                 rating = str(tutor["rating"]),
 
-                image = (
-                    f"https://i.pravatar.cc/"
-                    f"150?img={i+10}"
-                ),
+                image = imagenes[tutor["userId"]],
 
                 tutor_id = str(
                     tutor["userId"]
