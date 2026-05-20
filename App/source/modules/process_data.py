@@ -189,3 +189,51 @@ def process_stats(users) -> dict:
         "sessions": total_sessions,
         "pending_suggestions": pending_suggestions
     }
+
+def process_user_stats(users, identifier) -> dict:
+    """
+    users: lista completa de usuarios
+    identifier: id, email o name
+    """
+
+    # ================= FIND USER =================
+    user = next(
+        (
+            u for u in users
+            if u.get("id") == identifier
+            or u.get("email") == identifier
+            or u.get("name") == identifier
+        ),
+        None
+    )
+
+    if not user:
+        return {
+            "error": "User not found"
+        }
+
+    # ================= PROCESS STATS =================
+    return {
+        "id": user.get("id"),
+        "name": user.get("name", ""),
+        "email": user.get("email", ""),
+        "pfp": user.get("pfp", ""),
+        "state": user.get("state", ""),
+
+        "becado": "Becado" if user.get("isBecado") else "No becado",
+
+        "rating": (
+            user.get("tutorProfile", {}).get("rating", 0)
+            if user.get("tutorProfile")
+            else 0
+        ),
+
+        "sessions": len(user.get("sessions", [])),
+        "reviews": len(user.get("writtenReviews", [])),
+        "subjects": len(user.get("subjects", [])),
+
+        "pending": sum(
+            1 for s in user.get("receivedSuggestions", [])
+            if s.get("status") == "pending"
+        )
+    }
