@@ -119,6 +119,78 @@ def convert_dict_to_list_of_list(user_data:dict):
         convierta json respoonse en esto"""
     pass
 
+def find_user_id(users, identifier: str) -> int | None:
+    """Resuelve nombre, email, KEY_XXXXXX o id numérico al id de usuario."""
+    if not users or not identifier:
+        return None
+
+    identifier = identifier.strip()
+
+    for user in users:
+        user_id = user.get("id")
+        keycode = f"KEY_{user_id:06d}"
+
+        if identifier in (
+            user.get("name"),
+            user.get("email"),
+            keycode,
+            str(user_id),
+        ):
+            return user_id
+
+    return None
+
+
+def submit_review_local(
+    users,
+    tutor_id: int,
+    student_id: int,
+    rating: int,
+    comment: str = "",
+) -> bool:
+    """Guarda una review en memoria cuando no hay servidor."""
+    tutor = next((u for u in users if u.get("id") == tutor_id), None)
+    student = next((u for u in users if u.get("id") == student_id), None)
+
+    if not tutor or not student:
+        return False
+
+    if not tutor.get("tutorProfile"):
+        return False
+
+    written = student.setdefault("writtenReviews", [])
+    received = tutor.setdefault("receivedReviews", [])
+
+    for review in written:
+        if review.get("tutor", {}).get("id") == tutor_id:
+            return False
+
+    new_review = {
+        "id": len(written) + len(received) + 1,
+        "tutor": {"id": tutor_id, "name": tutor.get("name")},
+        "student": {"id": student_id, "name": student.get("name")},
+        "rating": rating,
+        "comment": comment or "",
+    }
+
+    written.append(new_review)
+    received.append(new_review)
+
+    ratings = [
+        r["rating"]
+        for r in received
+        if r.get("rating") is not None
+    ]
+
+    if ratings:
+        tutor["tutorProfile"]["rating"] = round(
+            sum(ratings) / len(ratings),
+            1,
+        )
+
+    return True
+
+
 def extraer_tutores(data):
     tutores = []
     nombres = {}

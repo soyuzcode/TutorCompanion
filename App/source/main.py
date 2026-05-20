@@ -6,7 +6,8 @@ from modules.process_data import is_psk_and_username_valid
 from modules.process_data import process_data_from_user_dict
 # Solo importamos tutorías (el viejo formato) y get_user_data/get_sugerencias_reales
 from modules.process_data import obtener_todas_las_tutorias 
-from modules.get_data import get_user_data, get_sugerencias_reales
+from modules.get_data import get_user_data, get_sugerencias_reales, post_review
+from modules.process_data import find_user_id, submit_review_local
 from modules.tuto_suggestions import get_key_hours_by_identifier
 from modules.ranking import get_featured_tutors
 from modules.process_data import extraer_tutores
@@ -18,7 +19,14 @@ class Main():
         self.solicitudes_pendientes = [] # Nueva lista para solicitudes
         self.user_data = []
 
-        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor, get_tutors=self.extraer_tutor_plural,get_stats=self.get_stats)
+        UI = TutorCompanion(
+            check_login=self.check_login,
+            get_key_hours=self.get_key_hours,
+            get_ranking=self.get_rank_tutor,
+            get_tutors=self.extraer_tutor_plural,
+            get_stats=self.get_stats,
+            submit_review=self.submit_review,
+        )
         self.UI = UI
         UI.run()
 
@@ -30,6 +38,46 @@ class Main():
 
     def get_rank_tutor(self):
         return get_featured_tutors(self.user_data)
+
+    def submit_review(
+        self,
+        tutor_id: int,
+        rating: int,
+        comment: str = "",
+    ) -> bool:
+        if not self.user_data:
+            return False
+
+        student_id = find_user_id(
+            self.user_data,
+            self.UI.current_user,
+        )
+
+        if not student_id:
+            print("No se pudo identificar al estudiante")
+            return False
+
+        if os.environ.get("CONNECTED") == "TRUE":
+            result = post_review(
+                tutor_id,
+                student_id,
+                rating,
+                comment,
+            )
+            if result:
+                datos = get_user_data()
+                if datos:
+                    self.user_data = datos
+                return True
+            return False
+
+        return submit_review_local(
+            self.user_data,
+            tutor_id,
+            student_id,
+            rating,
+            comment,
+        )
 
     def get_key_hours(self, identifier) -> tuple | None:
         try:

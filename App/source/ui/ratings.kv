@@ -1,0 +1,144 @@
+#:import dp kivy.metrics.dp
+
+<RatingsScreen>:
+
+    MDFloatLayout:
+        md_bg_color: 0.05, 0.08, 0.15, 1
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"x": 0.02, "top": 0.98}
+            theme_text_color: "Custom"
+            text_color: 0.3, 0.8, 1, 1
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "dashboard"
+
+        MDLabel:
+            text: "Rating Tutor"
+            halign: "center"
+            pos_hint: {"center_y": 0.93}
+            font_size: "30sp"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+
+        MDLabel:
+            text: "Califica la experiencia con tu tutor ⭐"
+            halign: "center"
+            pos_hint: {"center_y": 0.89}
+            font_size: "14sp"
+            theme_text_color: "Custom"
+            text_color: 0.65, 0.65, 0.7, 1
+
+        ScrollView:
+            size_hint: 1, 0.76
+            pos_hint: {"x": 0, "y": 0.07}
+            do_scroll_x: False
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(20)
+                spacing: dp(15)
+
+                MDCard:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    padding: dp(25)
+                    spacing: dp(20)
+                    radius: [20]
+                    md_bg_color: 0.1, 0.12, 0.2, 1
+
+                    MDLabel:
+                        text: "Selecciona un tutor"
+                        bold: True
+                        font_size: "18sp"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+
+                    MDBoxLayout:
+                        id: tutor_container
+                        orientation: "vertical"
+                        adaptive_height: True
+                        spacing: dp(10)
+
+                MDCard:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    padding: dp(25)
+                    spacing: dp(15)
+                    radius: [20]
+                    md_bg_color: 0.1, 0.12, 0.2, 1
+
+                    MDLabel:
+                        text: "Tu calificación"
+                        bold: True
+                        font_size: "18sp"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+
+                    MDLabel:
+                        id: rating_label
+                        text: "⭐ 0 / 5"
+                        halign: "center"
+                        font_size: "22sp"
+                        theme_text_color: "Custom"
+                        text_color: 1, 0.8, 0.2, 1
+
+                    MDBoxLayout:
+                        adaptive_height: True
+                        spacing: dp(8)
+                        pos_hint: {"center_x": 0.5}
+
+                        MDIconButton:
+                            icon: "star"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.8, 0.2, 1
+                            on_release: root.set_rating(1)
+
+                        MDIconButton:
+                            icon: "star"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.8, 0.2, 1
+                            on_release: root.set_rating(2)
+
+                        MDIconButton:
+                            icon: "star"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.8, 0.2, 1
+                            on_release: root.set_rating(3)
+
+                        MDIconButton:
+                            icon: "star"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.8, 0.2, 1
+                            on_release: root.set_rating(4)
+
+                        MDIconButton:
+                            icon: "star"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.8, 0.2, 1
+                            on_release: root.set_rating(5)
+
+                    MDTextField:
+                        id: txt_comentario
+                        hint_text: "Comentario (opcional)"
+                        mode: "fill"
+                        multiline: True
+                        max_height: dp(120)
+                        fill_color_normal: 0.08, 0.10, 0.18, 1
+                        fill_color_focus: 0.08, 0.10, 0.22, 1
+                        text_color_normal: 1, 1, 1, 1
+                        text_color_focus: 1, 1, 1, 1
+                        hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                        hint_text_color_focus: 0.3, 0.8, 1, 1
+
+                MDFillRoundFlatButton:
+                    text: "Enviar calificación"
+                    font_size: "16sp"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.9
+                    md_bg_color: 0.3, 0.8, 1, 1
+                    text_color: 0.05, 0.08, 0.15, 1
+                    on_release: root.enviar_calificacion()

@@ -58,3 +58,34 @@ def get_sugerencias_reales() -> list:
     except Exception as e:
         print(f"No se pudieron cargar las sugerencias: {e}")
         return []
+
+
+def post_review(
+    tutor_id: int,
+    student_id: int,
+    rating: int,
+    comment: str = "",
+) -> dict | None:
+    """Envía una calificación al endpoint POST /reviews."""
+    try:
+        url = f"{get_base_Url()}/reviews"
+        payload = {
+            "tutorId": tutor_id,
+            "studentId": student_id,
+            "rating": rating,
+            "comment": comment or "",
+        }
+        response = requests.post(url, json=payload, timeout=10)
+
+        if response.status_code == 200:
+            return response.json()
+
+        print(
+            f"Error al enviar review: "
+            f"{response.status_code} {response.text}"
+        )
+        return None
+
+    except Exception as e:
+        print(f"No se pudo enviar la calificación: {e}")
+        return None

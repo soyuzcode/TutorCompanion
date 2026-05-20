@@ -6,7 +6,8 @@ from kivy.core.text import LabelBase
 from kivy.properties import (
     StringProperty,
     BooleanProperty,
-    ObjectProperty
+    ObjectProperty,
+    NumericProperty,
 )
 
 from kivymd.app import MDApp
@@ -77,6 +78,47 @@ class LoginScreen(MDScreen):
 class SugerirTutoriaScreen(MDScreen):
     pass
 
+
+class RatingsScreen(MDScreen):
+
+    selected_rating = NumericProperty(0)
+
+    def set_rating(self, value):
+        self.selected_rating = value
+        self.ids.rating_label.text = f"⭐ {value} / 5"
+
+    def enviar_calificacion(self):
+        app = MDApp.get_running_app()
+
+        tutor_id = app.get_tutor_seleccionado_rating()  # type: ignore
+
+        if not tutor_id:
+            print("Error: Debes seleccionar un tutor")
+            return
+
+        if self.selected_rating < 1:
+            print("Error: Debes elegir una calificación de 1 a 5")
+            return
+
+        comment = self.ids.txt_comentario.text.strip()
+
+        success = app.submit_review(  # type: ignore
+            int(tutor_id),
+            int(self.selected_rating),
+            comment,
+        )
+
+        if success:
+            print("¡Calificación enviada!")
+            app.load_data_on_dashboard()  # type: ignore
+            self.selected_rating = 0
+            self.ids.rating_label.text = "⭐ 0 / 5"
+            self.ids.txt_comentario.text = ""
+            self.manager.transition.direction = "right"
+            self.manager.current = "dashboard"
+        else:
+            print("No se pudo enviar la calificación")
+
 class StatsScreen(MDScreen):
 
     def load_user(self, user: dict):
@@ -128,10 +170,10 @@ class DashboardScreen(MDScreen):
         )
 
     def ver_ratings(self):
-
-        print(
-            "Acceso a: Panel de Calificaciones"
-        )
+        app = MDApp.get_running_app()
+        app.load_tutors_for_rating()  # type: ignore
+        self.manager.transition.direction = "left"
+        self.manager.current = "ratings"
 
     def ver_estadisticas(self):
         pass
@@ -274,6 +316,7 @@ class TutorCompanion(MDApp):
         get_ranking,
         get_tutors,
         get_stats,
+        submit_review,
         **kwargs
     ):
 
@@ -288,6 +331,8 @@ class TutorCompanion(MDApp):
         self.get_tutors = get_tutors
 
         self.get_stats = get_stats
+
+        self.submit_review = submit_review
 
         self.current_user = ""
 
@@ -322,6 +367,8 @@ class TutorCompanion(MDApp):
         
         Builder.load_file("ui/stats.kv")
 
+        Builder.load_file("ui/ratings.kv")
+
         # ================================================
         # SCREEN MANAGER
         # ================================================
@@ -345,6 +392,12 @@ class TutorCompanion(MDApp):
         self.sm.add_widget(
             StatsScreen(
                 name="stats"
+            )
+        )
+
+        self.sm.add_widget(
+            RatingsScreen(
+                name="ratings"
             )
         )
 
@@ -472,6 +525,32 @@ class TutorCompanion(MDApp):
             )
 
             container.add_widget(card)
+
+    def load_tutors_for_rating(self):
+        tutores, nombres, imagenes = self.get_tutors()
+
+        ratings_screen = self.sm.get_screen("ratings")
+        container = ratings_screen.ids.tutor_container
+        container.clear_widgets()
+
+        for tutor in tutores:
+            card = TutorSelectCard(
+                name=nombres[tutor["userId"]],
+                rating=str(tutor["rating"]),
+                image=imagenes[tutor["userId"]],
+                tutor_id=str(tutor["userId"]),
+            )
+            container.add_widget(card)
+
+    def get_tutor_seleccionado_rating(self):
+        ratings_screen = self.sm.get_screen("ratings")
+        container = ratings_screen.ids.tutor_container
+
+        for card in container.children:
+            if hasattr(card, "selected") and card.selected:
+                return card.tutor_id
+
+        return None
 
     # =====================================================
     # DASHBOARD DATA

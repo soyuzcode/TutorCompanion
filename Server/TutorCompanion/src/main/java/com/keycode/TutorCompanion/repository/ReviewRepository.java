@@ -9,4 +9,7 @@ import com.keycode.TutorCompanion.model.Review;
 public interface ReviewRepository
         extends JpaRepository<Review, Long> {
 
+    java.util.List<Review> findByTutor_Id(Long tutorId);
+
+    boolean existsByTutor_IdAndStudent_Id(Long tutorId, Long studentId);
 }
