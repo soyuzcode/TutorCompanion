@@ -9,12 +9,28 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivy.properties import StringProperty
 from kivy.factory import Factory
 
-from kivy.factory import Factory
-
 
 # WINDOW CONFIG
 #Window.size = (400, 700)
 #Window.clearcolor = (0.05, 0.08, 0.15, 1)
+
+
+# =========================================================
+# CARDS (¡Primero definimos las clases en Python!)
+# =========================================================
+
+class TutoriaCard(MDCard):
+    materia = StringProperty("")
+    estado = StringProperty("")
+    fecha = StringProperty("")  # 🌟 Declarada explícitamente en Python antes del .kv
+
+class ImpactCard(MDCard):
+    pass
+
+class TutorCard(MDCard):
+    position = StringProperty("")
+    name = StringProperty("")
+    rating = StringProperty("0")
 
 
 # ================= SCREENS =================
@@ -66,20 +82,7 @@ class DashboardScreen(MDScreen):
             # Agregamos la tarjeta real al contenedor con scroll
             columna_izquierda.add_widget(nueva_tarjeta)
 
-# ================= CARDS =================
 
-class TutoriaCard(MDCard):
-    materia = StringProperty("")
-    estado = StringProperty("")
-    fecha = StringProperty("")  # 🌟 Declarada explícitamente en Python
-
-class ImpactCard(MDCard):
-    pass
-
-class TutorCard(MDCard):
-    position = StringProperty("")
-    name = StringProperty("")
-    rating = StringProperty("0")
 # ================= APP =================
 
 class TutorCompanion(MDApp):
@@ -108,7 +111,7 @@ class TutorCompanion(MDApp):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Cyan"
 
-        # LOAD KV FILES
+        # LOAD KV FILES (Ahora sí, cuando Kivy lea esto, ya conocerá las propiedades de arriba)
         Builder.load_file("ui/login.kv")
         Builder.load_file("ui/components.kv")
         Builder.load_file("ui/dashboard.kv")
@@ -149,11 +152,9 @@ class TutorCompanion(MDApp):
         card = dashboard.ids.impact_card
 
         if data is None:
-
             card.opacity = 0
             card.disabled = True
             card.height = 0
-
             return
 
         approved_hours, total_hours = data
@@ -162,7 +163,6 @@ class TutorCompanion(MDApp):
 
         card.opacity = 1
         card.disabled = False
-        #card.height = dp(190)
 
         card.current_hours = approved_hours
         card.total_hours = total_hours
@@ -173,14 +173,9 @@ class TutorCompanion(MDApp):
         self.current_user = user
 
         if self.check_login(user=user, psk=psk):
-
             print("Alright! You're good!")
-
             self.sm.transition.direction = "left"
-
             self.load_data_on_dashboard()
             self.sm.current = "dashboard"
-
         else:
-
             print("Wrong!")
