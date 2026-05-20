@@ -111,10 +111,11 @@
 # TUTOR CARD
 # =========================================================
 
-<TutorCard@MDCard>
+<TutorCard>
 
     position: ""
     name: ""
+    rating: "0"
 
     size_hint_y: None
     height: dp(85)
@@ -147,7 +148,7 @@
         Widget:
 
         MDLabel:
-            text: "10"
+            text: root.rating
 
             theme_text_color: "Custom"
             text_color: 1, 0.8, 0.2, 1

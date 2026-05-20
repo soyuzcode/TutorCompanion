@@ -8,35 +8,45 @@ from modules.process_data import process_data_from_user_dict
 from modules.process_data import obtener_todas_las_tutorias 
 from modules.get_data import get_user_data
 from modules.tuto_suggestions import get_key_hours_by_identifier
+from modules.ranking import get_featured_tutors
 
 class Main():
     def __init__(self) -> None:
         # Añadimos esto para que la lista exista desde el inicio:
         self.tutorias_disponibles = []
         
-        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours)
+        self.user_data = []
+
+        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor)
         self.UI = UI
         UI.run()
 
         # Don't write anything here!!
         # This will execute when kill UI
 
-    def get_key_hours(self, identifier) -> tuple:
+    def get_rank_tutor(self):
+        return get_featured_tutors(self.user_data)
+
+    def get_key_hours(self, identifier) -> tuple | None:
         # 1. Intentamos extraer los datos reales (del servidor o del JSON local según qué cargó primero)
         try:
             # Si ya tenemos datos locales o del servidor cargados en las validaciones
             # Intentamos pasárselos a la función de tus compañeros
-            datos = get_user_data() if os.environ.get("CONNECTED") == "TRUE" else None
+            datos = self.user_data if os.environ.get("CONNECTED") == "TRUE" else None
             if datos:
                 resultado = get_key_hours_by_identifier(identifier=identifier, users=datos)
-                if resultado is not None:
-                    return resultado
+
+                # Si la funcion devuelve None es porque el usuario no es becado o no es tutor
+                # No es un bug, es una feature 😎    
+                return resultado
+            
         except Exception:
             pass
 
         # 2. SALVADA DE DESARROLLADOR (FALLBACK MOCK): 
         # Si la función de ellos devuelve None o falla porque no hay red, 
         # devolvemos (25 horas aprobadas, de 70 requeridas) para que Kivy no colapse.
+        # Nota de Carlos: Tenle m[a]s f[e] a Kivy, si es un None, no se mostrar[a]n las horas y ya jsjs
         return (25, 70) 
 
     def check_login(self, user, psk) -> bool:
@@ -46,6 +56,9 @@ class Main():
         try:
             print("Intentando conectar con el servidor de Carlos...")
             datos_servidor = get_user_data()
+
+            self.user_data = datos_servidor
+            
             if datos_servidor:
                 datos_procesados = process_data_from_user_dict(datos_servidor)
                 if is_psk_and_username_valid(user=user, psk=psk, data=datos_procesados):
