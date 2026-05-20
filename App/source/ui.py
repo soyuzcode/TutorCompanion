@@ -346,7 +346,7 @@ class TutorCompanion(MDApp):
         # PLACEHOLDER DATA
         # ================================================
 
-        tutores, nombres = self.get_tutors()
+        tutores, nombres, imagenes = self.get_tutors()
 
         # ================================================
         # GET SCREEN
@@ -374,10 +374,7 @@ class TutorCompanion(MDApp):
 
                 rating = str(tutor["rating"]),
 
-                image = (
-                    f"https://i.pravatar.cc/"
-                    f"150?img={i+10}"
-                ),
+                image = imagenes[tutor["userId"]],
 
                 tutor_id = str(
                     tutor["userId"]

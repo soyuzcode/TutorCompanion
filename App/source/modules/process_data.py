@@ -122,6 +122,7 @@ def convert_dict_to_list_of_list(user_data:dict):
 def extraer_tutores(data):
     tutores = []
     nombres = {}
+    imagenes = {}
 
     for user in data:
         tutor_profile = user.get("tutorProfile")
@@ -136,5 +137,9 @@ def extraer_tutores(data):
             })
 
             nombres[user_id] = user["name"]
+            imagenes[user_id] = user["pfp"]
 
-    return tutores, nombres
+    # Ordenar de mayor rating a menor
+    tutores.sort(key=lambda x: x["rating"], reverse=True)
+
+    return tutores, nombres, imagenes
