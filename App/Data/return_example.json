@@ -21,6 +21,8 @@
             }
         ],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -59,6 +61,20 @@
             }
         ],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 7,
+                "subject": {
+                    "id": 4,
+                    "name": "Desarrollo Personal"
+                },
+                "topic": "Existential Crisis",
+                "message": "No sé si debuggear tiene sentido",
+                "status": "accepted",
+                "createdAt": "2026-01-05T15:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -97,6 +113,20 @@
             }
         ],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 1,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Relativity Help",
+                "message": "No entiendo los marcos de referencia",
+                "status": "pending",
+                "createdAt": "2026-01-05T09:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -129,6 +159,8 @@
             }
         ],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -155,6 +187,20 @@
             }
         ],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 2,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Electricity and Magnetism",
+                "message": "Necesito ayuda para el parcial jsjs",
+                "status": "accepted",
+                "createdAt": "2026-01-05T10:30:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -189,6 +235,31 @@
                 "id": 2
             }
         ],
+        "receivedSuggestions": [
+            {
+                "id": 3,
+                "subject": {
+                    "id": 5,
+                    "name": "Introduccion a la Ingenieria"
+                },
+                "topic": "Creative Engineering",
+                "message": "Quiero mezclar arte con ingeniería",
+                "status": "pending",
+                "createdAt": "2026-01-05T11:00:00"
+            },
+            {
+                "id": 9,
+                "subject": {
+                    "id": 5,
+                    "name": "Introduccion a la Ingenieria"
+                },
+                "topic": "Art Composition",
+                "message": "Teach me the renaissance secrets",
+                "status": "cancelled",
+                "createdAt": "2026-01-05T17:00:00"
+            }
+        ],
+        "sentSuggestions": [],
         "sessions": [
             {
                 "id": 2,
@@ -232,6 +303,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 9,
+                "subject": {
+                    "id": 5,
+                    "name": "Introduccion a la Ingenieria"
+                },
+                "topic": "Art Composition",
+                "message": "Teach me the renaissance secrets",
+                "status": "cancelled",
+                "createdAt": "2026-01-05T17:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -254,6 +339,8 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -276,6 +363,8 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -310,6 +399,42 @@
                 "id": 1
             }
         ],
+        "receivedSuggestions": [
+            {
+                "id": 1,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Relativity Help",
+                "message": "No entiendo los marcos de referencia",
+                "status": "pending",
+                "createdAt": "2026-01-05T09:00:00"
+            },
+            {
+                "id": 4,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Physics for Athletes",
+                "message": "Necesito entender aceleración para una tarea",
+                "status": "rejected",
+                "createdAt": "2026-01-05T12:00:00"
+            },
+            {
+                "id": 8,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Quantum Curiosity",
+                "message": "Necesito reforzar teoría antes del laboratorio",
+                "status": "pending",
+                "createdAt": "2026-01-05T16:00:00"
+            }
+        ],
+        "sentSuggestions": [],
         "sessions": [
             {
                 "id": 1,
@@ -353,6 +478,8 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -381,6 +508,31 @@
                 "id": 3
             }
         ],
+        "receivedSuggestions": [
+            {
+                "id": 2,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Electricity and Magnetism",
+                "message": "Necesito ayuda para el parcial jsjs",
+                "status": "accepted",
+                "createdAt": "2026-01-05T10:30:00"
+            },
+            {
+                "id": 5,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Tesla Coils",
+                "message": "bro ocupamos hacer algo épico",
+                "status": "pending",
+                "createdAt": "2026-01-05T13:00:00"
+            }
+        ],
+        "sentSuggestions": [],
         "sessions": [
             {
                 "id": 3,
@@ -421,6 +573,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 8,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Quantum Curiosity",
+                "message": "Necesito reforzar teoría antes del laboratorio",
+                "status": "pending",
+                "createdAt": "2026-01-05T16:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -455,6 +621,43 @@
                 "id": 4
             }
         ],
+        "receivedSuggestions": [
+            {
+                "id": 6,
+                "subject": {
+                    "id": 3,
+                    "name": "Programacion 1"
+                },
+                "topic": "Frontend Architecture",
+                "message": "KivyMD me está destruyendo mentalmente",
+                "status": "pending",
+                "createdAt": "2026-01-05T14:00:00"
+            },
+            {
+                "id": 10,
+                "subject": {
+                    "id": 3,
+                    "name": "Programacion 1"
+                },
+                "topic": "Startup Backend",
+                "message": "Hay que escalar microservicios",
+                "status": "pending",
+                "createdAt": "2026-01-05T18:00:00"
+            }
+        ],
+        "sentSuggestions": [
+            {
+                "id": 3,
+                "subject": {
+                    "id": 5,
+                    "name": "Introduccion a la Ingenieria"
+                },
+                "topic": "Creative Engineering",
+                "message": "Quiero mezclar arte con ingeniería",
+                "status": "pending",
+                "createdAt": "2026-01-05T11:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -481,6 +684,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 10,
+                "subject": {
+                    "id": 3,
+                    "name": "Programacion 1"
+                },
+                "topic": "Startup Backend",
+                "message": "Hay que escalar microservicios",
+                "status": "pending",
+                "createdAt": "2026-01-05T18:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -503,6 +720,8 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
@@ -525,6 +744,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 4,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Physics for Athletes",
+                "message": "Necesito entender aceleración para una tarea",
+                "status": "rejected",
+                "createdAt": "2026-01-05T12:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -551,6 +784,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 6,
+                "subject": {
+                    "id": 3,
+                    "name": "Programacion 1"
+                },
+                "topic": "Frontend Architecture",
+                "message": "KivyMD me está destruyendo mentalmente",
+                "status": "pending",
+                "createdAt": "2026-01-05T14:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -573,6 +820,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [],
+        "sentSuggestions": [
+            {
+                "id": 5,
+                "subject": {
+                    "id": 2,
+                    "name": "Fisica 1"
+                },
+                "topic": "Tesla Coils",
+                "message": "bro ocupamos hacer algo épico",
+                "status": "pending",
+                "createdAt": "2026-01-05T13:00:00"
+            }
+        ],
         "sessions": [],
         "subjects": [
             {
@@ -595,6 +856,20 @@
         "contact": null,
         "enrolledSessions": [],
         "receivedReviews": [],
+        "receivedSuggestions": [
+            {
+                "id": 7,
+                "subject": {
+                    "id": 4,
+                    "name": "Desarrollo Personal"
+                },
+                "topic": "Existential Crisis",
+                "message": "No sé si debuggear tiene sentido",
+                "status": "accepted",
+                "createdAt": "2026-01-05T15:00:00"
+            }
+        ],
+        "sentSuggestions": [],
         "sessions": [],
         "subjects": [
             {
