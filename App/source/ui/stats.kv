@@ -3,77 +3,195 @@
     MDFloatLayout:
         md_bg_color: 0.05, 0.08, 0.15, 1
 
-        MDLabel:
-            text: "Stats Dashboard"
-            halign: "center"
-            font_size: "28sp"
-            pos_hint: {"center_y": 0.93}
+
+        # ================= BACK BUTTON =================
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"x": 0.02, "top": 0.98}
             theme_text_color: "Custom"
             text_color: 1, 1, 1, 1
-
-        MDGridLayout:
-            cols: 2
-            padding: "15dp"
-            spacing: "15dp"
-            adaptive_height: True
-            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            on_release:
+                app.go_back()
 
 
-            MDCard:
-                MDLabel:
-                    text: "Usuarios"
+        # ================= HEADER =================
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: "110dp"
+            pos_hint: {"top": 1}
+            padding: "20dp"
+            spacing: "5dp"
 
-                MDLabel:
-                    id: total_users
-                    text: "0"
-                    halign: "center"
+            MDLabel:
+                id: user_name
+                text: "User Name"
+                font_style: "H5"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
 
-
-            MDCard:
-                MDLabel:
-                    text: "Activos"
-
-                MDLabel:
-                    id: active
-                    text: "0"
-                    halign: "center"
-
-
-            MDCard:
-                MDLabel:
-                    text: "Tutores"
-
-                MDLabel:
-                    id: tutors
-                    text: "0"
-                    halign: "center"
+            MDLabel:
+                id: user_email
+                text: "email@keyinstitute.edu.sv"
+                font_size: "13sp"
+                theme_text_color: "Custom"
+                text_color: 0.6, 0.6, 0.6, 1
 
 
-            MDCard:
-                MDLabel:
-                    text: "Rating"
+        # ================= CONTENT =================
+        ScrollView:
+            size_hint: 1, 0.82
+            pos_hint: {"center_x": 0.5, "y": 0}
 
-                MDLabel:
-                    id: avg_rating
-                    text: "0"
-                    halign: "center"
-
-
-            MDCard:
-                MDLabel:
-                    text: "Sesiones"
-
-                MDLabel:
-                    id: sessions
-                    text: "0"
-                    halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: "16dp"
+                spacing: "14dp"
 
 
-            MDCard:
-                MDLabel:
-                    text: "Pendientes"
+                # ================= PROFILE CARD =================
+                MDCard:
+                    size_hint_y: None
+                    height: "160dp"
+                    padding: "16dp"
+                    radius: [18, 18, 18, 18]
+                    md_bg_color: 0.1, 0.12, 0.2, 1
+                    elevation: 6
 
-                MDLabel:
-                    id: pending
-                    text: "0"
-                    halign: "center"
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "12dp"
+
+                        AsyncImage:
+                            id: pfp
+                            source: ""
+                            size_hint: None, None
+                            size: "90dp", "90dp"
+
+                        MDBoxLayout:
+                            orientation: "vertical"
+
+                            MDLabel:
+                                text: "Estado del usuario"
+                                font_size: "13sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.7, 0.7, 0.7, 1
+
+                            MDLabel:
+                                id: state
+                                text: "active"
+                                font_style: "H6"
+                                theme_text_color: "Custom"
+                                text_color: 0.3, 0.8, 1, 1
+
+                            MDLabel:
+                                id: becado
+                                text: "Becado"
+                                font_size: "13sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.8, 0.8, 0.8, 1
+
+
+                # ================= RATING CARD =================
+                MDCard:
+                    size_hint_y: None
+                    height: "120dp"
+                    padding: "16dp"
+                    radius: [18, 18, 18, 18]
+                    md_bg_color: 0.1, 0.12, 0.2, 1
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+
+                        MDLabel:
+                            text: "Rating promedio"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                        MDLabel:
+                            id: rating
+                            text: "0.0"
+                            font_style: "H3"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+
+
+                # ================= STATS GRID =================
+                MDGridLayout:
+                    cols: 2
+                    adaptive_height: True
+                    spacing: "14dp"
+
+
+                    MDCard:
+                        padding: "14dp"
+                        radius: [16, 16, 16, 16]
+                        md_bg_color: 0.1, 0.12, 0.2, 1
+
+                        MDLabel:
+                            text: "Sesiones"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                        MDLabel:
+                            id: sessions
+                            text: "0"
+                            font_style: "H4"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+
+
+                    MDCard:
+                        padding: "14dp"
+                        radius: [16, 16, 16, 16]
+                        md_bg_color: 0.1, 0.12, 0.2, 1
+
+                        MDLabel:
+                            text: "Reviews"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                        MDLabel:
+                            id: reviews
+                            text: "0"
+                            font_style: "H4"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+
+
+                    MDCard:
+                        padding: "14dp"
+                        radius: [16, 16, 16, 16]
+                        md_bg_color: 0.1, 0.12, 0.2, 1
+
+                        MDLabel:
+                            text: "Materias"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                        MDLabel:
+                            id: subjects
+                            text: "0"
+                            font_style: "H4"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+
+
+                    MDCard:
+                        padding: "14dp"
+                        radius: [16, 16, 16, 16]
+                        md_bg_color: 0.1, 0.12, 0.2, 1
+
+                        MDLabel:
+                            text: "Pendientes"
+                            theme_text_color: "Custom"
+                            text_color: 0.7, 0.7, 0.7, 1
+
+                        MDLabel:
+                            id: pending
+                            text: "0"
+                            font_style: "H4"
+                            theme_text_color: "Custom"
+                            text_color: 1, 0.4, 0.4, 1

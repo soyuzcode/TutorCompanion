@@ -79,30 +79,23 @@ class SugerirTutoriaScreen(MDScreen):
 
 class StatsScreen(MDScreen):
 
-    stats = {}
-
-    def load_stats(self, users: list):
-        """
-        Recibe usuarios desde backend o app state
-        y actualiza UI
-        """
-
+    def load_user(self, user: dict):
         app = MDApp.get_running_app()
-        self.stats = app.get_stats() # type: ignore
-        self.render_stats()
 
-    def render_stats(self):
-        """
-        Aquí SOLO actualizas UI bindings
-        (labels, cards, etc)
-        """
+        data = app.get_stats(app.users) # type: ignore
 
-        self.ids.total_users.text = str(self.stats.get("total_users", 0))
-        self.ids.active.text = str(self.stats.get("active", 0))
-        self.ids.tutors.text = str(self.stats.get("tutors", 0))
-        self.ids.avg_rating.text = str(self.stats.get("avg_rating", 0))
-        self.ids.sessions.text = str(self.stats.get("sessions", 0))
-        self.ids.pending.text = str(self.stats.get("pending_suggestions", 0))
+        self.ids.user_name.text = data["name"]
+        self.ids.user_email.text = data["email"]
+        self.ids.pfp.source = data["pfp"]
+
+        self.ids.state.text = data["state"]
+        self.ids.becado.text = data["becado"]
+
+        self.ids.rating.text = str(data["rating"])
+        self.ids.sessions.text = str(data["sessions"])
+        self.ids.reviews.text = str(data["reviews"])
+        self.ids.subjects.text = str(data["subjects"])
+        self.ids.pending.text = str(data["pending"])
 
 class DashboardScreen(MDScreen):
 
@@ -329,11 +322,11 @@ class TutorCompanion(MDApp):
             )
         )
 
-        self.sm.add_widget(
-            StatsScreen(
-                name="stats"
-            )
-        )
+        #self.sm.add_widget(
+        #    StatsScreen(
+        #        name="stats"
+        #    )
+        #)
 
         self.sm.current = "login"
 

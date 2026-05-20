@@ -10,7 +10,7 @@ from modules.get_data import get_user_data, get_sugerencias_reales
 from modules.tuto_suggestions import get_key_hours_by_identifier
 from modules.ranking import get_featured_tutors
 from modules.process_data import extraer_tutores
-from modules.process_data import process_stats
+from modules.process_data import process_user_stats
 
 class Main():
     def __init__(self) -> None:
@@ -22,8 +22,8 @@ class Main():
         self.UI = UI
         UI.run()
 
-    def get_stats(self):
-        return process_stats(self.user_data)
+    def get_stats(self, user):
+        return process_user_stats(self.user_data, user)
 
     def extraer_tutor_plural(self):
         return extraer_tutores(self.user_data)
