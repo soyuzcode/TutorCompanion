@@ -82,6 +82,26 @@ class DashboardScreen(MDScreen):
             # Agregamos la tarjeta real al contenedor con scroll
             columna_izquierda.add_widget(nueva_tarjeta)
 
+    def actualizar_solicitudes(self, lista_solicitudes):
+        """
+        Recibe la lista de listas: [[nombre, materia, estado], ...]
+        y actualiza el contenedor de solicitudes en el dashboard.
+        """
+        contenedor = self.ids.get('contenedor_solicitudes') # Asegúrate que este id exista en tu dashboard.kv
+        if not contenedor:
+            print("Error: No se encontró 'contenedor_solicitudes' en el archivo .kv")
+            return
+            
+        contenedor.clear_widgets()
+        
+        for sol in lista_solicitudes:
+            nombre, materia, estado = sol
+            # Aquí podrías crear un widget tipo 'SolicitudCard' si lo tienes
+            # O simplemente agregar un Label para probar que funciona:
+            # card = SolicitudCard(nombre=nombre, materia=materia, estado=estado)
+            # contenedor.add_widget(card)
+            print(f"Agregando solicitud: {nombre} - {materia} ({estado})")
+
 
 # ================= APP =================
 
