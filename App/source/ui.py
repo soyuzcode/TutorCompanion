@@ -46,36 +46,32 @@ class DashboardScreen(MDScreen):
         [[id, materia, tema, fecha, hora], ...] y pinta tarjetas reales.
         """
         columna_izquierda = self.ids.contenedor_izquierdo
-        TutoriaCardClass = Factory.TutoriaCard
         
         # Limpiamos antes de agregar para que no se dupliquen al recargar
         columna_izquierda.clear_widgets()
         
         for tutoria in lista_tutorias:
             materia_tuto = tutoria[1]
-            fecha_tuto = tutoria[3]  # 🌟 Extraemos la fecha real
-            hora_tuto = tutoria[4]   # 🌟 Extraemos la hora real
+            fecha_tuto = tutoria[3]  # Extraemos la fecha real
+            hora_tuto = tutoria[4]   # Extraemos la hora real
             estado_tuto = "Confirmada" 
             
-            # 1. Creamos la tarjeta VACÍA
-            nueva_tarjeta = TutoriaCardClass()
-            
-            # 2. Asignamos los datos reales dinámicamente si las propiedades existen
-            if hasattr(nueva_tarjeta, "materia"):
-                nueva_tarjeta.materia = materia_tuto
-            if hasattr(nueva_tarjeta, "estado"):
-                nueva_tarjeta.estado = estado_tuto
-                
-            # 🌟 AQUÍ PASAMOS LA FECHA Y HORA REALES A LA TARJETA:
-            if hasattr(nueva_tarjeta, "fecha"):
-                nueva_tarjeta.fecha = f"{fecha_tuto} - {hora_tuto}"
-            elif hasattr(nueva_tarjeta, "date"): # Por si acaso le pusieron 'date' en inglés
-                nueva_tarjeta.date = f"{fecha_tuto} - {hora_tuto}"
+            # 🌟 CREAMOS LA TARJETA PASÁNDOLE LAS PROPIEDADES DIRECTAMENTE:
+            nueva_tarjeta = TutoriaCard(
+                materia = materia_tuto,
+                estado = estado_tuto,
+                fecha = f"{fecha_tuto} - {hora_tuto}"
+            )
                 
             # Agregamos la tarjeta real al contenedor con scroll
             columna_izquierda.add_widget(nueva_tarjeta)
 
 # ================= CARDS =================
+
+class TutoriaCard(MDCard):
+    materia = StringProperty("")
+    estado = StringProperty("")
+    fecha = StringProperty("")  # 🌟 Declarada explícitamente en Python
 
 class ImpactCard(MDCard):
     pass
