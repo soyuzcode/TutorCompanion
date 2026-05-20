@@ -55,6 +55,10 @@ class DashboardScreen(MDScreen):
         
     def ver_estadisticas(self):
         print(" Acceso a: Gráficas de Progreso y Horas (Módulo en desarrollo)")
+
+    def actualizar_usuario(self, nombre, rol):
+        self.ids.label_nombre.text = f"Hola, {nombre}! 👋"
+        self.ids.label_rol.text = f"Rol: {rol}"
     
     def actualizar_tarjetas_tutorias(self, lista_tutorias):
         """
@@ -180,4 +184,4 @@ class TutorCompanion(MDApp):
         else:
             print("Wrong!")
 
-# Ajuste pendiente: mejorar formato de fechas de tutorias 
+# Ajuste pendiente: mejorar formato de fechas de tutorias
