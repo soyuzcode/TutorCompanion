@@ -71,6 +71,7 @@ class Main():
                     # ENVIAMOS LOS DATOS REALES A LA UI
                     dashboard = self.UI.sm.get_screen("dashboard")
                     dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
+                    dashboard.actualizar_usuario(user, "Estudiante")
                     
                     return True
         except Exception as e:
@@ -105,6 +106,7 @@ class Main():
                 # ENVIAMOS LOS DATOS LOCALES A LA UI
                 dashboard = self.UI.sm.get_screen("dashboard")
                 dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
+                dashboard.actualizar_usuario(user, "Estudiante")
                 
                 return True
         except Exception as err_local:
