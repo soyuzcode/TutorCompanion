@@ -12,7 +12,7 @@ def get_user_data() -> dict | None:
     # 1. Intentamos conectar al servidor de Vercel con un "timeout" de 2 segundos 
     # para que si está caído, no congele la app por minutos.
     try:
-        response = requests.get(f"{get_base_Url()}/user", timeout=2)
+        response = requests.get(f"{get_base_Url()}/user", timeout=5)
         if response.status_code == 200:
             return response.json()
         else:
@@ -39,3 +39,22 @@ def get_user_data() -> dict | None:
     except Exception as err_local:
         print(f"Error reading backup JSON: {err_local}")
         return None
+    
+def get_sugerencias_reales() -> list:
+    """
+    Obtiene las sugerencias/solicitudes desde el endpoint oficial de Carlos.
+    """
+    try:
+        # Usamos la misma lógica de URL base que ya tienes configurada
+        url = f"{get_base_Url()}/suggestions" 
+        response = requests.get(url, timeout=5)
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Error al obtener sugerencias: {response.status_code}")
+            return []
+            
+    except Exception as e:
+        print(f"No se pudieron cargar las sugerencias: {e}")
+        return []

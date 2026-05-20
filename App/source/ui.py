@@ -13,7 +13,6 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.menu import MDDropdownMenu
 
-
 # =========================================================
 # WINDOW CONFIG
 # =========================================================
@@ -25,6 +24,10 @@ from kivymd.uix.menu import MDDropdownMenu
 # =========================================================
 # CARDS
 # =========================================================
+class SolicitudCard(MDCard):
+    # Estas variables deben coincidir con lo que usas en components.kv
+    name = StringProperty("")
+    materia = StringProperty("")
 
 class TutoriaCard(MDCard):
 
@@ -68,6 +71,8 @@ class TutorSelectCard(MDCard):
 class LoginScreen(MDScreen):
     pass
 
+class SugerirTutoriaScreen(MDScreen):
+    pass
 
 class DashboardScreen(MDScreen):
 
@@ -155,24 +160,31 @@ class DashboardScreen(MDScreen):
                 materia = materia_tuto,
 
                 estado = estado_tuto,
-
-                fecha = (
-                    f"{fecha_tuto} - {hora_tuto}"
-                )
+                fecha = f"{fecha_tuto} - {hora_tuto}"
             )
+                
+            # Agregamos la tarjeta real al contenedor con scroll
+            columna_izquierda.add_widget(nueva_tarjeta)
 
-            columna_izquierda.add_widget(
-                nueva_tarjeta
-            )
+    def actualizar_solicitudes(self, lista_solicitudes):
+        contenedor = self.ids.contenedor_solicitudes
+        
+        # Limpiamos, dejando el título (asumiendo que es el primer hijo)
+        while len(contenedor.children) > 1:
+            contenedor.remove_widget(contenedor.children[0])
+            
+        for sol in lista_solicitudes:
+            # AHORA ACCEDEMOS POR CLAVE, YA QUE 'sol' ES UN DICCIONARIO
+            materia = sol.get("subject", {}).get("name", "Sin materia")
+            tema = sol.get("topic", "Sin tema")
+            estado = sol.get("status", "pending")
+            
+            # Ajusta esto según lo que acepte tu SolicitudCard
+            # Si tu tarjeta solo acepta 'name' y 'materia', usa 'tema' como nombre o lo que prefieras
+            card = SolicitudCard(name=tema, materia=f"{materia} ({estado})") 
+            contenedor.add_widget(card)
 
-
-class SugerirTutoriaScreen(MDScreen):
-    pass
-
-
-# =========================================================
-# APP
-# =========================================================
+# ================= APP =================
 
 class TutorCompanion(MDApp):
 

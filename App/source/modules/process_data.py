@@ -10,15 +10,8 @@ def validar_correo(texto):
 # Asignado: Michelle
 def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     """
-    Dado el diccionario o lista de datos de Data/return_example.json,
-    recorre los usuarios, extrae TODAS las tutorías existentes en sus 'subjects'
-    e información disponible, evitando duplicarlas.
-    
-    Retorna una lista de listas lista para la UI:
-        [
-            [ID, MATERIA, TEMA, FECHA, HORA],
-            ...
-        ]
+    Función universal: intenta extraer datos de 'sessions' (servidor) 
+    o de 'subjects'/'sentSuggestions' (prueba).
     """
     if data is None:
         return []
@@ -27,24 +20,30 @@ def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     ids_visitados = set()
 
     for user in data:
-        subjects = user.get("subjects", [])
-        for sub in subjects:
-            sub_id = str(sub.get("id"))
-            
-            # Si la tutoría no la hemos procesado ya, la agregamos
-            if sub_id not in ids_visitados:
-                ids_visitados.add(sub_id)
+        # --- ESTRATEGIA 1: Intentar buscar en 'sessions' (Formato Servidor) ---
+        sessions = user.get("sessions", [])
+        for sess in sessions:
+            sess_id = str(sess.get("id"))
+            if sess_id not in ids_visitados:
+                ids_visitados.add(sess_id)
+                full_start = sess.get("startTime", "T--")
+                fecha, hora = full_start.split("T") if "T" in full_start else (full_start, "No definida")
+                resultado.append([sess_id, user.get("subjects", [{}])[0].get("name", "Materia"), sess.get("topic", "General"), fecha, hora])
+
+        # --- ESTRATEGIA 2: Intentar buscar en 'sentSuggestions' (Formato Prueba) ---
+        # --- ESTRATEGIA 2: Intentar buscar en 'sentSuggestions' (Formato Prueba) ---
+        suggestions = user.get("sentSuggestions", [])
+        for sug in suggestions:
+            sug_id = str(sug.get("id"))
+            if sug_id not in ids_visitados:
+                ids_visitados.add(sug_id)
+                full_date = sug.get("createdAt", "T--")
                 
-                # Extraemos los datos básicos. Si falta alguno, ponemos un valor por defecto
-                lista_tutoria = [
-                    sub_id,                                # ID
-                    sub.get("name", "Materia sin nombre"), # Nombre de la materia
-                    sub.get("topic", "General"),           # Tema / Tópico
-                    sub.get("date", "XX/XX/2026"),         # Fecha
-                    sub.get("hour", "4:00 PM")             # Hora
-                ]
-                resultado.append(lista_tutoria)
+                # AQUÍ ESTÁ EL CAMBIO: 'full_date' en lugar de 'full_start'
+                fecha, hora = full_date.split("T") if "T" in full_date else (full_date, "12:00 PM")
                 
+                resultado.append([sug_id, sug.get("subject", {}).get("name", "Materia"), sug.get("topic", "General"), fecha, hora])
+
     return resultado
 
 
@@ -119,3 +118,4 @@ def convert_dict_to_list_of_list(user_data:dict):
         
         convierta json respoonse en esto"""
     pass
+
