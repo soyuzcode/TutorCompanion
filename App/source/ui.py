@@ -6,6 +6,7 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
+from kivy.factory import Factory
 
 from kivy.factory import Factory
 
@@ -57,12 +58,17 @@ class ImpactCard(MDCard):
 
 class TutorCompanion(MDApp):
 
-    def __init__(self, check_login, get_key_hours,**kwargs):
+    def __init__(self, 
+                 check_login, 
+                 get_key_hours,
+                 get_ranking,
+                 **kwargs):
 
         super().__init__(**kwargs)
 
         self.check_login = check_login
         self.get_key_hours = get_key_hours
+        self.get_rank_tutor = get_ranking
 
         self.current_user = ""
 
@@ -93,6 +99,23 @@ class TutorCompanion(MDApp):
 
     def load_data_on_dashboard(self):
 
+        # RANKING CARDS
+        data = self.get_rank_tutor()
+        dashboard = self.sm.get_screen("dashboard")
+        container = dashboard.ids.tutor_container
+
+        container.clear_widgets()
+
+        for i, tutor in enumerate(data):
+            card = Factory.TutorCard(
+                position = str(i +1),
+                name = tutor["name"],
+                rating = tutor["rating"]
+            )
+
+            container.add_widget(card)
+            
+        # IMPACT CARD
         data = self.get_key_hours(self.current_user)
 
         dashboard = self.sm.get_screen("dashboard")

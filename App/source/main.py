@@ -8,18 +8,22 @@ from modules.process_data import process_data_from_user_dict
 from modules.process_data import obtener_todas_las_tutorias 
 from modules.get_data import get_user_data
 from modules.tuto_suggestions import get_key_hours_by_identifier
+from modules.ranking import get_featured_tutors
 
 class Main():
     def __init__(self) -> None:
         # Añadimos esto para que la lista exista desde el inicio:
         self.tutorias_disponibles = []
         
-        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours)
+        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor)
         self.UI = UI
         UI.run()
 
         # Don't write anything here!!
         # This will execute when kill UI
+
+    def get_rank_tutor(self):
+        return get_featured_tutors(get_user_data())
 
     def get_key_hours(self, identifier) -> tuple | None:
         # 1. Intentamos extraer los datos reales (del servidor o del JSON local según qué cargó primero)
