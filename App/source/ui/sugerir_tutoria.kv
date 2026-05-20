@@ -263,26 +263,13 @@
 
                     MDFillRoundFlatButton:
                         text: "PUBLICAR SUGERENCIA"
-
                         font_size: "15sp"
-
                         pos_hint: {"center_x": 0.5}
-
                         size_hint_x: 1
-
                         height: "55dp"
-
                         md_bg_color: 0.3, 0.8, 1, 1
-
                         text_color: 0.05, 0.08, 0.15, 1
-
-                        on_release:
-                            app.enviar_sugerencia(
-                                materia_dropdown.text,
-                                txt_tema.text,
-                                txt_descripcion.text,
-                                app.get_tutor_seleccionado()
-                            )
+                        on_release: app.enviar_sugerencia(materia_dropdown.text, txt_tema.text, txt_descripcion.text, app.get_tutor_seleccionado())
 
         # =====================================================
         # FOOTER
