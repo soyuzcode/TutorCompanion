@@ -278,8 +278,10 @@
 
                         on_release:
                             app.enviar_sugerencia(
-                            txt_tema.text,
-                            txt_descripcion.text
+                                materia_dropdown.text,
+                                txt_tema.text,
+                                txt_descripcion.text,
+                                app.get_tutor_seleccionado()
                             )
 
         # =====================================================

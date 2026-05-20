@@ -2,9 +2,11 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 
+# IMPORTA TODO LO QUE NECESITAS EN UN SOLO BLOQUE
 from kivy.properties import (
     StringProperty,
-    BooleanProperty
+    BooleanProperty,
+    ObjectProperty
 )
 
 from kivymd.app import MDApp
@@ -12,8 +14,6 @@ from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.menu import MDDropdownMenu
-
-from kivy.properties import StringProperty, ObjectProperty
 
 # =========================================================
 # WINDOW CONFIG
@@ -564,3 +564,40 @@ class TutorCompanion(MDApp):
         else:
 
             print("Wrong!")
+
+    # =====================================================
+    # SUGERIR TUTORIA - LÓGICA
+    # =====================================================
+
+    def enviar_sugerencia(self, materia, tema, descripcion, tutor_id):
+        # 1. Validación
+        if materia == "Selecciona una materia":
+            print("Error: Debes seleccionar una materia")
+            return
+        if not tutor_id:
+            print("Error: Debes seleccionar un tutor")
+            return
+            
+        print(f"Enviando sugerencia al servidor...")
+        print(f"Materia: {materia}, Tema: {tema}, Descripcion: {descripcion}, Tutor ID: {tutor_id}")
+        
+        # =================================================
+        # NOTA PARA BACKEND: 
+        # Aquí falta la integración con la API de Carlos.
+        # =================================================
+        
+        self.sm.current = "dashboard"
+        print("¡Sugerencia enviada con éxito!")
+
+    def get_tutor_seleccionado(self):
+        # Buscamos la pantalla y el contenedor de tarjetas
+        sugerir_screen = self.sm.get_screen("sugerir_tutoria")
+        container = sugerir_screen.ids.tutor_container
+        
+        # Iteramos sobre las tarjetas en el contenedor
+        for card in container.children:
+            # Verificamos si la tarjeta está seleccionada
+            if hasattr(card, 'selected') and card.selected:
+                return card.tutor_id
+        
+        return None # Retorna None si no hay nada seleccionado
