@@ -212,6 +212,9 @@ class DashboardScreen(MDScreen):
     # LÓGICA DE SOLICITUDES (ACEPTAR/RECHAZAR)
     # =====================================================
 
+    # Biomimetismo axial 47 :p
+    # Falta cargar datos en el server luego de dar aceptar o rechazar
+
     def manejar_decision(self, sol_id, decision, sol_data):
         """
         sol_id: El identificador único de la sugerencia.
