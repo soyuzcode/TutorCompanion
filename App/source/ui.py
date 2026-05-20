@@ -11,6 +11,7 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
+from kivymd.uix.menu import MDDropdownMenu
 
 
 # =========================================================
@@ -79,6 +80,8 @@ class DashboardScreen(MDScreen):
         app = MDApp.get_running_app()
 
         app.load_tutors() # type: ignore
+
+        app.setup_subject_dropdown() # type: ignore
 
         self.manager.transition.direction = "left"
 
@@ -243,6 +246,80 @@ class TutorCompanion(MDApp):
         self.sm.current = "login"
 
         return self.sm
+
+    # =====================================================
+    # SUBJECT DROPDOWN
+    # =====================================================
+
+    def setup_subject_dropdown(self):
+
+        sugerir_screen = self.sm.get_screen(
+            "sugerir_tutoria"
+        )
+
+        dropdown_item = (
+            sugerir_screen.ids.materia_dropdown
+        )
+
+        materias = [
+
+            "Calculo 1",
+
+            "Fisica 1",
+
+            "Programacion 1",
+
+            "Desarrollo Personal",
+
+            "Introduccion a la Ingenieria"
+        ]
+
+        menu_items = []
+
+        for materia in materias:
+
+            menu_items.append(
+                {
+                    "text": materia,
+
+                    "viewclass": "OneLineListItem",
+
+                    "on_release":
+                    lambda x=materia:
+                    self.set_subject(x)
+                }
+            )
+
+        self.subject_menu = MDDropdownMenu(
+
+            caller = dropdown_item,
+
+            items = menu_items,
+
+            width_mult = 5,
+
+            md_bg_color = (
+                0.15,
+                0.17,
+                0.25,
+                1
+            )
+        )
+
+
+    def set_subject(self, materia):
+
+        sugerir_screen = self.sm.get_screen(
+            "sugerir_tutoria"
+        )
+
+        dropdown_item = (
+            sugerir_screen.ids.materia_dropdown
+        )
+
+        dropdown_item.text = materia
+
+        self.subject_menu.dismiss()
 
     # =====================================================
     # LOAD TUTORS
