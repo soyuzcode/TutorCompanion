@@ -56,14 +56,17 @@
 
 
 
+
+
 # =========================================================
-# TUTORIA CARD
+# TUTORIA CARD (Corregida con propiedad dinámica de fecha)
 # =========================================================
 
 <TutoriaCard@MDCard>
 
     materia: ""
     estado: ""
+    fecha: ""  # 🌟 ¡MÁGICO! Esta línea le permite a Python cambiar el texto desde ui.py
 
     size_hint_y: None
     height: dp(110)
@@ -87,7 +90,7 @@
             text_color: 1, 1, 1, 1
 
         MDLabel:
-            text: "XX/XX/2026 - 4:00 PM"
+            text: root.fecha  # 🌟 Cambiado de texto estático a la variable dinámica
 
             theme_text_color: "Custom"
             text_color: 0.7, 0.7, 0.7, 1

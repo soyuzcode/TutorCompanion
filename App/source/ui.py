@@ -42,27 +42,37 @@ class DashboardScreen(MDScreen):
     
     def actualizar_tarjetas_tutorias(self, lista_tutorias):
         """
-        Recibe la lista de listas generada por Yulissa:
+        Recibe la lista de listas:
         [[id, materia, tema, fecha, hora], ...] y pinta tarjetas reales.
         """
         columna_izquierda = self.ids.contenedor_izquierdo
         TutoriaCardClass = Factory.TutoriaCard
         
+        # Limpiamos antes de agregar para que no se dupliquen al recargar
+        columna_izquierda.clear_widgets()
+        
         for tutoria in lista_tutorias:
             materia_tuto = tutoria[1]
-            estado_tuto = "Confirmada" # Un valor por defecto para el diseño
+            fecha_tuto = tutoria[3]  # 🌟 Extraemos la fecha real
+            hora_tuto = tutoria[4]   # 🌟 Extraemos la hora real
+            estado_tuto = "Confirmada" 
             
-            # 1. Creamos la tarjeta VACÍA (así no lanza el error de propiedad)
+            # 1. Creamos la tarjeta VACÍA
             nueva_tarjeta = TutoriaCardClass()
             
-            # 2. Si tus compañeros definieron la tarjeta con propiedades internas de texto,
-            # intentamos asignárselas directamente al componente.
+            # 2. Asignamos los datos reales dinámicamente si las propiedades existen
             if hasattr(nueva_tarjeta, "materia"):
                 nueva_tarjeta.materia = materia_tuto
             if hasattr(nueva_tarjeta, "estado"):
                 nueva_tarjeta.estado = estado_tuto
                 
-            # Agregamos la tarjeta real al contenedor
+            # 🌟 AQUÍ PASAMOS LA FECHA Y HORA REALES A LA TARJETA:
+            if hasattr(nueva_tarjeta, "fecha"):
+                nueva_tarjeta.fecha = f"{fecha_tuto} - {hora_tuto}"
+            elif hasattr(nueva_tarjeta, "date"): # Por si acaso le pusieron 'date' en inglés
+                nueva_tarjeta.date = f"{fecha_tuto} - {hora_tuto}"
+                
+            # Agregamos la tarjeta real al contenedor con scroll
             columna_izquierda.add_widget(nueva_tarjeta)
 
 # ================= CARDS =================
