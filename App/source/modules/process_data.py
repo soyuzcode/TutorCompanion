@@ -8,11 +8,10 @@ def validar_correo(texto):
 
 
 # Asignado: Michelle
-# Asignado: Michelle
 def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     """
-    Recorre usuarios, extrae tutorías de 'subjects' y sugerencias de 'sentSuggestions',
-    formateando la fecha correctamente.
+    Función universal: intenta extraer datos de 'sessions' (servidor) 
+    o de 'subjects'/'sentSuggestions' (prueba).
     """
     if data is None:
         return []
@@ -21,43 +20,26 @@ def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     ids_visitados = set()
 
     for user in data:
-        # 1. Procesar subjects (lo que ya tenías)
-        subjects = user.get("subjects", [])
-        for sub in subjects:
-            sub_id = str(sub.get("id"))
-            if sub_id not in ids_visitados:
-                ids_visitados.add(sub_id)
-                
-                lista_tutoria = [
-                    sub_id,
-                    sub.get("name", "Materia sin nombre"),
-                    sub.get("topic", "General"),
-                    "Sin fecha", # Los subjects no traen fecha en tu JSON
-                    "4:00 PM"
-                ]
-                resultado.append(lista_tutoria)
+        # --- ESTRATEGIA 1: Intentar buscar en 'sessions' (Formato Servidor) ---
+        sessions = user.get("sessions", [])
+        for sess in sessions:
+            sess_id = str(sess.get("id"))
+            if sess_id not in ids_visitados:
+                ids_visitados.add(sess_id)
+                full_start = sess.get("startTime", "T--")
+                fecha, hora = full_start.split("T") if "T" in full_start else (full_start, "No definida")
+                resultado.append([sess_id, user.get("subjects", [{}])[0].get("name", "Materia"), sess.get("topic", "General"), fecha, hora])
 
-        # 2. Procesar sentSuggestions (¡Aquí está la fecha real!)
+        # --- ESTRATEGIA 2: Intentar buscar en 'sentSuggestions' (Formato Prueba) ---
         suggestions = user.get("sentSuggestions", [])
         for sug in suggestions:
-            # Usamos el ID de la sugerencia para no duplicar
             sug_id = str(sug.get("id"))
             if sug_id not in ids_visitados:
                 ids_visitados.add(sug_id)
-                
-                # Extraemos fecha y hora de "createdAt": "2026-01-05T15:00:00"
                 full_date = sug.get("createdAt", "T--")
-                fecha, hora = full_date.split("T") if "T" in full_date else (full_date, "12:00 PM")
-                
-                lista_tutoria = [
-                    sug_id,
-                    sug.get("subject", {}).get("name", "Materia sin nombre"),
-                    sug.get("topic", "General"),
-                    fecha, # Ejemplo: 2026-01-05
-                    hora   # Ejemplo: 15:00:00
-                ]
-                resultado.append(lista_tutoria)
-                
+                fecha, hora = full_start.split("T") if "T" in full_date else (full_date, "12:00 PM")
+                resultado.append([sug_id, sug.get("subject", {}).get("name", "Materia"), sug.get("topic", "General"), fecha, hora])
+
     return resultado
 
 
