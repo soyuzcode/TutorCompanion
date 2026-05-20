@@ -134,8 +134,8 @@ class DashboardScreen(MDScreen):
         )
 
     def ver_estadisticas(self):
-
-        self.manager.current = "stats"
+        pass
+        #self.manager.current = "stats"
 
     # =====================================================
     # USER INFO
@@ -325,11 +325,11 @@ class TutorCompanion(MDApp):
             )
         )
 
-        #self.sm.add_widget(
-        #    StatsScreen(
-        #        name="stats"
-        #    )
-        #)
+        self.sm.add_widget(
+            StatsScreen(
+                name="stats"
+            )
+        )
 
         self.sm.current = "login"
 
