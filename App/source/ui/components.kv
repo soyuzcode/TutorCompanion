@@ -398,3 +398,61 @@
 
             theme_text_color: "Custom"
             text_color: 0.5, 0.8, 1, 1
+
+<TutorSelectCard>
+
+    orientation: "horizontal"
+
+    size_hint_y: None
+    height: "85dp"
+
+    padding: "15dp"
+
+    spacing: "15dp"
+
+    radius: [20,20,20,20]
+
+    md_bg_color: 0.14, 0.16, 0.24, 1
+
+    ripple_behavior: True
+
+    FitImage:
+        source: root.image
+
+        size_hint_x: None
+
+        width: "55dp"
+
+        radius: [50]
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        spacing: "3dp"
+
+        MDLabel:
+            text: root.name
+
+            bold: True
+
+            font_size: "16sp"
+
+            theme_text_color: "Custom"
+
+            text_color: 1,1,1,1
+
+        MDLabel:
+            text: f"⭐ {root.rating}"
+
+            font_size: "13sp"
+
+            theme_text_color: "Custom"
+
+            text_color: 0.85,0.85,0.9,1
+
+    Widget:
+
+    MDCheckbox:
+        group: "tutores"
+
+        active: root.selected

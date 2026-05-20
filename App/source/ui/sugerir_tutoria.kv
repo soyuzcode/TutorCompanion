@@ -11,8 +11,11 @@
 
         MDIconButton:
             icon: "arrow-left"
+
             pos_hint: {"x": 0.02, "top": 0.98}
+
             theme_text_color: "Custom"
+
             text_color: 0.3, 0.8, 1, 1
 
             on_release:
@@ -21,142 +24,237 @@
 
         MDLabel:
             text: "Sugerir Tutoría"
-            font_style: "H4"
-            bold: True
+
             halign: "center"
-            pos_hint: {"center_y": 0.91}
+
+            pos_hint: {"center_y": 0.92}
+
+            font_size: "30sp"
+
+            bold: True
+
             theme_text_color: "Custom"
+
             text_color: 1, 1, 1, 1
 
         MDLabel:
-            text: "Describe el tema que necesitas reforzar 🎧"
+            text: "Encuentra ayuda para el tema que necesitas reforzar 🎧"
+
             halign: "center"
-            pos_hint: {"center_y": 0.865}
+
+            pos_hint: {"center_y": 0.875}
+
             font_size: "14sp"
 
             theme_text_color: "Custom"
+
             text_color: 0.65, 0.65, 0.7, 1
 
         MDIcon:
             icon: "comment-question-outline"
+
             font_size: "72sp"
+
             pos_hint: {"center_x": 0.5, "center_y": 0.77}
 
             theme_text_color: "Custom"
+
             text_color: 0.3, 0.8, 1, 1
 
         # =====================================================
-        # FORM CONTAINER
+        # SCROLL CONTENT
         # =====================================================
 
         ScrollView:
             size_hint: 1, 0.63
+
             pos_hint: {"x": 0, "y": 0.08}
+
+            do_scroll_x: False
 
             MDBoxLayout:
                 orientation: "vertical"
+
                 adaptive_height: True
+
                 padding: dp(20)
+
                 spacing: dp(15)
+
+                # =================================================
+                # MAIN CARD
+                # =================================================
 
                 MDCard:
                     orientation: "vertical"
+
                     adaptive_height: True
 
                     padding: dp(25)
+
                     spacing: dp(20)
 
                     radius: [32, 32, 32, 32]
+
                     elevation: 10
 
                     size_hint_x: 0.92
+
                     pos_hint: {"center_x": 0.5}
 
                     md_bg_color: 0.1, 0.12, 0.2, 1
 
-                    # =========================================
-                    # INPUTS
-                    # =========================================
+                    # =============================================
+                    # MATERIA
+                    # =============================================
 
-                    MDTextField:
-                        id: txt_materia
+                    MDLabel:
+                        text: "Materia"
 
-                        hint_text: "Materia"
-                        helper_text: "Ej. Matemática, Física, Programación"
-                        helper_text_mode: "on_focus"
+                        bold: True
 
-                        icon_right: "book-education"
+                        font_size: "15sp"
 
-                        mode: "fill"
-                        radius: [18, 18, 18, 18]
+                        theme_text_color: "Custom"
 
-                        size_hint_y: None
-                        height: "60dp"
+                        text_color: 1,1,1,1
 
-                        line_color_focus: 0.3, 0.8, 1, 1
-                        icon_right_color_focus: 0.3, 0.8, 1, 1
+                    MDDropDownItem:
+                        id: materia_dropdown
+
+                        text: "Selecciona una materia"
+
+                        current_item: "Selecciona una materia"
+
+                        pos_hint: {"center_x": .5}
+
+                        text_color: 1,1,1,1
+
+                    # =============================================
+                    # TEMA
+                    # =============================================
 
                     MDTextField:
                         id: txt_tema
 
                         hint_text: "Tema específico"
-                        helper_text: "Ej. Derivadas, SQL, Herencia"
+
+                        helper_text: "Ej. Relatividad, SQL JOINs, Derivadas"
+
                         helper_text_mode: "on_focus"
+
+                        helper_text_color_normal: 1,1,1,0.7
+
+                        helper_text_color_focus: 1,1,1,0.9
 
                         icon_right: "text-search"
 
                         mode: "fill"
+
                         radius: [18, 18, 18, 18]
 
                         size_hint_y: None
-                        height: "60dp"
+
+                        height: "65dp"
+
+                        padding: [20, 20, 20, 20]
 
                         line_color_focus: 0.3, 0.8, 1, 1
+
                         icon_right_color_focus: 0.3, 0.8, 1, 1
+
+                    # =============================================
+                    # TUTORES
+                    # =============================================
+
+                    MDLabel:
+                        text: "Tutor sugerido"
+
+                        bold: True
+
+                        font_size: "15sp"
+
+                        theme_text_color: "Custom"
+
+                        text_color: 1,1,1,1
+
+                    ScrollView:
+                        size_hint_y: None
+
+                        height: "220dp"
+
+                        do_scroll_x: False
+
+                        MDBoxLayout:
+                            id: tutor_container
+
+                            orientation: "vertical"
+
+                            adaptive_height: True
+
+                            spacing: "12dp"
+
+                    # =============================================
+                    # DESCRIPCIÓN
+                    # =============================================
 
                     MDTextField:
                         id: txt_descripcion
 
                         hint_text: "Describe tu dificultad"
-                        helper_text: "Opcional"
+
+                        helper_text: "¿Qué parte no entiendes?"
+
                         helper_text_mode: "on_focus"
+
+                        helper_text_color_normal: 1,1,1,0.7
+
+                        helper_text_color_focus: 1,1,1,0.9
 
                         icon_right: "comment-text-outline"
 
                         multiline: True
 
                         mode: "fill"
+
                         radius: [18, 18, 18, 18]
 
                         size_hint_y: None
-                        height: "130dp"
+
+                        height: "140dp"
+
+                        padding: [20, 20, 20, 20]
 
                         line_color_focus: 0.3, 0.8, 1, 1
+
                         icon_right_color_focus: 0.3, 0.8, 1, 1
 
                     Widget:
                         size_hint_y: None
+
                         height: dp(5)
 
-                    # =========================================
+                    # =============================================
                     # BUTTON
-                    # =========================================
+                    # =============================================
 
                     MDFillRoundFlatButton:
                         text: "PUBLICAR SUGERENCIA"
+
                         font_size: "15sp"
 
                         pos_hint: {"center_x": 0.5}
 
                         size_hint_x: 1
-                        height: "52dp"
+
+                        height: "55dp"
 
                         md_bg_color: 0.3, 0.8, 1, 1
+
                         text_color: 0.05, 0.08, 0.15, 1
 
                         on_release:
                             app.enviar_sugerencia(
-                            txt_materia.text,
                             txt_tema.text,
                             txt_descripcion.text
                             )
@@ -167,6 +265,7 @@
 
         MDLabel:
             text: "Key Institute®"
+
             halign: "center"
 
             pos_hint: {"center_y": 0.03}
@@ -174,4 +273,5 @@
             font_size: "11sp"
 
             theme_text_color: "Custom"
+
             text_color: 0.45, 0.45, 0.5, 1
