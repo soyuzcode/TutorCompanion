@@ -64,6 +64,8 @@ class TutorCompanion(MDApp):
         self.check_login = check_login
         self.get_key_hours = get_key_hours
 
+        self.current_user = ""
+
     def build(self):
 
         LabelBase.register(
@@ -91,7 +93,7 @@ class TutorCompanion(MDApp):
 
     def load_data_on_dashboard(self):
 
-        data = self.get_key_hours()
+        data = self.get_key_hours(self.current_user)
 
         dashboard = self.sm.get_screen("dashboard")
         card = dashboard.ids.impact_card
@@ -118,11 +120,15 @@ class TutorCompanion(MDApp):
 
     def on_login(self, user, psk):
 
+        self.current_user = user
+
         if self.check_login(user=user, psk=psk):
 
             print("Alright! You're good!")
 
             self.sm.transition.direction = "left"
+
+            self.load_data_on_dashboard()
             self.sm.current = "dashboard"
 
         else:
