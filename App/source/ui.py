@@ -9,8 +9,6 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivy.properties import StringProperty
 from kivy.factory import Factory
 
-from components import SolicitudCard
-
 # WINDOW CONFIG
 #Window.size = (400, 700)
 #Window.clearcolor = (0.05, 0.08, 0.15, 1)
@@ -19,6 +17,10 @@ from components import SolicitudCard
 # =========================================================
 # CARDS (¡Primero definimos las clases en Python!)
 # =========================================================
+class SolicitudCard(MDCard):
+    # Estas variables deben coincidir con lo que usas en components.kv
+    name = StringProperty("")
+    materia = StringProperty("")
 
 class TutoriaCard(MDCard):
     materia = StringProperty("")
