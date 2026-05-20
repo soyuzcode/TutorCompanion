@@ -71,6 +71,8 @@ class TutorSelectCard(MDCard):
 class LoginScreen(MDScreen):
     pass
 
+class SugerirTutoriaScreen(MDScreen):
+    pass
 
 class DashboardScreen(MDScreen):
 
