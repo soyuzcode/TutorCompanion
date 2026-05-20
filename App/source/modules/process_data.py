@@ -119,3 +119,22 @@ def convert_dict_to_list_of_list(user_data:dict):
         convierta json respoonse en esto"""
     pass
 
+def extraer_tutores(data):
+    tutores = []
+    nombres = {}
+
+    for user in data:
+        tutor_profile = user.get("tutorProfile")
+
+        # Solo usuarios que sí son tutores
+        if tutor_profile is not None:
+            user_id = user["id"]
+
+            tutores.append({
+                "userId": user_id,
+                "rating": tutor_profile["rating"]
+            })
+
+            nombres[user_id] = user["name"]
+
+    return tutores, nombres

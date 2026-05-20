@@ -9,6 +9,7 @@ from modules.process_data import obtener_todas_las_tutorias
 from modules.get_data import get_user_data, get_sugerencias_reales
 from modules.tuto_suggestions import get_key_hours_by_identifier
 from modules.ranking import get_featured_tutors
+from modules.process_data import extraer_tutores
 
 class Main():
     def __init__(self) -> None:
@@ -16,9 +17,12 @@ class Main():
         self.solicitudes_pendientes = [] # Nueva lista para solicitudes
         self.user_data = []
 
-        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor)
+        UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor, get_tutors=self.extraer_tutor_plural)
         self.UI = UI
         UI.run()
+
+    def extraer_tutor_plural(self):
+        return extraer_tutores(self.user_data)
 
     def get_rank_tutor(self):
         return get_featured_tutors(self.user_data)
