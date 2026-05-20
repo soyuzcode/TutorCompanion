@@ -1,4 +1,4 @@
-#:import dp kivy.metrics.dp
+:import dp kivy.metrics.dp
 
 # =========================================================
 # DASHBOARD SCREEN
@@ -177,12 +177,12 @@
                     ripple_behavior: True
                     on_release: root.ir_a_sugerir_tutoria()
 
-                ActionCard:
-                    icon: "magnify"
-                    title: "Buscar Tutorías"
-                    subtitle: "Explora tutorías disponibles"
-                    ripple_behavior: True
-                    on_release: root.ir_a_buscar_tutorias()
+                #ActionCard:
+                    #icon: "magnify"
+                    #title: "Buscar Tutorías"
+                    #subtitle: "Explora tutorías disponibles"
+                    #ripple_behavior: True
+                    #on_release: root.ir_a_buscar_tutorias()
 
                 ActionCard:
                     icon: "clock-outline"
@@ -274,13 +274,6 @@
                 orientation: "vertical"
                 spacing: dp(15)
                 size_hint_x: 0.34
-
-                MDTextField:
-                    hint_text: "Buscar tutorías..."
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
-                    hint_text_color_normal: 0.7,0.7,0.7,1
-                    line_color_focus: 0.3,0.8,1,1
 
                 ImpactCard:
                     id: impact_card
