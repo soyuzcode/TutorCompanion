@@ -75,74 +75,64 @@ INSERT INTO reviews (tutor_id, student_id, rating, comment) VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tutoring_suggestions
-(id, student_id, tutor_id, subject_id, topic, message, status, created_at)
+(student_id, tutor_id, subject_id, topic, message, status, created_at)
 VALUES
 
--- Freud -> Einstein
-(1,3,10,2,
+(3,10,2,
 'Relativity Help',
 'No entiendo los marcos de referencia',
 'pending',
 '2026-01-05 09:00'),
 
--- Sartre -> Tesla
-(2,5,12,2,
+(5,12,2,
 'Electricity and Magnetism',
 'Necesito ayuda para el parcial jsjs',
 'accepted',
 '2026-01-05 10:30'),
 
--- Kanye -> Da Vinci
-(3,14,6,5,
+(14,6,5,
 'Creative Engineering',
 'Quiero mezclar arte con ingeniería',
 'pending',
 '2026-01-05 11:00'),
 
--- Cristiano -> Einstein
-(4,17,10,2,
+(17,10,2,
 'Physics for Athletes',
 'Necesito entender aceleración para una tarea',
 'rejected',
 '2026-01-05 12:00'),
 
--- Einstein_420 -> Tesla
-(5,19,12,2,
+(19,12,2,
 'Tesla Coils',
 'bro ocupamos hacer algo épico',
 'pending',
 '2026-01-05 13:00'),
 
--- DaVinci.exe -> Kanye
-(6,18,14,3,
+(18,14,3,
 'Frontend Architecture',
 'KivyMD me está destruyendo mentalmente',
 'pending',
 '2026-01-05 14:00'),
 
--- Nietzsche -> FreudDebugging
-(7,2,20,4,
+(2,20,4,
 'Existential Crisis',
 'No sé si debuggear tiene sentido',
 'accepted',
 '2026-01-05 15:00'),
 
--- Marie Curie -> Einstein
-(8,13,10,2,
+(13,10,2,
 'Quantum Curiosity',
 'Necesito reforzar teoría antes del laboratorio',
 'pending',
 '2026-01-05 16:00'),
 
--- Michelangelo -> Da Vinci
-(9,7,6,5,
+(7,6,5,
 'Art Composition',
 'Teach me the renaissance secrets',
 'cancelled',
 '2026-01-05 17:00'),
 
--- Elon -> Kanye
-(10,15,14,3,
+(15,14,3,
 'Startup Backend',
 'Hay que escalar microservicios',
 'pending',

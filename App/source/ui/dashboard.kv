@@ -52,6 +52,7 @@
                         Widget:
 
                         MDLabel:
+                            id: label_nombre
                             text: "Hola! 👋"
                             bold: True
                             adaptive_height: True
@@ -60,6 +61,7 @@
                             text_color: 1, 1, 1, 1
 
                         MDLabel:
+                            id: label_rol
                             text: "Rol: Estudiante"
                             adaptive_height: True
 
@@ -153,14 +155,13 @@
             spacing: dp(20)
 
            # =====================================================
-            # LEFT COLUMN START (Botones FIJOS + Próximas Tutorías con SCROLL)
+            # LEFT COLUMN START
             # =====================================================
             MDBoxLayout:
                 orientation: "vertical"
                 spacing: dp(15)
-                size_hint_x: 0.33  # Mantiene el mismo ancho en la pantalla
+                size_hint_x: 0.33
 
-                #  ESTA PARTE SE QUEDA CONGELADA ARRIBA (NO SE MUEVE)
                 MDLabel:
                     text: "¿Qué quieres hacer?"
                     bold: True
@@ -198,25 +199,24 @@
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
-                # AQUÍ EMPIEZA EL SCROLL ÚNICAMENTE PARA LAS MATERIAS 
                 ScrollView:
                     do_scroll_x: False
                     do_scroll_y: True
                     bar_width: dp(4)
 
                     MDBoxLayout:
-                        id: contenedor_izquierdo  # 🌟 ¡MÁGICO! Python meterá aquí tus tarjetas dinámicas
+                        id: contenedor_izquierdo
                         orientation: "vertical"
                         spacing: dp(15)
                         size_hint_y: None
-                        height: self.minimum_height  # Crece automáticamente según las tutorías del servidor
+                        height: self.minimum_height
 
             # =====================================================
             # LEFT COLUMN END
             # =====================================================
 
             # =====================================================
-            # CENTER COLUMN START (Se queda exactamente igual)
+            # CENTER COLUMN START
             # =====================================================
 
             MDBoxLayout:
@@ -251,7 +251,6 @@
                     spacing: dp(15)
                     adaptive_height: True
 
-
                     FeatureCard:
                         icon: "star"
                         title: "Rating Tutor"
@@ -269,7 +268,7 @@
             # =====================================================
 
             # =====================================================
-            # RIGHT COLUMN START (Con Scroll dinámico en Solicitudes)
+            # RIGHT COLUMN START
             # =====================================================
             MDBoxLayout:
                 orientation: "vertical"
@@ -283,17 +282,12 @@
                     hint_text_color_normal: 0.7,0.7,0.7,1
                     line_color_focus: 0.3,0.8,1,1
 
-                # =================================================
-                # IMPACT CARD (Se queda fija arriba)
-                # =================================================
                 ImpactCard:
                     id: impact_card
                     current_hours: 24
                     total_hours: 40
                     progress_value: 60
-                # =================================================
 
-                # ⏬ AQUÍ EMPIEZA EL ÁREA CON SCROLL ⏬
                 ScrollView:
                     do_scroll_x: False
                     do_scroll_y: True
@@ -304,7 +298,6 @@
                         orientation: "vertical"
                         spacing: dp(15)
                         adaptive_height: True
-
 
                         MDLabel:
                             text: "Solicitudes"
