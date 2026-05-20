@@ -31,15 +31,19 @@ def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
                 resultado.append([sess_id, user.get("subjects", [{}])[0].get("name", "Materia"), sess.get("topic", "General"), fecha, hora])
 
         # --- ESTRATEGIA 2: Intentar buscar en 'sentSuggestions' (Formato Prueba) ---
+        # --- ESTRATEGIA 2: Intentar buscar en 'sentSuggestions' (Formato Prueba) ---
         suggestions = user.get("sentSuggestions", [])
         for sug in suggestions:
             sug_id = str(sug.get("id"))
             if sug_id not in ids_visitados:
                 ids_visitados.add(sug_id)
                 full_date = sug.get("createdAt", "T--")
-                fecha, hora = full_start.split("T") if "T" in full_date else (full_date, "12:00 PM")
+                
+                # AQUÍ ESTÁ EL CAMBIO: 'full_date' en lugar de 'full_start'
+                fecha, hora = full_date.split("T") if "T" in full_date else (full_date, "12:00 PM")
+                
                 resultado.append([sug_id, sug.get("subject", {}).get("name", "Materia"), sug.get("topic", "General"), fecha, hora])
-
+                
     return resultado
 
 
@@ -114,3 +118,30 @@ def convert_dict_to_list_of_list(user_data:dict):
         
         convierta json respoonse en esto"""
     pass
+
+def obtener_todas_las_solicitudes(data: list | dict | None) -> list[list[str]]:
+    """
+    Extrae las solicitudes (sentSuggestions) del servidor real.
+    """
+    if data is None:
+        return []
+
+    solicitudes = []
+    
+    for user in data:
+        # En el JSON del server, las solicitudes están en 'sentSuggestions'
+        suggestions = user.get("sentSuggestions", [])
+        
+        for sug in suggestions:
+            # Extraemos: Nombre del estudiante (user.name), Materia y Estado
+            nombre_estudiante = user.get("name", "Desconocido")
+            materia = sug.get("subject", {}).get("name", "Materia")
+            estado = sug.get("status", "pending")
+            
+            solicitudes.append([
+                nombre_estudiante,
+                materia,
+                estado
+            ])
+            
+    return solicitudes
