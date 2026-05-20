@@ -84,24 +84,22 @@ class DashboardScreen(MDScreen):
 
     def actualizar_solicitudes(self, lista_solicitudes):
         """
-        Recibe la lista de listas: [[nombre, materia, estado], ...]
-        y actualiza el contenedor de solicitudes en el dashboard.
+        Esta es la función que tu main.py estaba buscando.
         """
-        contenedor = self.ids.get('contenedor_solicitudes') # Asegúrate que este id exista en tu dashboard.kv
-        if not contenedor:
-            print("Error: No se encontró 'contenedor_solicitudes' en el archivo .kv")
-            return
-            
-        contenedor.clear_widgets()
+        # Aquí conectamos con el ID que acabas de poner en el .kv
+        contenedor = self.ids.contenedor_solicitudes
         
+        # Limpiamos las tarjetas viejas (dejando el título "Solicitudes")
+        # Si tienes hijos, removemos desde el último hacia atrás para no borrar el Label
+        while len(contenedor.children) > 1:
+            contenedor.remove_widget(contenedor.children[0])
+            
+        # Agregamos las nuevas tarjetas reales
         for sol in lista_solicitudes:
             nombre, materia, estado = sol
-            # Aquí podrías crear un widget tipo 'SolicitudCard' si lo tienes
-            # O simplemente agregar un Label para probar que funciona:
-            # card = SolicitudCard(nombre=nombre, materia=materia, estado=estado)
-            # contenedor.add_widget(card)
-            print(f"Agregando solicitud: {nombre} - {materia} ({estado})")
-
+            # Creamos la tarjeta (asegúrate de que SolicitudCard acepte estos parámetros)
+            card = SolicitudCard(name=nombre, materia=f"Solicita {materia}") 
+            contenedor.add_widget(card)
 
 # ================= APP =================
 

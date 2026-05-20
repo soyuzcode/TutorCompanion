@@ -300,9 +300,11 @@
                     bar_width: dp(4)
 
                     MDBoxLayout:
+                        id: contenedor_solicitudes  # <--- ¡ESTE ES EL ID QUE TE FALTA!
                         orientation: "vertical"
                         spacing: dp(15)
-                        adaptive_height: True  #  Crucial para que el scroll sepa cuánto medir
+                        adaptive_height: True
+
 
                         MDLabel:
                             text: "Solicitudes"
@@ -312,13 +314,7 @@
                             theme_text_color: "Custom"
                             text_color: 1, 1, 1, 1
 
-                        SolicitudCard:
-                            name: "Luis"
-                            materia: "Álgebra"
-
-                        SolicitudCard:
-                            name: "Camila"
-                            materia: "Programación"
+                       
                             
                         # Puedes meter aquí 10 SolicitudCard más si quieres probar y verás cómo deslizan libremente.
 
