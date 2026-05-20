@@ -1,0 +1,79 @@
+<StatsScreen>:
+
+    MDFloatLayout:
+        md_bg_color: 0.05, 0.08, 0.15, 1
+
+        MDLabel:
+            text: "Stats Dashboard"
+            halign: "center"
+            font_size: "28sp"
+            pos_hint: {"center_y": 0.93}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+
+        MDGridLayout:
+            cols: 2
+            padding: "15dp"
+            spacing: "15dp"
+            adaptive_height: True
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+
+            MDCard:
+                MDLabel:
+                    text: "Usuarios"
+
+                MDLabel:
+                    id: total_users
+                    text: "0"
+                    halign: "center"
+
+
+            MDCard:
+                MDLabel:
+                    text: "Activos"
+
+                MDLabel:
+                    id: active
+                    text: "0"
+                    halign: "center"
+
+
+            MDCard:
+                MDLabel:
+                    text: "Tutores"
+
+                MDLabel:
+                    id: tutors
+                    text: "0"
+                    halign: "center"
+
+
+            MDCard:
+                MDLabel:
+                    text: "Rating"
+
+                MDLabel:
+                    id: avg_rating
+                    text: "0"
+                    halign: "center"
+
+
+            MDCard:
+                MDLabel:
+                    text: "Sesiones"
+
+                MDLabel:
+                    id: sessions
+                    text: "0"
+                    halign: "center"
+
+
+            MDCard:
+                MDLabel:
+                    text: "Pendientes"
+
+                MDLabel:
+                    id: pending
+                    text: "0"
+                    halign: "center"

@@ -143,3 +143,49 @@ def extraer_tutores(data):
     tutores.sort(key=lambda x: x["rating"], reverse=True)
 
     return tutores, nombres, imagenes
+
+# process_data.py
+
+def process_stats(users) -> dict:
+    """
+    Recibe lista de users desde backend (Spring)
+    y retorna un diccionario de stats listo para UI
+    """
+
+    total_users = len(users)
+
+    active = len([u for u in users if u.get("state") == "active"])
+    banned = len([u for u in users if u.get("state") == "banned"])
+    becados = len([u for u in users if u.get("isBecado")])
+
+    tutors = [u for u in users if u.get("tutorProfile")]
+    total_tutors = len(tutors)
+
+    avg_rating = (
+        sum(t["tutorProfile"]["rating"] for t in tutors) / len(tutors)
+        if tutors else 0
+    )
+
+    total_reviews = sum(len(u.get("writtenReviews", [])) for u in users)
+
+    total_sessions = sum(len(u.get("sessions", [])) for u in users)
+
+    pending_suggestions = sum(
+        len([
+            s for s in u.get("receivedSuggestions", [])
+            if s.get("status") == "pending"
+        ])
+        for u in users
+    )
+
+    return {
+        "total_users": total_users,
+        "active": active,
+        "banned": banned,
+        "becados": becados,
+        "tutors": total_tutors,
+        "avg_rating": round(avg_rating, 2),
+        "reviews": total_reviews,
+        "sessions": total_sessions,
+        "pending_suggestions": pending_suggestions
+    }
