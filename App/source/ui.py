@@ -24,6 +24,15 @@ class LoginScreen(MDScreen):
 
 
 class DashboardScreen(MDScreen):
+
+    def ir_a_sugerir_tutoria(self):
+        print("Botón sugerir presionado")
+
+    def ir_a_buscar_tutorias(self):
+        pass  
+
+    def ir_a_mis_tutorias(self):
+        pass
     
     def actualizar_tarjetas_tutorias(self, lista_tutorias):
         """

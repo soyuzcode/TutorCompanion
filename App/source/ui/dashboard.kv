@@ -181,16 +181,22 @@
                         icon: "calendar-plus"
                         title: "Sugerir Tutoría"
                         subtitle: "Pide ayuda en temas difíciles"
+                        ripple_behavior: True
+                        on_release: root.ir_a_sugerir_tutoria()
 
                     ActionCard:
                         icon: "magnify"
                         title: "Buscar Tutorías"
                         subtitle: "Explora tutorías disponibles"
+                        ripple_behavior: True
+                        on_release: root.ir_a_buscar_tutorias()
 
                     ActionCard:
                         icon: "clock-outline"
                         title: "Mis Tutorías"
                         subtitle: "Revisa tus sesiones"
+                        ripple_behavior: True
+                        on_release: root.ir_a_mis_tutorias()
 
                     MDLabel:
                         text: "Próximas Tutorías"
