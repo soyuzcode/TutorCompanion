@@ -13,6 +13,8 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.menu import MDDropdownMenu
 
+from kivy.properties import StringProperty, ObjectProperty
+
 # =========================================================
 # WINDOW CONFIG
 # =========================================================
@@ -25,9 +27,10 @@ from kivymd.uix.menu import MDDropdownMenu
 # CARDS
 # =========================================================
 class SolicitudCard(MDCard):
-    # Estas variables deben coincidir con lo que usas en components.kv
     name = StringProperty("")
     materia = StringProperty("")
+    solicitud_id = StringProperty("")       # <--- Añade esto
+    data_original = ObjectProperty(None)    # <--- Añade esto
 
 class TutoriaCard(MDCard):
 
@@ -169,20 +172,58 @@ class DashboardScreen(MDScreen):
     def actualizar_solicitudes(self, lista_solicitudes):
         contenedor = self.ids.contenedor_solicitudes
         
-        # Limpiamos, dejando el título (asumiendo que es el primer hijo)
+        # Limpiamos, dejando el título
         while len(contenedor.children) > 1:
             contenedor.remove_widget(contenedor.children[0])
             
         for sol in lista_solicitudes:
-            # AHORA ACCEDEMOS POR CLAVE, YA QUE 'sol' ES UN DICCIONARIO
             materia = sol.get("subject", {}).get("name", "Sin materia")
             tema = sol.get("topic", "Sin tema")
-            estado = sol.get("status", "pending")
+            sol_id = str(sol.get("id", "0")) # Asegúrate de obtener el ID real
             
-            # Ajusta esto según lo que acepte tu SolicitudCard
-            # Si tu tarjeta solo acepta 'name' y 'materia', usa 'tema' como nombre o lo que prefieras
-            card = SolicitudCard(name=tema, materia=f"{materia} ({estado})") 
+            # PASAMOS LOS NUEVOS DATOS AQUÍ
+            card = SolicitudCard(
+                name=tema, 
+                materia=f"{materia}", 
+                solicitud_id=sol_id,    # <--- Esto es clave
+                data_original=sol       # <--- Esto es clave
+            ) 
             contenedor.add_widget(card)
+
+    # =====================================================
+    # LÓGICA DE SOLICITUDES (ACEPTAR/RECHAZAR)
+    # =====================================================
+
+    def manejar_decision(self, sol_id, decision, sol_data):
+        """
+        sol_id: El identificador único de la sugerencia.
+        decision: "accepted" o "rejected".
+        sol_data: El diccionario completo con la info.
+        """
+        print(f"Usuario decidió: {decision} sobre la solicitud {sol_id}")
+        
+        # 1. Lógica Visual: Remover la tarjeta de la lista de solicitudes
+        contenedor = self.ids.contenedor_solicitudes
+        for card in contenedor.children:
+            # Aquí asumimos que la tarjeta tiene un atributo 'sol_id'
+            if hasattr(card, 'solicitud_id') and card.solicitud_id == str(sol_id):
+                contenedor.remove_widget(card)
+                break
+        
+        # 2. Si fue aceptada, agregar a la lista de "Próximas Tutorías"
+        if decision == "accepted":
+            self.agregar_tutoria_confirmada(sol_data)
+
+    def agregar_tutoria_confirmada(self, solicitud):
+        columna_izquierda = self.ids.contenedor_izquierdo
+        materia = solicitud.get("subject", {}).get("name", "Materia")
+        
+        nueva_tarjeta = TutoriaCard(
+            materia=materia,
+            estado="Confirmada",
+            fecha="Nueva sesión agregada"
+        )
+        columna_izquierda.add_widget(nueva_tarjeta)
 
 # ================= APP =================
 
