@@ -152,62 +152,64 @@
             padding: dp(20)
             spacing: dp(20)
 
+           # =====================================================
+            # LEFT COLUMN START (Botones FIJOS + Próximas Tutorías con SCROLL)
             # =====================================================
-            # LEFT COLUMN START (¡Aquí aplicamos el Scroll!)
-            # =====================================================
-            
-            # Cambiamos el MDBoxLayout directo por un ScrollView para esa columna
-            ScrollView:
-                do_scroll_x: False
-                do_scroll_y: True
-                size_hint_x: 0.33  # Mantiene el mismo ancho original en la cuadrícula
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+                size_hint_x: 0.33  # Mantiene el mismo ancho en la pantalla
 
-                MDBoxLayout:
-                    id: contenedor_izquierdo  
-                    orientation: "vertical"
-                    spacing: dp(15)
-                    size_hint_y: None
-                    height: self.minimum_height # MÁGICO: Crece según las tutorías que metas y activa el scroll
+                #  ESTA PARTE SE QUEDA CONGELADA ARRIBA (NO SE MUEVE)
+                MDLabel:
+                    text: "¿Qué quieres hacer?"
+                    bold: True
+                    font_size: "22sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
 
-                    MDLabel:
-                        text: "¿Qué quieres hacer?"
-                        bold: True
-                        font_size: "22sp"
-                        adaptive_height: True
-                        theme_text_color: "Custom"
-                        text_color: 1, 1, 1, 1
+                ActionCard:
+                    icon: "calendar-plus"
+                    title: "Sugerir Tutoría"
+                    subtitle: "Pide ayuda en temas difíciles"
+                    ripple_behavior: True
+                    on_release: root.ir_a_sugerir_tutoria()
 
-                    ActionCard:
-                        icon: "calendar-plus"
-                        title: "Sugerir Tutoría"
-                        subtitle: "Pide ayuda en temas difíciles"
-                        ripple_behavior: True
-                        on_release: root.ir_a_sugerir_tutoria()
+                ActionCard:
+                    icon: "magnify"
+                    title: "Buscar Tutorías"
+                    subtitle: "Explora tutorías disponibles"
+                    ripple_behavior: True
+                    on_release: root.ir_a_buscar_tutorias()
 
-                    ActionCard:
-                        icon: "magnify"
-                        title: "Buscar Tutorías"
-                        subtitle: "Explora tutorías disponibles"
-                        ripple_behavior: True
-                        on_release: root.ir_a_buscar_tutorias()
+                ActionCard:
+                    icon: "clock-outline"
+                    title: "Mis Tutorías"
+                    subtitle: "Revisa tus sesiones"
+                    ripple_behavior: True
+                    on_release: root.ir_a_mis_tutorias()
 
-                    ActionCard:
-                        icon: "clock-outline"
-                        title: "Mis Tutorías"
-                        subtitle: "Revisa tus sesiones"
-                        ripple_behavior: True
-                        on_release: root.ir_a_mis_tutorias()
+                MDLabel:
+                    text: "Próximas Tutorías"
+                    bold: True
+                    font_size: "22sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
 
-                    MDLabel:
-                        text: "Próximas Tutorías"
-                        bold: True
-                        font_size: "22sp"
-                        adaptive_height: True
-                        theme_text_color: "Custom"
-                        text_color: 1, 1, 1, 1
+                # AQUÍ EMPIEZA EL SCROLL ÚNICAMENTE PARA LAS MATERIAS 
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: dp(4)
 
-                    # Aquí tu script de Python seguirá metiendo las tarjetas dinámicas,
-                    # pero ahora se deslizarán hermosamente hacia abajo sin romper la app.
+                    MDBoxLayout:
+                        id: contenedor_izquierdo  # 🌟 ¡MÁGICO! Python meterá aquí tus tarjetas dinámicas
+                        orientation: "vertical"
+                        spacing: dp(15)
+                        size_hint_y: None
+                        height: self.minimum_height  # Crece automáticamente según las tutorías del servidor
 
             # =====================================================
             # LEFT COLUMN END
