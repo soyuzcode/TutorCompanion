@@ -77,6 +77,33 @@ class LoginScreen(MDScreen):
 class SugerirTutoriaScreen(MDScreen):
     pass
 
+class StatsScreen(MDScreen):
+
+    stats = {}
+
+    def load_stats(self, users: list):
+        """
+        Recibe usuarios desde backend o app state
+        y actualiza UI
+        """
+
+        app = MDApp.get_running_app()
+        self.stats = app.get_stats() # type: ignore
+        self.render_stats()
+
+    def render_stats(self):
+        """
+        Aquí SOLO actualizas UI bindings
+        (labels, cards, etc)
+        """
+
+        self.ids.total_users.text = str(self.stats.get("total_users", 0))
+        self.ids.active.text = str(self.stats.get("active", 0))
+        self.ids.tutors.text = str(self.stats.get("tutors", 0))
+        self.ids.avg_rating.text = str(self.stats.get("avg_rating", 0))
+        self.ids.sessions.text = str(self.stats.get("sessions", 0))
+        self.ids.pending.text = str(self.stats.get("pending_suggestions", 0))
+
 class DashboardScreen(MDScreen):
 
     # =====================================================
@@ -115,9 +142,7 @@ class DashboardScreen(MDScreen):
 
     def ver_estadisticas(self):
 
-        print(
-            "Acceso a: Estadísticas"
-        )
+        self.manager.current = "stats"
 
     # =====================================================
     # USER INFO
@@ -238,6 +263,7 @@ class TutorCompanion(MDApp):
         get_key_hours,
         get_ranking,
         get_tutors,
+        get_stats,
         **kwargs
     ):
 
@@ -250,6 +276,8 @@ class TutorCompanion(MDApp):
         self.get_rank_tutor = get_ranking
 
         self.get_tutors = get_tutors
+
+        self.get_stats = get_stats
 
         self.current_user = ""
 
@@ -281,6 +309,8 @@ class TutorCompanion(MDApp):
         Builder.load_file("ui/dashboard.kv")
 
         Builder.load_file("ui/sugerir_tutoria.kv")
+        
+        Builder.load_file("ui/stats.kv")
 
         # ================================================
         # SCREEN MANAGER
@@ -299,6 +329,12 @@ class TutorCompanion(MDApp):
         self.sm.add_widget(
             SugerirTutoriaScreen(
                 name="sugerir_tutoria"
+            )
+        )
+
+        self.sm.add_widget(
+            StatsScreen(
+                name="stats"
             )
         )
 
