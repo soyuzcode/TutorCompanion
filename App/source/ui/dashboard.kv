@@ -52,7 +52,7 @@
                         Widget:
 
                         MDLabel:
-                            text: "Hola Carlitos 👋"
+                            text: "Hola! 👋"
                             bold: True
                             adaptive_height: True
 
@@ -153,55 +153,62 @@
             spacing: dp(20)
 
             # =====================================================
-            # LEFT COLUMN START
+            # LEFT COLUMN START (¡Aquí aplicamos el Scroll!)
             # =====================================================
+            
+            # Cambiamos el MDBoxLayout directo por un ScrollView para esa columna
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_x: 0.33  # Mantiene el mismo ancho original en la cuadrícula
 
-            MDBoxLayout:
-                id: contenedor_izquierdo  # <-- LE AGREGAMOS ESTE ID 
-                orientation: "vertical"
-                spacing: dp(15)
-                size_hint_x: 0.33
+                MDBoxLayout:
+                    id: contenedor_izquierdo  
+                    orientation: "vertical"
+                    spacing: dp(15)
+                    size_hint_y: None
+                    height: self.minimum_height # MÁGICO: Crece según las tutorías que metas y activa el scroll
 
-                MDLabel:
-                    text: "¿Qué quieres hacer?"
-                    bold: True
-                    font_size: "22sp"
-                    adaptive_height: True
-                    theme_text_color: "Custom"
-                    text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: "¿Qué quieres hacer?"
+                        bold: True
+                        font_size: "22sp"
+                        adaptive_height: True
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
 
-                ActionCard:
-                    icon: "calendar-plus"
-                    title: "Sugerir Tutoría"
-                    subtitle: "Pide ayuda en temas difíciles"
+                    ActionCard:
+                        icon: "calendar-plus"
+                        title: "Sugerir Tutoría"
+                        subtitle: "Pide ayuda en temas difíciles"
 
-                ActionCard:
-                    icon: "magnify"
-                    title: "Buscar Tutorías"
-                    subtitle: "Explora tutorías disponibles"
+                    ActionCard:
+                        icon: "magnify"
+                        title: "Buscar Tutorías"
+                        subtitle: "Explora tutorías disponibles"
 
-                ActionCard:
-                    icon: "clock-outline"
-                    title: "Mis Tutorías"
-                    subtitle: "Revisa tus sesiones"
+                    ActionCard:
+                        icon: "clock-outline"
+                        title: "Mis Tutorías"
+                        subtitle: "Revisa tus sesiones"
 
-                MDLabel:
-                    text: "Próximas Tutorías"
-                    bold: True
-                    font_size: "22sp"
-                    adaptive_height: True
-                    theme_text_color: "Custom"
-                    text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: "Próximas Tutorías"
+                        bold: True
+                        font_size: "22sp"
+                        adaptive_height: True
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
 
-                # BORRAMOS las tarjetas viejas de Cálculo y Física de aquí.
-                # Tu código se encargará de crearlas dinámicamente.
+                    # Aquí tu script de Python seguirá metiendo las tarjetas dinámicas,
+                    # pero ahora se deslizarán hermosamente hacia abajo sin romper la app.
 
             # =====================================================
             # LEFT COLUMN END
             # =====================================================
 
             # =====================================================
-            # CENTER COLUMN START
+            # CENTER COLUMN START (Se queda exactamente igual)
             # =====================================================
 
             MDBoxLayout:
@@ -214,7 +221,6 @@
                     bold: True
                     font_size: "22sp"
                     adaptive_height: True
-
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
@@ -239,7 +245,6 @@
                     bold: True
                     font_size: "22sp"
                     adaptive_height: True
-
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
@@ -260,10 +265,8 @@
             # CENTER COLUMN END
             # =====================================================
 
-
-
             # =====================================================
-            # RIGHT COLUMN START
+            # RIGHT COLUMN START (Se queda igual, aquí está tu ImpactCard)
             # =====================================================
 
             MDBoxLayout:
@@ -273,36 +276,28 @@
 
                 MDTextField:
                     hint_text: "Buscar tutorías..."
-
                     text_color_normal: 1,1,1,1
                     text_color_focus: 1,1,1,1
-
                     hint_text_color_normal: 0.7,0.7,0.7,1
-
                     line_color_focus: 0.3,0.8,1,1
 
                 # =================================================
-                # IMPACT CARD START
+                # IMPACT CARD START (Mantenemos su ID intacto)
                 # =================================================
-
                 ImpactCard:
                     id: impact_card
-
                     current_hours: 24
                     total_hours: 40
                     progress_value: 60
-
                 # =================================================
                 # IMPACT CARD END
                 # =================================================
-
 
                 MDLabel:
                     text: "Solicitudes"
                     bold: True
                     font_size: "22sp"
                     adaptive_height: True
-
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
 
