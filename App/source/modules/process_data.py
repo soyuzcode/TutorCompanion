@@ -8,17 +8,11 @@ def validar_correo(texto):
 
 
 # Asignado: Michelle
+# Asignado: Michelle
 def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     """
-    Dado el diccionario o lista de datos de Data/return_example.json,
-    recorre los usuarios, extrae TODAS las tutorías existentes en sus 'subjects'
-    e información disponible, evitando duplicarlas.
-    
-    Retorna una lista de listas lista para la UI:
-        [
-            [ID, MATERIA, TEMA, FECHA, HORA],
-            ...
-        ]
+    Recorre usuarios, extrae tutorías de 'subjects' y sugerencias de 'sentSuggestions',
+    formateando la fecha correctamente.
     """
     if data is None:
         return []
@@ -27,21 +21,40 @@ def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
     ids_visitados = set()
 
     for user in data:
+        # 1. Procesar subjects (lo que ya tenías)
         subjects = user.get("subjects", [])
         for sub in subjects:
             sub_id = str(sub.get("id"))
-            
-            # Si la tutoría no la hemos procesado ya, la agregamos
             if sub_id not in ids_visitados:
                 ids_visitados.add(sub_id)
                 
-                # Extraemos los datos básicos. Si falta alguno, ponemos un valor por defecto
                 lista_tutoria = [
-                    sub_id,                                # ID
-                    sub.get("name", "Materia sin nombre"), # Nombre de la materia
-                    sub.get("topic", "General"),           # Tema / Tópico
-                    sub.get("date", "XX/XX/2026"),         # Fecha
-                    sub.get("hour", "4:00 PM")             # Hora
+                    sub_id,
+                    sub.get("name", "Materia sin nombre"),
+                    sub.get("topic", "General"),
+                    "Sin fecha", # Los subjects no traen fecha en tu JSON
+                    "4:00 PM"
+                ]
+                resultado.append(lista_tutoria)
+
+        # 2. Procesar sentSuggestions (¡Aquí está la fecha real!)
+        suggestions = user.get("sentSuggestions", [])
+        for sug in suggestions:
+            # Usamos el ID de la sugerencia para no duplicar
+            sug_id = str(sug.get("id"))
+            if sug_id not in ids_visitados:
+                ids_visitados.add(sug_id)
+                
+                # Extraemos fecha y hora de "createdAt": "2026-01-05T15:00:00"
+                full_date = sug.get("createdAt", "T--")
+                fecha, hora = full_date.split("T") if "T" in full_date else (full_date, "12:00 PM")
+                
+                lista_tutoria = [
+                    sug_id,
+                    sug.get("subject", {}).get("name", "Materia sin nombre"),
+                    sug.get("topic", "General"),
+                    fecha, # Ejemplo: 2026-01-05
+                    hora   # Ejemplo: 15:00:00
                 ]
                 resultado.append(lista_tutoria)
                 
