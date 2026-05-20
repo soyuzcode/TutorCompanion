@@ -21,7 +21,7 @@ class Main():
         # Don't write anything here!!
         # This will execute when kill UI
 
-    def get_key_hours(self, identifier) -> tuple:
+    def get_key_hours(self, identifier) -> tuple | None:
         # 1. Intentamos extraer los datos reales (del servidor o del JSON local según qué cargó primero)
         try:
             # Si ya tenemos datos locales o del servidor cargados en las validaciones
@@ -29,14 +29,18 @@ class Main():
             datos = get_user_data() if os.environ.get("CONNECTED") == "TRUE" else None
             if datos:
                 resultado = get_key_hours_by_identifier(identifier=identifier, users=datos)
-                if resultado is not None:
-                    return resultado
+
+                # Si la funcion devuelve None es porque el usuario no es becado o no es tutor
+                # No es un bug, es una feature 😎    
+                return resultado
+            
         except Exception:
             pass
 
         # 2. SALVADA DE DESARROLLADOR (FALLBACK MOCK): 
         # Si la función de ellos devuelve None o falla porque no hay red, 
         # devolvemos (25 horas aprobadas, de 70 requeridas) para que Kivy no colapse.
+        # Nota de Carlos: Tenle m[a]s f[e] a Kivy, si es un None, no se mostrar[a]n las horas y ya jsjs
         return (25, 70) 
 
     def check_login(self, user, psk) -> bool:
