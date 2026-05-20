@@ -9,7 +9,7 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivy.properties import StringProperty
 from kivy.factory import Factory
 
-from ui.components import SolicitudCard
+from components import SolicitudCard
 
 # WINDOW CONFIG
 #Window.size = (400, 700)
