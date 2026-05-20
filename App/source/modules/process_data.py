@@ -43,7 +43,7 @@ def obtener_todas_las_tutorias(data: list | dict | None) -> list[list[str]]:
                 fecha, hora = full_date.split("T") if "T" in full_date else (full_date, "12:00 PM")
                 
                 resultado.append([sug_id, sug.get("subject", {}).get("name", "Materia"), sug.get("topic", "General"), fecha, hora])
-                
+
     return resultado
 
 
@@ -119,29 +119,3 @@ def convert_dict_to_list_of_list(user_data:dict):
         convierta json respoonse en esto"""
     pass
 
-def obtener_todas_las_solicitudes(data: list | dict | None) -> list[list[str]]:
-    """
-    Extrae las solicitudes (sentSuggestions) del servidor real.
-    """
-    if data is None:
-        return []
-
-    solicitudes = []
-    
-    for user in data:
-        # En el JSON del server, las solicitudes están en 'sentSuggestions'
-        suggestions = user.get("sentSuggestions", [])
-        
-        for sug in suggestions:
-            # Extraemos: Nombre del estudiante (user.name), Materia y Estado
-            nombre_estudiante = user.get("name", "Desconocido")
-            materia = sug.get("subject", {}).get("name", "Materia")
-            estado = sug.get("status", "pending")
-            
-            solicitudes.append([
-                nombre_estudiante,
-                materia,
-                estado
-            ])
-            
-    return solicitudes

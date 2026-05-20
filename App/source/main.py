@@ -4,9 +4,9 @@ import os
 from ui import TutorCompanion
 from modules.process_data import is_psk_and_username_valid
 from modules.process_data import process_data_from_user_dict
-# Importamos ambas funciones (Tutorías y Solicitudes)
-from modules.process_data import obtener_todas_las_tutorias, obtener_todas_las_solicitudes 
-from modules.get_data import get_user_data
+# Solo importamos tutorías (el viejo formato) y get_user_data/get_sugerencias_reales
+from modules.process_data import obtener_todas_las_tutorias 
+from modules.get_data import get_user_data, get_sugerencias_reales
 from modules.tuto_suggestions import get_key_hours_by_identifier
 from modules.ranking import get_featured_tutors
 
@@ -44,19 +44,18 @@ class Main():
             if datos_servidor:
                 datos_procesados = process_data_from_user_dict(datos_servidor)
                 if is_psk_and_username_valid(user=user, psk=psk, data=datos_procesados):
-                    # CARGAMOS AMBAS COSAS
+                    # CARGAMOS TUTORÍAS DEL JSON VIEJO
                     self.tutorias_disponibles = obtener_todas_las_tutorias(datos_servidor)
-                    self.solicitudes_pendientes = obtener_todas_las_solicitudes(datos_servidor)
                     
-                    # --- AÑADE ESTA LÍNEA AQUÍ MISMO ---
-                    print(f"DEBUG: Solicitudes encontradas: {self.solicitudes_pendientes}")
-
+                    # CARGAMOS SOLICITUDES DEL NUEVO ENDPOINT
+                    self.solicitudes_pendientes = get_sugerencias_reales() 
+                    
+                    print(f"DEBUG: Solicitudes reales encontradas: {self.solicitudes_pendientes}")
 
                     os.environ["CONNECTED"] = "TRUE"
                     
                     dashboard = self.UI.sm.get_screen("dashboard")
                     dashboard.actualizar_tarjetas_tutorias(self.tutorias_disponibles)
-                    # AQUÍ CONECTAMOS LAS SOLICITUDES A LA UI
                     dashboard.actualizar_solicitudes(self.solicitudes_pendientes)
                     
                     return True
@@ -64,12 +63,12 @@ class Main():
             print(f"El servidor no está disponible: {e}")
 
         # =======================================================================
-        # 2. PLAN B (LOCAL)
+        # 2. PLAN B (LOCAL) - SI FALLA EL SERVIDOR
         # =======================================================================
         print("Activando modo local...")
         os.environ["CONNECTED"] = "FALSE"
-        # ... (Tu código de carga de JSON local queda igual)
-        # Asegúrate de llamar a actualizar_solicitudes(self.solicitudes_pendientes) también aquí abajo si quieres que se vean en local.
+        # Aquí puedes dejar que cargue las locales si quieres, 
+        # pero ya tienes la lógica maestra arriba lista.
         
         return False
 
