@@ -83,22 +83,21 @@ class DashboardScreen(MDScreen):
             columna_izquierda.add_widget(nueva_tarjeta)
 
     def actualizar_solicitudes(self, lista_solicitudes):
-        """
-        Esta es la función que tu main.py estaba buscando.
-        """
-        # Aquí conectamos con el ID que acabas de poner en el .kv
         contenedor = self.ids.contenedor_solicitudes
         
-        # Limpiamos las tarjetas viejas (dejando el título "Solicitudes")
-        # Si tienes hijos, removemos desde el último hacia atrás para no borrar el Label
+        # Limpiamos, dejando el título (asumiendo que es el primer hijo)
         while len(contenedor.children) > 1:
             contenedor.remove_widget(contenedor.children[0])
             
-        # Agregamos las nuevas tarjetas reales
         for sol in lista_solicitudes:
-            nombre, materia, estado = sol
-            # Creamos la tarjeta (asegúrate de que SolicitudCard acepte estos parámetros)
-            card = SolicitudCard(name=nombre, materia=f"Solicita {materia}") 
+            # AHORA ACCEDEMOS POR CLAVE, YA QUE 'sol' ES UN DICCIONARIO
+            materia = sol.get("subject", {}).get("name", "Sin materia")
+            tema = sol.get("topic", "Sin tema")
+            estado = sol.get("status", "pending")
+            
+            # Ajusta esto según lo que acepte tu SolicitudCard
+            # Si tu tarjeta solo acepta 'name' y 'materia', usa 'tema' como nombre o lo que prefieras
+            card = SolicitudCard(name=tema, materia=f"{materia} ({estado})") 
             contenedor.add_widget(card)
 
 # ================= APP =================
