@@ -205,13 +205,14 @@
 # SOLICITUD CARD
 # =========================================================
 
-<SolicitudCard@MDCard>
-
+<SolicitudCard>
     name: ""
     materia: ""
+    solicitud_id: ""
+    data_original: None
 
     size_hint_y: None
-    height: dp(95)
+    height: dp(105)
 
     radius: [20]
     elevation: 0
@@ -230,35 +231,41 @@
             MDIcon:
                 icon: "account-circle"
                 font_size: "35sp"
-
                 theme_text_color: "Custom"
                 text_color: 0.3, 0.8, 1, 1
 
         MDBoxLayout:
             orientation: "vertical"
 
-            Widget:
-
             MDLabel:
                 text: root.name
                 bold: True
-
                 theme_text_color: "Custom"
                 text_color: 1, 1, 1, 1
 
             MDLabel:
                 text: "Solicita " + root.materia
-
+                font_size: "12sp"
                 theme_text_color: "Custom"
                 text_color: 0.7, 0.7, 0.7, 1
 
-            Widget:
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_x: None
+            width: dp(100)
+            spacing: dp(5)
 
-        MDRoundFlatButton:
-            text: "Aceptar"
+            MDRaisedButton:
+                text: "Aceptar"
+                size_hint_x: 1
+                font_size: "10sp"
+                on_release: app.sm.get_screen('dashboard').manejar_decision(root.solicitud_id, "accepted", root.data_original)
 
-        MDRoundFlatButton:
-            text: "Rechazar"
+            MDRaisedButton:
+                text: "Rechazar"
+                size_hint_x: 1
+                font_size: "10sp"
+                on_release: app.sm.get_screen('dashboard').manejar_decision(root.solicitud_id, "rejected", root.data_original)
 
 
 
