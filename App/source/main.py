@@ -48,6 +48,10 @@ class Main():
                     self.tutorias_disponibles = obtener_todas_las_tutorias(datos_servidor)
                     self.solicitudes_pendientes = obtener_todas_las_solicitudes(datos_servidor)
                     
+                    # --- AÑADE ESTA LÍNEA AQUÍ MISMO ---
+                    print(f"DEBUG: Solicitudes encontradas: {self.solicitudes_pendientes}")
+
+
                     os.environ["CONNECTED"] = "TRUE"
                     
                     dashboard = self.UI.sm.get_screen("dashboard")
