@@ -15,6 +15,8 @@ class Main():
         # Añadimos esto para que la lista exista desde el inicio:
         self.tutorias_disponibles = []
         
+        self.user_data = []
+
         UI = TutorCompanion(check_login=self.check_login, get_key_hours=self.get_key_hours, get_ranking=self.get_rank_tutor)
         self.UI = UI
         UI.run()
@@ -23,14 +25,14 @@ class Main():
         # This will execute when kill UI
 
     def get_rank_tutor(self):
-        return get_featured_tutors(get_user_data())
+        return get_featured_tutors(self.user_data)
 
     def get_key_hours(self, identifier) -> tuple | None:
         # 1. Intentamos extraer los datos reales (del servidor o del JSON local según qué cargó primero)
         try:
             # Si ya tenemos datos locales o del servidor cargados en las validaciones
             # Intentamos pasárselos a la función de tus compañeros
-            datos = get_user_data() if os.environ.get("CONNECTED") == "TRUE" else None
+            datos = self.user_data if os.environ.get("CONNECTED") == "TRUE" else None
             if datos:
                 resultado = get_key_hours_by_identifier(identifier=identifier, users=datos)
 
@@ -54,6 +56,9 @@ class Main():
         try:
             print("Intentando conectar con el servidor de Carlos...")
             datos_servidor = get_user_data()
+
+            self.user_data = datos_servidor
+            
             if datos_servidor:
                 datos_procesados = process_data_from_user_dict(datos_servidor)
                 if is_psk_and_username_valid(user=user, psk=psk, data=datos_procesados):
