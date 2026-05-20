@@ -45,11 +45,7 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToMany
-    @JoinTable(
-    name = "user_subjects",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "subject_id")
-    )
+    @JoinTable(name = "user_subjects", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<Subject> subjects;
 
     @JsonManagedReference
@@ -75,6 +71,14 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "student")
     private List<Review> writtenReviews;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "student")
+    private List<TutoringSuggestion> sentSuggestions;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "tutor")
+    private List<TutoringSuggestion> receivedSuggestions;
 
     public User() {
     }
@@ -209,6 +213,22 @@ public class User {
 
     public void setWrittenReviews(List<Review> writtenReviews) {
         this.writtenReviews = writtenReviews;
+    }
+
+    public List<TutoringSuggestion> getSentSuggestions() {
+        return sentSuggestions;
+    }
+
+    public void setSentSuggestions(List<TutoringSuggestion> sentSuggestions) {
+        this.sentSuggestions = sentSuggestions;
+    }
+
+    public List<TutoringSuggestion> getReceivedSuggestions() {
+        return receivedSuggestions;
+    }
+
+    public void setReceivedSuggestions(List<TutoringSuggestion> receivedSuggestions) {
+        this.receivedSuggestions = receivedSuggestions;
     }
 
 }
